@@ -88,7 +88,7 @@ function Album(props) {
               {' '}
               <a rel="noopener noreferrer" target="_blank" href="https://www.google.com/maps/place/Canby,+OR+97013/@45.2711453,-122.7227492,13z/data=!3m1!4b1!4m5!3m4!1s0x5495646375ceb84f:0x110fdcab2e1cddd4!8m2!3d45.262205!4d-122.6921558">Canby, OR</a>
               {' '}
-              and work at a local elementary school as a building technician.
+              and currently work as a Cloud Software Specialist at a large IT reseller.
               <br />
               <br />
               When not working, or learning new things at ASU, I like to exercise and
@@ -151,7 +151,13 @@ function Album(props) {
         <Typography variant="h6" align="center" gutterBottom>
           See the code for this website
           {' '}
-          <a href="https://github.com/aneuhold/React-Projects/tree/master/portfolio">here!</a>
+          <a
+            href="https://github.com/aneuhold/portfolio"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            here!
+          </a>
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           ©2019 Anton Neuhold
