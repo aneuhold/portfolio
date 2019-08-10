@@ -62,6 +62,7 @@ function Album(props) {
     <React.Fragment>
       <CssBaseline />
       <main>
+
         {/* Hero unit */}
         <div className={classes.heroUnit}>
           <div className={classes.heroContent}>
@@ -72,7 +73,7 @@ function Album(props) {
               +
             </Typography>
             <Typography component="h4" variant="h5" align="center" color="textPrimary" gutterBottom>
-              <i>{'< Aspiring Developer />'}</i>
+              <i>{'< Developer />'}</i>
             </Typography>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" className={classes.titleName} gutterBottom>
               Anton (Tony) Neuhold
@@ -92,7 +93,7 @@ function Album(props) {
               <br />
               <br />
               When not working, or learning new things at ASU, I like to exercise and
-              learn about web development! Check out some social media links
+              learn more about web development! Check out some social media links
               and projects below:
             </Typography>
             <div className={classes.heroButtons}>
@@ -110,9 +111,10 @@ function Album(props) {
             </div>
           </div>
         </div>
+        {/* End hero unit */}
+
         <div className={classNames(classes.layout, classes.cardGrid)} id="projects">
-          {/* End hero unit */}
-          <Grid container justify="center" spacing={40}>
+          <Grid container justify="center" spacing={4}>
             {projects.map(card => (
               <Grid item key={card.name} sm={6} md={4} lg={3}>
                 <Card className={classes.card}>
@@ -145,7 +147,9 @@ function Album(props) {
             ))}
           </Grid>
         </div>
+
       </main>
+
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
@@ -164,6 +168,7 @@ function Album(props) {
         </Typography>
       </footer>
       {/* End footer */}
+
     </React.Fragment>
   );
 }
