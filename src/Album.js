@@ -73,7 +73,7 @@ function Album(props) {
               +
             </Typography>
             <Typography component="h4" variant="h5" align="center" color="textPrimary" gutterBottom>
-              <i>{'< Developer />'}</i>
+              <i>{'< Web Developer />'}</i>
             </Typography>
             <Typography component="h1" variant="h2" align="center" color="textPrimary" className={classes.titleName} gutterBottom>
               Anton (Tony) Neuhold
