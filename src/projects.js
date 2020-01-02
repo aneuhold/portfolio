@@ -36,6 +36,22 @@ const projects = [
     thumbnailDescription: 'MongoDB Exercise Tracker Thumbnail.',
   },
   {
+    name: 'Places Android App',
+    heading: 'Places Android App',
+    info: 'A simple Android app built to store and map named coordinates and details for those coordinates',
+    codeLink: 'https://github.com/aneuhold/places-android-app',
+    thumbnailUrl: 'https://i.imgur.com/aNwCNIp.png',
+    thumbnailDescription: 'Places Android App Thumbnail.',
+  },
+  {
+    name: 'Places iOS App',
+    heading: 'Places iOS App',
+    info: 'A simple iOS app built to store and map named coordinates and details for those coordinates',
+    codeLink: 'https://github.com/aneuhold/PlacesiOSApp',
+    thumbnailUrl: 'https://i.imgur.com/MuDnnHO.png',
+    thumbnailDescription: 'Places iOS App Thumbnail.',
+  },
+  {
     name: 'URL Shortener',
     heading: 'URL Shortener',
     info: 'Built with node.js, express, and MongoDB',
