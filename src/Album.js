@@ -164,7 +164,7 @@ function Album(props) {
           </a>
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          ©2019 Anton Neuhold
+          ©2020 Anton Neuhold
         </Typography>
       </footer>
       {/* End footer */}
