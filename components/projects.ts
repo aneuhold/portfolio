@@ -1,4 +1,14 @@
-const projects = [
+type project = {
+  name: string,
+  heading: string,
+  info: string,
+  demoLink?: string,
+  codeLink: string,
+  thumbnailUrl: string,
+  thumbnailDescription: string
+}
+
+const projects: Array<project> = [
   {
     name: 'React Drum Machine',
     heading: 'React Drum Machine',
