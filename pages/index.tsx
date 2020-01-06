@@ -2,17 +2,13 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
-import './App.css';
-import Album from './Album';
+import Album from '../components/Album';
 
 const theme = createMuiTheme({
   palette: {
     primary: orange,
     secondary: orange,
-  },
-  typography: {
-    useNextVariants: true,
-  },
+  }
 });
 
 const App = () => (

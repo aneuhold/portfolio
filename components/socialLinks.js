@@ -1,5 +1,3 @@
-import React from 'react';
-
 // These SVG paths were retrieved from simpleicons.org
 
 const socialLinks = [
