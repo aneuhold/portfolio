@@ -10,6 +10,24 @@ type project = {
 
 const projects: Array<project> = [
   {
+    name: 'PointSpire',
+    heading: 'PointSpire',
+    info: 'A personal project manager built with Scrum on a team with MongoDB, OAuth authentication, React, and TypeScript. Try it now by logging in with Github!',
+    demoLink: 'https://point-spire.com',
+    codeLink: 'https://github.com/PointSpire/PointSpire',
+    thumbnailUrl: 'https://i.imgur.com/Hwq5mBH.png',
+    thumbnailDescription: 'Carpet Geeks Thumbnail.',
+  },
+  {
+    name: 'Carpet Geeks Example Website',
+    heading: 'Carpet Geeks',
+    info: 'An example website built for a small business',
+    demoLink: 'https://carpetgeeks.netlify.app/',
+    codeLink: 'https://github.com/aneuhold/carpet-geeks',
+    thumbnailUrl: 'https://i.imgur.com/NuK5Z1y.png',
+    thumbnailDescription: 'Carpet Geeks Thumbnail.',
+  },
+  {
     name: 'React Drum Machine',
     heading: 'React Drum Machine',
     info: 'A drum machine built with react',
