@@ -41,44 +41,39 @@ export default function Album(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <>
-      <main>
-        <div className={classNames(classes.layout, classes.cardGrid)} id="projects">
-          <Grid container justifyContent="center" spacing={4}>
-            {projects.map((card) => (
-              <Grid item key={card.name} sm={6} md={4} lg={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={card.thumbnailUrl}
-                    title={card.thumbnailDescription}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {card.heading}
-                    </Typography>
-                    <Typography>
-                      {card.info}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    {card.demoLink
-                      ? (
-                        <Button size="small" color="primary" href={card.demoLink || ''} target="_blank">
-                          Demo
-                        </Button>
-                      ) : null}
-                    <Button size="small" color="primary" href={card.codeLink} target="_blank">
-                      Source
+    <div className={classNames(classes.layout, classes.cardGrid)} id="projects">
+      <Grid container justifyContent="center" spacing={4}>
+        {projects.map((card) => (
+          <Grid item key={card.name} sm={6} md={4} lg={3}>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.cardMedia}
+                image={card.thumbnailUrl}
+                title={card.thumbnailDescription}
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {card.heading}
+                </Typography>
+                <Typography>
+                  {card.info}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                {card.demoLink
+                  ? (
+                    <Button size="small" color="primary" href={card.demoLink || ''} target="_blank">
+                      Demo
                     </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+                  ) : null}
+                <Button size="small" color="primary" href={card.codeLink} target="_blank">
+                  Source
+                </Button>
+              </CardActions>
+            </Card>
           </Grid>
-        </div>
-
-      </main>
-    </>
+        ))}
+      </Grid>
+    </div>
   );
 }

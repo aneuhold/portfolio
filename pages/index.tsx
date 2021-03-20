@@ -5,8 +5,10 @@ import Hero from '../components/Hero';
 
 const App = (): JSX.Element => (
   <div className="app">
-    <Hero />
-    <Album />
+    <main>
+      <Hero />
+      <Album />
+    </main>
     <Footer />
   </div>
 );
