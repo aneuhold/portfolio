@@ -10,7 +10,7 @@ import {
   WithStyles,
   Link,
 } from '@material-ui/core';
-import projects from './projects';
+import projects from '../config/projects';
 import socialLinks from './socialLinks';
 
 const styles = ({ breakpoints, palette, spacing }: Theme) => createStyles({

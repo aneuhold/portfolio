@@ -1,12 +1,12 @@
 import React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../components/theme';
 
-export default class MyDocument extends Document {
+export default class MainDocument extends Document {
   render() {
     return (
-      <HTML lang="en">
+      <Html lang="en">
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
@@ -21,7 +21,6 @@ export default class MyDocument extends Document {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
             gtag('config', 'UA-169638120-1');
             `}
           </script>
@@ -30,12 +29,12 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </HTML>
+      </Html>
     );
   }
 }
 
-MyDocument.getInitialProps = async ctx => {
+MainDocument.getInitialProps = async ctx => {
   // Resolution order
   //
   // On the server:
