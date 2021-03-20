@@ -1,10 +1,12 @@
 import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, {
+  Html, Head, Main, NextScript,
+} from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 import theme from '../components/theme';
 
 export default class MainDocument extends Document {
-  render() {
+  render(): JSX.Element {
     return (
       <Html lang="en">
         <Head>
@@ -15,7 +17,7 @@ export default class MainDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
           {/* Global site tag (gtag.js) - Google Analytics */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169638120-1"></script>
+          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169638120-1" />
           <script>
             {`
             window.dataLayer = window.dataLayer || [];
@@ -34,7 +36,7 @@ export default class MainDocument extends Document {
   }
 }
 
-MainDocument.getInitialProps = async ctx => {
+MainDocument.getInitialProps = async (ctx) => {
   // Resolution order
   //
   // On the server:
@@ -61,10 +63,9 @@ MainDocument.getInitialProps = async ctx => {
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 
-  ctx.renderPage = () =>
-    originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />),
-    });
+  ctx.renderPage = () => originalRenderPage({
+    enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+  });
 
   const initialProps = await Document.getInitialProps(ctx);
 
