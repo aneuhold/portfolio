@@ -6,7 +6,7 @@ import theme from '../components/theme';
 export default class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <HTML lang="en">
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
@@ -30,7 +30,7 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </HTML>
     );
   }
 }
