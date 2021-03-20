@@ -10,13 +10,21 @@ type project = {
 
 const projects: Array<project> = [
   {
+    name: 'HaloMod SPA',
+    heading: 'HaloMod SPA',
+    info: 'Capstone project for the ASU Software Engineering program. Done on a team of 5 for an Astrophysics doctorate.',
+    codeLink: 'https://github.com/halomod/TheHaloMod-SPA',
+    thumbnailUrl: 'https://i.imgur.com/uxBxJWM.png',
+    thumbnailDescription: 'HaloMod SPA Thumbnail.',
+  },
+  {
     name: 'PointSpire',
     heading: 'PointSpire',
     info: 'A personal project manager built with Scrum on a team with MongoDB, OAuth authentication, React, and TypeScript. Try it now by logging in with Github!',
     demoLink: 'https://point-spire.com',
     codeLink: 'https://github.com/PointSpire/PointSpire',
     thumbnailUrl: 'https://i.imgur.com/Hwq5mBH.png',
-    thumbnailDescription: 'Carpet Geeks Thumbnail.',
+    thumbnailDescription: 'PointSpire Thumbnail',
   },
   {
     name: 'Carpet Geeks Example Website',

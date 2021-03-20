@@ -1,22 +1,15 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import orange from '@material-ui/core/colors/orange';
 import Album from '../components/Album';
+import Footer from '../components/Footer';
+import Hero from '../components/Hero';
 
-const theme = createMuiTheme({
-  palette: {
-    primary: orange,
-    secondary: orange,
-  }
-});
-
-const App = () => (
+const App = (): JSX.Element => (
   <div className="app">
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
+    <main>
+      <Hero />
       <Album />
-    </MuiThemeProvider>
+    </main>
+    <Footer />
   </div>
 );
 
