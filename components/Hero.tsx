@@ -77,9 +77,7 @@ export default function Hero(): JSX.Element {
           Anton (Tony) Neuhold
         </Typography>
         <Typography variant="h6" align="center" color="textSecondary">
-          Hi! I
-          &apos;
-          m currently an online student at
+          Hi! I&apos;m currently an online student at
           {' '}
           <Link rel="noopener noreferrer" color="primary" target="_blank" href="https://www.asu.edu/">Arizona State Univeristy</Link>
           {' '}
