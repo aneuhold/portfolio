@@ -3,10 +3,12 @@ import {
   IconButton, SvgIcon,
   Grid,
   Typography,
-  Theme,
-  makeStyles,
   Link,
+  Theme,
 } from '@material-ui/core';
+import {
+  makeStyles,
+} from '@material-ui/styles';
 import socialLinks from '../config/socialLinks';
 
 const useStyles = makeStyles((theme: Theme) => ({

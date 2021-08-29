@@ -4,8 +4,10 @@ import {
   CardMedia, Card, Grid, Button,
   Typography,
   Theme,
-  makeStyles,
 } from '@material-ui/core';
+import {
+  makeStyles,
+} from '@material-ui/styles';
 import classNames from 'classnames';
 import projects from '../config/projects';
 
