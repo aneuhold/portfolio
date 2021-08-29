@@ -67,7 +67,7 @@ export default function Hero(): JSX.Element {
     <div className={classes.heroUnit}>
       <div className={classes.heroContent}>
         <Typography component="h4" variant="h5" align="center" color="textPrimary">
-          [Software Engineering Student]
+          [Software Engineer]
         </Typography>
         <Typography component="h4" variant="h5" align="center" color="textSecondary">
           +
@@ -79,20 +79,18 @@ export default function Hero(): JSX.Element {
           Anton (Tony) Neuhold
         </Typography>
         <Typography variant="h6" align="center" color="textSecondary">
-          Hi! I&apos;m currently an online student at
-          {' '}
-          <Link rel="noopener noreferrer" color="primary" target="_blank" href="https://www.asu.edu/">Arizona State Univeristy</Link>
-          {' '}
-          working towards a bachelors in software engineering. I live in
-          {' '}
+          {'Hi! I\'m a Software Engineer currently working at '}
+          <Link rel="noopener noreferrer" color="primary" target="_blank" href="https://www.predictiveindex.com/">The Predictive Index</Link>
+          {' with a bachelors degree in the same from '}
+          <Link rel="noopener noreferrer" color="primary" target="_blank" href="https://www.asu.edu/">Arizona State University</Link>
+          {'. I live in '}
           <Link rel="noopener noreferrer" color="primary" target="_blank" href="https://www.google.com/maps/place/Canby,+OR+97013/@45.2711453,-122.7227492,13z/data=!3m1!4b1!4m5!3m4!1s0x5495646375ceb84f:0x110fdcab2e1cddd4!8m2!3d45.262205!4d-122.6921558">Canby, OR</Link>
-          {' '}
-          and currently work as a Cloud Software Specialist at a large IT reseller.
+          {'. '}
           <br />
           <br />
-          When not working, or learning new things at ASU, I like to exercise and
-          learn more about web development! Check out some social media links
-          and projects below:
+          When not working, or learning new things about development,
+          I like to exercise and hang out with my two pets and beautiful wife.
+          Check out some social media links and projects below:
         </Typography>
         <div className={classes.heroButtons}>
           <Grid container spacing={4} justifyContent="center">
