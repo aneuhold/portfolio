@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'plugin:react/recommended',
     'airbnb',
     'plugin:@typescript-eslint/recommended',
   ],
@@ -23,12 +24,15 @@ module.exports = {
     },
   },
   plugins: [
+    'react',
     '@typescript-eslint',
   ],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'react/jsx-props-no-spreading': [0],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     /**
      * Allow imports from `.ts` files to always be allowed to import without the
      * extension.

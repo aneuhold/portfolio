@@ -4,10 +4,10 @@
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
   "main": "index.js",
   "scripts": {
-    "react:dev": "next",
-    "react:build": "next build",
-    "react:start": "next start",
-    "react:export": "next export",
+    "react:dev": "next ./react",
+    "react:build": "next build ./react",
+    "react:start": "next start ./react",
+    "react:export": "next export ./react",
     "react:deploy": "npm run react:build && npm run react:export"
   },
   "keywords": [],
