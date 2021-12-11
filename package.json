@@ -1,14 +1,14 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "react:dev": "next",
+    "react:build": "next build",
+    "react:start": "next start",
+    "react:export": "next export",
+    "react:deploy": "npm run react:build && npm run react:export"
   },
   "keywords": [],
   "author": "",
