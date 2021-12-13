@@ -10,3 +10,5 @@ There are two versions of this portfolio with some shared code between them. Thi
 
 - [React portfolio](./react)
 - [Svelte portfolio](./svelte)
+
+The packages are managed with [yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces) which means there is a root `package.json` then any number of sub-projects 1 level deep with their own `package.json`. Dependencies are shared if they are the same version.
