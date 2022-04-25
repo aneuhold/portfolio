@@ -3,10 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'airbnb',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['airbnb', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -22,19 +19,21 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    '@typescript-eslint',
-  ],
+  plugins: ['@typescript-eslint'],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'linebreak-style': 'unix',
     /**
      * Allow imports from `.ts` files to always be allowed to import without the
      * extension.
      */
-    'import/extensions': ['error', {
-      ts: 'never',
-    }],
+    'import/extensions': [
+      'error',
+      {
+        ts: 'never',
+      },
+    ],
   },
 };

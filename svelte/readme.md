@@ -1,11 +1,38 @@
-# Svelte Portfolio
+# create-svelte
 
-This is the version of the portfolio written in Svelte. 
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## Development
+## Creating a project
 
-The various package.json commands are below:
+If you're seeing this, you've probably already done this step. Congrats!
 
-* `yarn build` will build the SvelteKit application
-* `yarn preview` will preview the built application locally (can use this to do things locally, but still need to find the command to use on netlify)
-* `yarn dev` will run the hot-reloading dev version
+```bash
+# create a new project in the current directory
+npm init svelte
+
+# create a new project in my-app
+npm init svelte my-app
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

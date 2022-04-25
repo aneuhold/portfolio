@@ -2,13 +2,13 @@
   "name": "portfolio",
   "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
-  "main": "index.js",
   "scripts": {
+    "svelte:dev": "cd svelte && yarn dev",
     "react:dev": "next ./react",
     "react:build": "next build ./react",
     "react:start": "next start ./react",
     "react:export": "next export ./react",
-    "react:deploy": "npm run react:build && npm run react:export"
+    "react:deploy": "yarn react:build && yarn react:export"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +41,6 @@
   "private": true,
   "workspaces": [
     "react",
-    "svelt"
+    "svelte"
   ]
 }
