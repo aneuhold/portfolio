@@ -4,28 +4,18 @@
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
   "scripts": {
     "svelte:dev": "cd svelte && yarn dev",
-    "react:dev": "next ./react",
-    "react:build": "next build ./react",
+    "react:dev": "yarn copy-shared-files && cd ./react && yarn dev",
+    "react:build": "yarn copy-shared-files && cd ./react && yarn build",
     "react:start": "next start ./react",
     "react:export": "next export ./react",
-    "react:deploy": "yarn react:build && yarn react:export"
+    "react:deploy": "yarn react:build && yarn react:export",
+    "copy-shared-files": "copyfiles ./config/* ./react/_shared-config -f && copyfiles ./lib/* ./react/_shared-lib -f"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
-    "@material-ui/core": "^5.0.0-alpha.27",
-    "@material-ui/icons": "^5.0.0-alpha.27",
-    "@material-ui/styles": "^5.0.0-beta.5",
-    "@types/gtag.js": "^0",
-    "@types/node": "^16",
-    "@types/react": "^17",
-    "classnames": "^2.2.6",
-    "next": "^11",
-    "react": "^17.0.1",
-    "react-dom": "^17",
+    "copyfiles": "^2.4.1",
     "typescript": "^4.4.0"
   },
   "devDependencies": {
