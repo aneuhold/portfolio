@@ -1,2 +1,12 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> this is a test</p>
+<script>
+  import Footer from 'src/components/footer.svelte';
+</script>
+
+This is the portfolio!
+<Footer />
+
+<style lang="scss" global>
+  html {
+    font-family: 'Roboto', sans-serif;
+  }
+</style>
