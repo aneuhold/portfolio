@@ -1,13 +1,8 @@
 <script>
-  import Footer from 'src/components/footer.svelte';
+  import Footer from 'src/components/Footer.svelte';
 </script>
 
-This is the portfolio!
-<Footer />
-
-<style lang="scss" global>
-  @import '../global-styles/global.scss';
-  html {
-    font-family: 'Roboto', sans-serif;
-  }
-</style>
+<template>
+  This is the portfolio!
+  <Footer />
+</template>
