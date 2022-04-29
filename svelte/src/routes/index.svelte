@@ -1,8 +1,9 @@
 <script>
   import Footer from 'src/components/Footer.svelte';
+  import Hero from 'src/components/Hero.svelte';
 </script>
 
 <template>
-  This is the portfolio!
+  <Hero />
   <Footer />
 </template>

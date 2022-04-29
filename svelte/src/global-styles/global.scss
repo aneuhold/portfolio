@@ -1,5 +1,9 @@
+@use '../global-styles/theme.scss';
+
 html {
   font-family: 'Roboto', sans-serif;
+  color: theme.$color-text-primary;
+  text-align: center;
 }
 
 // A lot of the below styles are pulled from the react version of Material UI
@@ -10,6 +14,13 @@ html {
   line-height: 1.2;
   letter-spacing: -0.00833em;
   margin-bottom: 0.35em;
+}
+
+.header-4 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.334;
+  letter-spacing: 0em;
 }
 
 .header-6 {
