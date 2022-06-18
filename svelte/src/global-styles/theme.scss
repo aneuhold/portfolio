@@ -1,10 +1,17 @@
-$color-text-primary: rgba(0, 0, 0, 0.87);
-$color-text-secondary: rgba(0, 0, 0, 0.6);
+// All the variables in this file are defined in `global.scss` so that the
+// root CSS variables are only put on the site once.
+//
+// If the root CSS variables were here, then it would be repeated every time
+// this file was imported.
 
-$color-primary: #ff9800;
-$color-primary-300: rgba(255, 152, 0, 0.4);
-$color-secondary: #ff9800;
-$color-shadow: rgba(0, 0, 0, 0.04);
+$color-text-primary: var(--color-text-primary);
+$color-text-secondary: var(--color-text-secondary);
 
-$standard-spacing: 8px;
-$background: #fff;
+$color-primary: var(--color-primary);
+$color-primary-300: var(--color-primary-300);
+$color-primary-100: var(--color-primary-100);
+$color-secondary: var(--color-secondary);
+$color-shadow: var(--color-shadow);
+
+$standard-spacing: var(--standard-spacing);
+$background: var(--background);
