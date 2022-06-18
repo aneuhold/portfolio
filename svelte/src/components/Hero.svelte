@@ -45,6 +45,8 @@
   }
 
   .heroButtons {
-    display: grid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 </style>
