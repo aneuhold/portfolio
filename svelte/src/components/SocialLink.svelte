@@ -33,7 +33,6 @@
   }
 
   .svgIcon {
-    border-radius: 50%;
     width: 1em;
     height: 1em;
     color: theme.$color-primary;

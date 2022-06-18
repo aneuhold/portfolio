@@ -12,7 +12,13 @@ const config = {
 		vite: {
       resolve: {
         alias: {
-          src: path.resolve('./src')
+          src: path.resolve('./src'),
+          config: path.resolve('./_shared-config')
+        }
+      },
+      server: {
+        fs: {
+          allow: ['./_shared-config']
         }
       }
     }

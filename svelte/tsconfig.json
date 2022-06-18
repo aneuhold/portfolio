@@ -21,5 +21,12 @@
       "config/*": ["_shared-config/*"]
     }
   },
-  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.js",
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "_shared-config/**/*.*"
+  ],
+  "exclude": ["node_modules"]
 }
