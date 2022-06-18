@@ -12,6 +12,8 @@
         imgUrl={project.thumbnailUrl}
         imgAlt={project.thumbnailDescription}
         info={project.info}
+        demoLink={project.demoLink}
+        codeLink={project.codeLink}
       />
     {/each}
   </CardGrid>

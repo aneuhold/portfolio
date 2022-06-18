@@ -5,6 +5,8 @@
   export let imgUrl: string;
   export let imgAlt: string;
   export let info: string;
+  export let demoLink: string | undefined;
+  export let codeLink: string;
 </script>
 
 <div class="projectCard">
@@ -14,7 +16,10 @@
     <p>{info}</p>
   </div>
   <div class="footer">
-    <TextButton text="test" url="www.google.com" />
+    {#if demoLink}
+      <TextButton text="demo" url={demoLink} />
+    {/if}
+    <TextButton text="source" url={codeLink} />
   </div>
 </div>
 

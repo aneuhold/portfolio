@@ -3,7 +3,7 @@
   export let url: string;
 </script>
 
-<a class="button-text" href={url}>
+<a rel="noopener noreferrer" target="_blank" class="button-text" href={url}>
   {text}
 </a>
 
