@@ -3,8 +3,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   // Use ESLint for all file types that it supports (which still uses prettier behind the scenes)
-  "[javascript][typescript][html]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[javascript][typescript][html][javascriptreact][typescriptreact]": {
+    "editor.defaultFormatter": null,
     "editor.formatOnSave": false
   },
   "editor.codeActionsOnSave": {

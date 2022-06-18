@@ -41,5 +41,7 @@ module.exports = {
     'import/extensions': ['error', {
       ts: 'never',
     }],
+    // Import resolver turned off because this is handled by TypeScript
+    'import/no-unresolved': [0],
   },
 };
