@@ -10,12 +10,7 @@
 
   a {
     color: theme.$color-primary;
-    text-decoration: underline;
-    text-decoration-line: underline;
-    text-decoration-thickness: initial;
-    text-decoration-style: initial;
     text-decoration-color: theme.$color-primary-300;
-    cursor: pointer;
   }
 
   a:hover {
