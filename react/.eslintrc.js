@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',
+    'linebreak-style': 0,
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-props-no-spreading': [0],
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
