@@ -1,13 +1,10 @@
 module.exports = {
+  root: true,
   env: {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -23,10 +20,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-  ],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',
@@ -38,9 +32,12 @@ module.exports = {
      * Allow imports from `.ts` files to always be allowed to import without the
      * extension.
      */
-    'import/extensions': ['error', {
-      ts: 'never',
-    }],
+    'import/extensions': [
+      'error',
+      {
+        ts: 'never',
+      },
+    ],
     // Import resolver turned off because this is handled by TypeScript
     'import/no-unresolved': [0],
   },
