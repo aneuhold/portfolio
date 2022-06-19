@@ -9,7 +9,7 @@ import {
 import {
   makeStyles,
 } from '@material-ui/styles';
-import socialLinks from '../config/socialLinks';
+import socialLinks from '../socialLinks';
 
 const useStyles = makeStyles((theme: Theme) => ({
   titleName: {

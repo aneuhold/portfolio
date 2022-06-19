@@ -4,8 +4,8 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
-import theme from '../config/theme';
-import pageView from '../lib/googleAnalytics';
+import theme from '../theme';
+import pageView from 'lib/googleAnalytics';
 
 export default function CustomApp(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;

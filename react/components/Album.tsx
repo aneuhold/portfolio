@@ -1,15 +1,17 @@
 import React from 'react';
 import {
-  CardContent, CardActions,
-  CardMedia, Card, Grid, Button,
+  CardContent,
+  CardActions,
+  CardMedia,
+  Card,
+  Grid,
+  Button,
   Typography,
   Theme,
 } from '@material-ui/core';
-import {
-  makeStyles,
-} from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import projects from '../config/projects';
+import projects from 'config/projects';
 
 const useStyles = makeStyles((theme: Theme) => ({
   layout: {
@@ -57,18 +59,25 @@ export default function Album(): JSX.Element {
                 <Typography gutterBottom variant="h5" component="h2">
                   {card.heading}
                 </Typography>
-                <Typography>
-                  {card.info}
-                </Typography>
+                <Typography>{card.info}</Typography>
               </CardContent>
               <CardActions>
-                {card.demoLink
-                  ? (
-                    <Button size="small" color="primary" href={card.demoLink || ''} target="_blank">
-                      Demo
-                    </Button>
-                  ) : null}
-                <Button size="small" color="primary" href={card.codeLink} target="_blank">
+                {card.demoLink ? (
+                  <Button
+                    size="small"
+                    color="primary"
+                    href={card.demoLink || ''}
+                    target="_blank"
+                  >
+                    Demo
+                  </Button>
+                ) : null}
+                <Button
+                  size="small"
+                  color="primary"
+                  href={card.codeLink}
+                  target="_blank"
+                >
                   Source
                 </Button>
               </CardActions>

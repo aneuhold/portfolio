@@ -3,7 +3,7 @@ import Document, {
   Html, Head, Main, NextScript,
 } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
-import theme from '../config/theme';
+import theme from '../theme';
 
 export default class MainDocument extends Document {
   render(): JSX.Element {

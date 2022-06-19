@@ -1,31 +1,24 @@
 {
   "name": "portfolio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
-  "main": "index.js",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "i": "yarn && yarn i:react && yarn i:svelte",
+    "i:react": "cd react && yarn",
+    "i:svelte": "cd svelte && yarn",
+    "svelte": "yarn copy-shared-files && cd svelte && yarn dev",
+    "react": "yarn copy-shared-files && cd react && yarn dev",
+    "react:build": "yarn copy-shared-files && cd ./react && yarn build",
+    "react:start": "next start ./react",
+    "react:export": "next export ./react",
+    "react:deploy": "yarn react:build && yarn react:export",
+    "copy-shared-files": "copyfiles ./config/* ./react/_shared-config ./svelte/_shared-config -f && copyfiles ./lib/* ./react/_shared-lib ./svelte/_shared-config -f"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anton G. Neuhold Jr",
   "license": "ISC",
   "dependencies": {
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.1.5",
-    "@material-ui/core": "^5.0.0-alpha.27",
-    "@material-ui/icons": "^5.0.0-alpha.27",
-    "@material-ui/styles": "^5.0.0-beta.5",
-    "@types/gtag.js": "^0",
-    "@types/node": "^16",
-    "@types/react": "^17",
-    "classnames": "^2.2.6",
-    "next": "^11",
-    "react": "^17.0.1",
-    "react-dom": "^17",
+    "copyfiles": "^2.4.1",
     "typescript": "^4.4.0"
   },
   "devDependencies": {
@@ -37,5 +30,6 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0"
-  }
+  },
+  "private": true
 }
