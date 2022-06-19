@@ -1,0 +1,33 @@
+name: Upgrade Yarn Packages
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 0 * * 0"
+
+jobs:
+  upgrade-packages:
+    name: Upgrade packages
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ⚙️
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18.x"
+
+      - name: Upgrade packages 🔀
+        run: yarn upgradeAndTest
+
+      - name: Commit and create PR 🔀
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Upgrade Yarn packages (automated)"
+          branch: "upgrade-yarn-packages-automated"
+          commit-message: "Upgrade yarn packages (automated)"
+          reviewers: aneuhold
