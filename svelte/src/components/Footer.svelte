@@ -1,10 +1,12 @@
+<script lang="ts">
+  import Link from './Link.svelte';
+</script>
+
 <template>
   <footer>
     <span class="header-6"
       >See the code for this website
-      <a href="https://github.com/aneuhold/portfolio" rel="noopener noreferrer" target="_blank"
-        >here!</a
-      >
+      <Link url="https://github.com/aneuhold/portfolio" linkText="here!" />
     </span>
     <span class="subtitle-1">©{new Date().getFullYear()} Anton Neuhold</span>
   </footer>
