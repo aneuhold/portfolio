@@ -16,5 +16,5 @@ module.exports = {
   moduleDirectories: ['node_modules'],
   moduleNameMapper: {
     '^config/(.*)$': '<rootDir>/_shared-config/$1'
-  } 
+  }
 };
