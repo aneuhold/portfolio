@@ -13,7 +13,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2020",
-    "types": ["jest"],
+    "types": ["jest", "vite/client"],
     // Any extra paths below need to be added to the following other locations:
     // - The "include" section below
     // - The jest.config.cjs file
