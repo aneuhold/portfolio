@@ -1,12 +1,18 @@
-import preprocess from 'svelte-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
 import path from 'path';
 import adapter from '@sveltejs/adapter-static';
+import { mdsvex } from 'mdsvex';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   // Consult https://github.com/sveltejs/svelte-preprocess
   // for more information about preprocessors
-  preprocess: preprocess({}),
+  preprocess: [
+    sveltePreprocess({}),
+    mdsvex({
+      extensions: ['.md']
+    })
+  ],
 
   kit: {
     vite: {
@@ -34,7 +40,8 @@ const config = {
       // This can be false if you're using a fallback (i.e. SPA mode)
       default: true
     }
-  }
+  },
+  extensions: ['.svelte', '.md']
 };
 
 export default config;
