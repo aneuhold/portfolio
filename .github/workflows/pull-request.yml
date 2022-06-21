@@ -7,8 +7,8 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: 'Deploy'
+  testAndDeploy:
+    name: 'Test and Deploy'
     runs-on: ubuntu-latest
 
     steps:
@@ -30,12 +30,11 @@ jobs:
       - name: Install dependencies for root and svelte
         run: yarn && yarn i:svelte
 
+      - name: Run tests
+        run: yarn test
+
       - name: Build the svelte site
         run: yarn svelte:build
-
-      - name: Extract branch name
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
