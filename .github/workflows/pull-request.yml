@@ -33,15 +33,16 @@ jobs:
       - name: Build the svelte site
         run: yarn svelte:build
 
-      # Sets the branch name as environment variable
-      - uses: nelonoel/branch-name@v1.0.1
+      - name: Extract branch name
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
 
       # Install Netlify CLI
       - name: Install Netlify CLI
         run: yarn global add netlify-cli
 
       - name: Deploy preview to Netlify
-        run: netlify deploy --alias ${{ env.BRANCH_NAME }} --prod false --dir "./svelte/build" --build false --message "${{ github.event.pull_request.title }} Deploy Preview"
+        run: netlify deploy --alias "${{ steps.extract_branch.outputs.branch }}" --prod false --dir "./svelte/build" --build false --message "${{ github.event.pull_request.title }} Deploy Preview"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -53,4 +54,4 @@ jobs:
           authToken: ${{ secrets.GITHUB_TOKEN }}
           context: Netlify preview
           state: success
-          target_url: https://${{ env.BRANCH_NAME }}--epic-bassi-85e884.netlify.app
+          target_url: https://${{ steps.extract_branch.outputs.branch }}--epic-bassi-85e884.netlify.app
