@@ -44,29 +44,11 @@ jobs:
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: '${{ github.event.pull_request.title }} Deploy Preview'
-          enable-pull-request-comment: true
+          enable-pull-request-comment: false
           enable-commit-comment: false
-          overwrites-pull-request-comment: true
+          overwrites-pull-request-comment: false
+          github-deployment-description: 'Netlify Deploy Preview'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
-
-      # # Install Netlify CLI
-      # - name: Install Netlify CLI
-      #   run: yarn global add netlify-cli
-
-      # - name: Deploy preview to Netlify
-      #   run: netlify deploy --alias "${{ steps.extract_branch.outputs.branch }}" --dir "./svelte/build" --message "${{ github.event.pull_request.title }} Deploy Preview"
-      #   env:
-      #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-      # Creates a status check with link to preview
-      - name: Status check
-        uses: Sibz/github-status-action@v1.1.1
-        with:
-          authToken: ${{ secrets.GITHUB_TOKEN }}
-          context: Netlify preview
-          state: success
-          target_url: https://${{ steps.extract_branch.outputs.branch }}--epic-bassi-85e884.netlify.app
