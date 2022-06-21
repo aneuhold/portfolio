@@ -38,7 +38,7 @@ jobs:
 
       # Install Netlify CLI
       - name: Install Netlify CLI
-        run: yarn install netlify-cli -g
+        run: yarn global add netlify-cli
 
       - name: Deploy preview to Netlify
         run: netlify deploy --alias ${{ env.BRANCH_NAME }} --prod false --dir "./svelte/build" --build false --message "${{ github.event.pull_request.title }} Deploy Preview"
