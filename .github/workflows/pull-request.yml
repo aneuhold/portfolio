@@ -2,10 +2,7 @@ name: 'Pull Request Actions'
 
 on:
   pull_request:
-    // Only initiate the workflow when a PR is opened, or committed to if it
-    // is targeting the main branch.
-    branches:
-      - main
+    // Only initiate the workflow when a PR is opened, or committed to
 
 jobs:
   deploy:
