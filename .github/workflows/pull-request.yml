@@ -42,7 +42,7 @@ jobs:
         run: yarn global add netlify-cli
 
       - name: Deploy preview to Netlify
-        run: netlify deploy --alias "${{ steps.extract_branch.outputs.branch }}" --prod false --dir "./svelte/build" --build false --message "${{ github.event.pull_request.title }} Deploy Preview"
+        run: netlify deploy --alias "${{ steps.extract_branch.outputs.branch }}" --dir "./svelte/build" --message "${{ github.event.pull_request.title }} Deploy Preview"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
