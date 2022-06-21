@@ -41,20 +41,15 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           deploy_alias: ${{ env.BRANCH_NAME }}
 
-      - name: Deploy Preview to Netlify
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: './svelte/build'
-          production-branch: main
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: ${{ github.event.pull_request.title }} Deploy Preview
-          enable-pull-request-comment: true
-          enable-commit-comment: false
-          overwrites-pull-request-comment: true
+      # Install Netlify CLI
+      - name: Install Netlify CLI
+        run: yarn install netlify-cli -g
+
+      - name: Deploy preview to Netlify
+        run: netlify deploy --alias ${{ env.BRANCH_NAME }} --prod false --dir "./svelte/build" --build false --message "${{ github.event.pull_request.title }} Deploy Preview"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
 
       # Creates a status check with link to preview
       - name: Status check
