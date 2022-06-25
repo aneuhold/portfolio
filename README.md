@@ -11,9 +11,22 @@ There are two versions of this portfolio with some shared code between them. Thi
 - [React portfolio](./react)
 - [Svelte portfolio](./svelte)
 
+## Deployment Process
+
+```mermaid
+sequenceDiagram
+    Github main Branch->>GitHub Actions: push
+    GitHub Actions->>Netlify: built files
+```
+
 ## Dev Setup
 
-To start development on the react side:
+To start development for react:
 
-- Run `yarn dev` in the root directory
-- Note that changes to the shared folders such as `./config` and `./lib` need to have `yarn dev` ran again to copy those files down into the react directory.
+- Run `yarn react` in the root directory
+
+To start development for svelt:
+
+- Run `yarn svelte` in the root directory
+
+Note that changes to the shared folders such as `./config` and `./lib` need to have the dev startup command ran again to copy those files down into the react directory.
