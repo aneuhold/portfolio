@@ -6,10 +6,12 @@
 <script lang="ts">
   export let url: string;
   export let svgIconPath: string;
+  export let linkName: string;
 </script>
 
 <a class="svgLink" href={url} rel="noopener noreferrer" target="_blank">
   <svg class="svgIcon">
+    <title>{linkName}</title>
     <path d={svgIconPath} />
   </svg>
 </a>

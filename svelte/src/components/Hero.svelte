@@ -30,7 +30,11 @@
 
   <div class="heroButtons">
     {#each socialLinks as socialLink}
-      <SocialLink url={socialLink.link} svgIconPath={socialLink.svgIconPath} />
+      <SocialLink
+        linkName={socialLink.name}
+        url={socialLink.link}
+        svgIconPath={socialLink.svgIconPath}
+      />
     {/each}
   </div>
 </div>
