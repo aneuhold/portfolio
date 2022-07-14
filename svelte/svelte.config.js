@@ -1,5 +1,4 @@
 import sveltePreprocess from 'svelte-preprocess';
-import path from 'path';
 import adapter from '@sveltejs/adapter-static';
 import { mdsvex } from 'mdsvex';
 
@@ -15,19 +14,6 @@ const config = {
   ],
 
   kit: {
-    vite: {
-      resolve: {
-        alias: {
-          src: path.resolve('./src'),
-          config: path.resolve('./_shared-config')
-        }
-      },
-      server: {
-        fs: {
-          allow: ['./_shared-config']
-        }
-      }
-    },
     adapter: adapter({
       // default options are shown
       pages: 'build',
