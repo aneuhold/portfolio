@@ -15,16 +15,16 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "1.0.0-next.60",
-    "@sveltejs/kit": "1.0.0-next.374",
+    "@sveltejs/adapter-auto": "1.0.0-next.61",
+    "@sveltejs/kit": "1.0.0-next.377",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/svelte": "^3.1.3",
-    "@types/jest": "^28.1.5",
+    "@types/jest": "^28.1.6",
     "@types/marked": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "babel-jest": "^28.1.3",
-    "eslint": "^8.19.0",
+    "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-svelte3": "^4.0.0",
@@ -37,14 +37,14 @@
     "svelte-check": "^2.8.0",
     "svelte-jester": "^2.3.2",
     "svelte-preprocess": "^4.10.6",
-    "ts-jest": "^28.0.6",
+    "ts-jest": "^28.0.7",
     "tslib": "^2.3.1",
     "typescript": "~4.7.4",
     "vite": "^3.0.0"
   },
   "type": "module",
   "dependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.36",
+    "@sveltejs/adapter-static": "^1.0.0-next.37",
     "marked": "^4.0.18",
     "mdsvex": "^0.10.6",
     "node-sass": "^7.0.1"
