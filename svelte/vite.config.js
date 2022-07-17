@@ -5,16 +5,14 @@ import path from 'path';
 const config = {
   plugins: [sveltekit()],
   resolve: {
-    resolve: {
-      alias: {
-        src: path.resolve('./src'),
-        config: path.resolve('./_shared-config')
-      }
-    },
-    server: {
-      fs: {
-        allow: ['./_shared-config']
-      }
+    alias: {
+      src: path.resolve('./src'),
+      config: path.resolve('./_shared-config')
+    }
+  },
+  server: {
+    fs: {
+      allow: ['./_shared-config', './src']
     }
   }
 };
