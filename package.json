@@ -14,7 +14,7 @@
     "react:export": "next export ./react",
     "react:deploy": "yarn react:build && yarn react:export",
     "copy-shared-files": "copyfiles ./config/* ./react/_shared-config ./svelte/_shared-config -f && copyfiles ./lib/* ./react/_shared-lib ./svelte/_shared-config -f",
-    "upgradeAndTest": "yarn upgrade --latest && cd svelte && yarn upgrade --latest && yarn prepare && yarn test",
+    "upgradeAndTest": "yarn upgrade --latest && yarn copy-shared-files && cd svelte && yarn upgrade --latest && yarn prepare && yarn test",
     "test": "yarn copy-shared-files && cd svelte && yarn prepare && yarn test"
   },
   "keywords": [],
