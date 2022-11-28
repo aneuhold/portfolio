@@ -17,14 +17,14 @@
     "upgradeAndTest": "yarn upgrade --latest && yarn buildAndTest"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "1.0.0-next.88",
-    "@sveltejs/kit": "1.0.0-next.553",
+    "@sveltejs/adapter-auto": "1.0.0-next.89",
+    "@sveltejs/kit": "1.0.0-next.562",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/svelte": "^3.2.2",
     "@types/jest": "^29.2.3",
     "@types/marked": "^4.0.7",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
+    "@typescript-eslint/eslint-plugin": "^5.44.0",
+    "@typescript-eslint/parser": "^5.44.0",
     "babel-jest": "^29.3.1",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.3.0",
@@ -32,7 +32,7 @@
     "eslint-plugin-svelte3": "^4.0.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
-    "prettier": "^2.5.1",
+    "prettier": "^2.8.0",
     "prettier-plugin-svelte": "^2.8.1",
     "sass": "^1.56.1",
     "svelte": "^3.53.1",
@@ -47,7 +47,7 @@
   "type": "module",
   "dependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.48",
-    "marked": "^4.2.2",
+    "marked": "^4.2.3",
     "mdsvex": "^0.10.6",
     "node-sass": "^8.0.0"
   }
