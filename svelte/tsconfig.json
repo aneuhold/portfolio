@@ -19,11 +19,11 @@
     // - The jest.config.cjs file
     // - The svelte.config.js resolve and server sections
     "paths": {
-      "src/*": ["src/*"],
+      "src/*": ["./src/*"],
       // The below were asked to be put there by Svelte-Kit for some reason.
-      "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"],
-      "config/*": ["_shared-config/*"]
+      "$lib": ["./src/lib"],
+      "$lib/*": ["./src/lib/*"],
+      "config/*": ["./_shared-config/*"]
     }
   },
   "include": [
