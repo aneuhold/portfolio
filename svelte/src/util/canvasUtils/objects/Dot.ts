@@ -1,4 +1,5 @@
 import type Moveable from '../interfaces/Drawable';
+import { getRandomColor, getRandomInt, getRandomNumber } from '../mathTools';
 
 export type DotOptions = {
   x?: number;
@@ -7,6 +8,11 @@ export type DotOptions = {
   yVelocity?: number;
   radius?: number;
   color?: string;
+  /**
+   * The factor of trailing length that should be applied to the dot. This
+   * should be an integer.
+   */
+  trailingFactor?: number;
 };
 
 /**
@@ -17,18 +23,23 @@ export default class Dot implements Moveable {
   private xVelocity: number;
   private y: number;
   private yVelocity: number;
+  private trailingFactor: number;
   private readonly radius: number;
   private readonly color: string;
   private readonly ctx: CanvasRenderingContext2D;
+  private readonly trailMaxLength: number;
+  private readonly trailCoords: { x: number; y: number }[] = [];
 
   constructor(ctx: CanvasRenderingContext2D, dotOptions: DotOptions = {}) {
     this.ctx = ctx;
-    this.x = dotOptions.x || ctx.canvas.width / 2;
-    this.xVelocity = dotOptions.xVelocity || 0.5;
-    this.y = dotOptions.y || ctx.canvas.height / 2;
-    this.yVelocity = dotOptions.yVelocity || 0.5;
+    this.x = dotOptions.x || getRandomInt(ctx.canvas.width);
+    this.xVelocity = dotOptions.xVelocity || getRandomNumber(10);
+    this.y = dotOptions.y || getRandomInt(ctx.canvas.height);
+    this.yVelocity = dotOptions.yVelocity || getRandomNumber(10);
     this.radius = dotOptions.radius || 10;
-    this.color = dotOptions.color || 'white';
+    this.color = dotOptions.color || getRandomColor();
+    this.trailingFactor = dotOptions.trailingFactor || 50;
+    this.trailMaxLength = this.trailingFactor;
     this.draw();
   }
 
@@ -45,11 +56,14 @@ export default class Dot implements Moveable {
     }
     this.x = nextX;
     this.y = nextY;
-    this.draw();
-  }
 
-  public currentPosition(): { x: number; y: number } {
-    return { x: this.x, y: this.y };
+    // Handle the trailing
+    this.trailCoords.unshift({ x: this.x, y: this.y });
+    if (this.trailCoords.length > this.trailMaxLength) {
+      this.trailCoords.pop();
+    }
+
+    this.draw();
   }
 
   /**
@@ -63,10 +77,35 @@ export default class Dot implements Moveable {
   }
 
   private draw(): void {
+    this.drawTrails();
+    this.drawIndividualDot(this.x, this.y, this.radius, this.color);
+  }
+
+  private drawTrails() {
+    const trailLength = this.trailCoords.length;
+    // Draw trails starting from the back and going forward so they stack
+    for (let trailIndex = trailLength - 1; trailIndex >= 0; trailIndex--) {
+      const trailCoord = this.trailCoords[trailIndex];
+      const trailAlpha = 1 - (trailIndex + 1) / this.trailMaxLength;
+      const trailRadius = this.radius * trailAlpha;
+      this.drawIndividualDot(trailCoord.x, trailCoord.y, trailRadius, this.color, trailAlpha);
+    }
+  }
+
+  private drawIndividualDot(
+    x: number,
+    y: number,
+    radius: number,
+    color: string,
+    alpha: number = 1
+  ) {
     this.ctx.beginPath();
-    this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    this.ctx.fillStyle = this.color;
+    this.ctx.arc(x, y, radius, 0, Math.PI * 2);
+    this.ctx.fillStyle = color;
+    this.ctx.globalAlpha = alpha;
     this.ctx.fill();
     this.ctx.closePath();
+    // Reset the alpha
+    this.ctx.globalAlpha = 1;
   }
 }

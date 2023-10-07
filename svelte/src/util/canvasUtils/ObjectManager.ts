@@ -30,9 +30,9 @@ export default class ObjectManager implements Moveable {
    * set of objects to be drawn.
    */
   public createSomeObjects(ctx: CanvasRenderingContext2D) {
-    this.addObjects([
-      new Dot(ctx),
-      new Dot(ctx, { xVelocity: -0.1, yVelocity: -0.1, color: 'red' })
-    ]);
+    const numObjects = 5;
+    for (let i = 0; i < numObjects; i++) {
+      this.addObject(new Dot(ctx));
+    }
   }
 }
