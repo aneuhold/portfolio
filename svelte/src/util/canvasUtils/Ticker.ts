@@ -6,15 +6,20 @@
 const FRAMES_PER_SECOND = 60;
 
 /**
- * TODO: This still needs to be setup. Was working on also adding in WebGL.
+ * The options for setting up the ticker.
  */
 export type TickerOptions = {
   /**
-   * Whether or not to use setTimeout instead of requestAnimationFrame. This
-   * should be true if the event listeners take a long time to execute.
+   * The time keeping technique to use for the ticker. This will default to
+   * `requestAnimationFrame` if not specified.
+   *
+   * `requestAnimationFrame` has the benefit of being able to pause when the
+   * user switches tabs.
    */
-  useSetTimeout?: boolean;
+  tickerTechnique?: TickerTechnique;
 };
+
+export type TickerTechnique = 'setTimeout' | 'requestAnimationFrame' | 'setInterval';
 
 /**
  * A ticker that ticks at a constant rate and can be subscribed to for
@@ -23,8 +28,15 @@ export type TickerOptions = {
 export default class Ticker {
   private eventListeners: Array<() => void> = [];
   private msToPassBetweenFrames = 1000 / FRAMES_PER_SECOND;
+  private tickerTechnique: TickerTechnique;
+  /**
+   * The timestamp of the previous frame. This is only used if the technique is
+   * `requestAnimationFrame`.
+   */
+  private previousTimeStamp: DOMHighResTimeStamp = performance.now();
 
-  constructor() {
+  constructor(options: TickerOptions = {}) {
+    this.tickerTechnique = options.tickerTechnique || 'requestAnimationFrame';
     this.start();
   }
 
@@ -36,16 +48,35 @@ export default class Ticker {
    * Starts the ticker.
    */
   private start() {
-    this.continue();
+    switch (this.tickerTechnique) {
+      case 'setTimeout':
+        this.continueSetTimeout();
+        break;
+      case 'requestAnimationFrame':
+        requestAnimationFrame((timeStamp) => this.continueRequestAnimationFrame(timeStamp));
+        break;
+      case 'setInterval':
+        setInterval(() => {
+          this.eventListeners.forEach((listener) => listener());
+        }, this.msToPassBetweenFrames);
+        break;
+    }
   }
 
-  /**
-   * Recursively calls itself to continue the ticker.
-   */
-  private continue() {
+  private continueSetTimeout() {
     this.eventListeners.forEach((listener) => listener());
     setTimeout(() => {
-      this.continue();
+      this.continueSetTimeout();
     }, this.msToPassBetweenFrames);
+  }
+
+  private continueRequestAnimationFrame(timeStamp: DOMHighResTimeStamp) {
+    if (timeStamp - this.previousTimeStamp >= this.msToPassBetweenFrames) {
+      this.eventListeners.forEach((listener) => listener());
+      // Update the previous timestamp after the event listeners have been
+      // called.
+      this.previousTimeStamp = timeStamp;
+    }
+    requestAnimationFrame((timeStamp) => this.continueRequestAnimationFrame(timeStamp));
   }
 }

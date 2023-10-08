@@ -4,17 +4,14 @@
   A little playground for learning more about canvas!
 -->
 <script lang="ts">
-  import drawOnCanvasContext from 'src/util/canvasDrawer';
+  import drawOnCanvas from 'src/util/canvasDrawer';
   import { onMount } from 'svelte';
 
   let canvas: HTMLCanvasElement;
 
   // Put inside onMount to be able to get the rendered element
   onMount(() => {
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      drawOnCanvasContext(ctx);
-    }
+    drawOnCanvas(canvas);
   });
 </script>
 
