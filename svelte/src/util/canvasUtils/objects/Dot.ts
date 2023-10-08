@@ -29,6 +29,7 @@ export default class Dot implements Moveable {
   private readonly ctx: CanvasRenderingContext2D;
   private readonly trailMaxLength: number;
   private readonly trailCoords: { x: number; y: number }[] = [];
+  private readonly trailPaths: Path2D[] = [];
 
   constructor(ctx: CanvasRenderingContext2D, dotOptions: DotOptions = {}) {
     this.ctx = ctx;
@@ -46,6 +47,7 @@ export default class Dot implements Moveable {
   continueMovement() {
     let nextX = this.x + this.xVelocity;
     let nextY = this.y + this.yVelocity;
+    // Handle velocity changes
     if (this.ctx.canvas.width < nextX || 0 > nextX) {
       this.xVelocity = -this.xVelocity;
       nextX = this.x + this.xVelocity;
@@ -58,9 +60,9 @@ export default class Dot implements Moveable {
     this.y = nextY;
 
     // Handle the trailing
-    this.trailCoords.unshift({ x: this.x, y: this.y });
-    if (this.trailCoords.length > this.trailMaxLength) {
-      this.trailCoords.pop();
+    this.trailPaths.unshift(this.createDotPath(this.x, this.y, this.radius));
+    if (this.trailPaths.length > this.trailMaxLength) {
+      this.trailPaths.pop();
     }
 
     this.draw();
@@ -99,13 +101,20 @@ export default class Dot implements Moveable {
     color: string,
     alpha: number = 1
   ) {
+    this.ctx.save();
     this.ctx.beginPath();
     this.ctx.arc(x, y, radius, 0, Math.PI * 2);
     this.ctx.fillStyle = color;
     this.ctx.globalAlpha = alpha;
     this.ctx.fill();
     this.ctx.closePath();
-    // Reset the alpha
-    this.ctx.globalAlpha = 1;
+    // Restore the state
+    this.ctx.restore();
+  }
+
+  private createDotPath(x: number, y: number, radius: number): Path2D {
+    const dotPath = new Path2D();
+    dotPath.arc(x, y, radius, 0, Math.PI * 2);
+    return dotPath;
   }
 }

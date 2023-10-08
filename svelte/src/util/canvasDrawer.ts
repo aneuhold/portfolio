@@ -1,45 +1,20 @@
 import ObjectManager from './canvasUtils/ObjectManager';
-
-const FRAMES_PER_SECOND = 60;
+import Ticker from './canvasUtils/Ticker';
 
 /**
  * Takes a canvas context and draws some things on it! This is just for fun.
  */
 export default function drawOnCanvasContext(ctx: CanvasRenderingContext2D) {
   adjustCanvasForHighResolution(ctx);
-  const msToPassBetweenFrames = 1000 / FRAMES_PER_SECOND;
-
-  /**
-   * The previous time stamp. This is used to calculate the time difference
-   * between frames. This is a double with the integer value being in ms.
-   */
-  let previousTimeStamp: DOMHighResTimeStamp = performance.now();
+  const ticker = new Ticker();
 
   const objectManager = new ObjectManager();
   objectManager.createSomeObjects(ctx);
 
-  /**
-   * The main animation loop for the canvas.
-   *
-   * @param timeStamp the time stamp from the requestAnimationFrame callback.
-   * This is in milliseconds.
-   */
-  function drawLoop(timeStamp: DOMHighResTimeStamp) {
-    if (timeStamp - previousTimeStamp >= msToPassBetweenFrames) {
-      previousTimeStamp = timeStamp;
-      drawThings();
-    }
-    window.requestAnimationFrame(drawLoop);
-  }
-
-  function drawThings() {
-    // Clear the canvas
+  ticker.subscribe(() => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     objectManager.continueMovement();
-  }
-
-  // Start the drawing
-  window.requestAnimationFrame(drawLoop);
+  });
 }
 
 /**
