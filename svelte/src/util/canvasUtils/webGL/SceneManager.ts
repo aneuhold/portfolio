@@ -46,6 +46,7 @@ export default class SceneManager {
     // Tell WebGL how to pull out the positions from the position
     // buffer into the vertexPosition attribute.
     this.setPositionAttribute(buffers);
+    this.setColorAttribute(buffers);
 
     // Tell WebGL to use our program when drawing
     this.gl.useProgram(this.programInfo.program);
@@ -98,5 +99,23 @@ export default class SceneManager {
       offset
     );
     this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
+  }
+
+  private setColorAttribute(buffers: Buffers) {
+    const numComponents = 4;
+    const type = this.gl.FLOAT;
+    const normalize = false;
+    const stride = 0;
+    const offset = 0;
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffers.color);
+    this.gl.vertexAttribPointer(
+      this.programInfo.attribLocations.vertexColor,
+      numComponents,
+      type,
+      normalize,
+      stride,
+      offset
+    );
+    this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexColor);
   }
 }

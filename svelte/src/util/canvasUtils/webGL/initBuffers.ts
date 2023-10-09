@@ -1,5 +1,6 @@
 export type Buffers = {
   position: WebGLBuffer;
+  color: WebGLBuffer;
 };
 
 /**
@@ -8,9 +9,14 @@ export type Buffers = {
  */
 export function initBuffers(gl: WebGL2RenderingContext): Buffers {
   const positionBuffer = initPositionBuffer(gl);
+  const colorBuffer = initColorBuffer(gl);
+  if (!colorBuffer) {
+    throw new Error('Unable to create color buffer.');
+  }
 
   return {
-    position: positionBuffer
+    position: positionBuffer,
+    color: colorBuffer
   };
 }
 

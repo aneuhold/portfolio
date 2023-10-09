@@ -1,18 +1,33 @@
 import SceneManager from './SceneManager';
 import { initBuffers } from './initBuffers';
 
+/**
+ * The source code for the vertex shader. This is responsible for determining
+ * the position of each vertex.
+ */
 const VERTEX_SHADER_SOURCE = `
   attribute vec4 aVertexPosition;
+  attribute vec4 aVertexColor;
   uniform mat4 uModelViewMatrix;
   uniform mat4 uProjectionMatrix;
+
+  varying lowp vec4 vColor;
+
   void main() {
     gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+    vColor = aVertexColor;
   }
 `;
 
+/**
+ * The source code for the fragment shader. This is responsible for determining
+ * the color of each pixel.
+ */
 const FRAGMENT_SHADER_SOURCE = `
+  varying lowp vec4 vColor;
+
   void main() {
-    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    gl_FragColor = vColor;
   }
 `;
 
@@ -20,6 +35,7 @@ export type ProgramInfo = {
   program: WebGLProgram;
   attribLocations: {
     vertexPosition: number;
+    vertexColor: number;
   };
   uniformLocations: {
     projectionMatrix: WebGLUniformLocation;
@@ -64,7 +80,8 @@ export default class WebGLContext {
    *
    * - The vertex shader is responsible for determining the position of each
    * vertex.
-   * - The fragment shader is responsible for determining the color of each pixel.
+   * - The fragment shader is responsible for determining the color of each
+   * pixel.
    *
    * This only needs to be done once it seems like.
    */
@@ -91,7 +108,8 @@ export default class WebGLContext {
     return {
       program: program,
       attribLocations: {
-        vertexPosition: this.gl.getAttribLocation(program, 'aVertexPosition')
+        vertexPosition: this.gl.getAttribLocation(program, 'aVertexPosition'),
+        vertexColor: this.gl.getAttribLocation(program, 'aVertexColor')
       },
       uniformLocations: {
         projectionMatrix,
