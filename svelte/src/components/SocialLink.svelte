@@ -1,5 +1,5 @@
 <!--
-  @SocialLink
+  @component
 
   some markdown here
 -->
