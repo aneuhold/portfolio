@@ -2,6 +2,7 @@
   "name": "svelte",
   "version": "0.0.1",
   "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
   "scripts": {
     "dev": "vite dev --port 3020 --open",
     "build": "vite build",
@@ -13,8 +14,8 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "buildAndTest": "yarn build && yarn test",
-    "upgradeAndTest": "yarn upgrade --latest && yarn buildAndTest"
+    "buildAndTest": "pnpm build && pnpm test",
+    "upgradeAndTest": "pnpm update --latest && pnpm buildAndTest"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "2.1.0",

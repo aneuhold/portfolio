@@ -2,20 +2,20 @@
   "name": "portfolio",
   "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
+  "packageManager": "pnpm@10.14.0",
+  "private": true,
   "scripts": {
-    "i": "yarn && yarn i:react && yarn i:svelte",
-    "i:react": "cd react && yarn",
-    "i:svelte": "cd svelte && yarn",
-    "svelte": "yarn copy-shared-files && cd svelte && yarn dev",
-    "svelte:build": "yarn copy-shared-files && cd svelte && yarn build",
-    "react": "yarn copy-shared-files && cd react && yarn dev",
-    "react:build": "yarn copy-shared-files && cd ./react && yarn build",
-    "react:start": "next start ./react",
-    "react:export": "next export ./react",
-    "react:deploy": "yarn react:build && yarn react:export",
+    "i": "pnpm i && cd ./react && pnpm i && cd ../svelte && pnpm i",
+    "svelte": "pnpm copy-shared-files && cd ./svelte && pnpm dev",
+    "svelte:build": "pnpm copy-shared-files && cd ./svelte && pnpm build",
+    "react": "pnpm copy-shared-files && cd ./react && pnpm dev",
+    "react:build": "pnpm copy-shared-files && cd ./react && pnpm build",
+    "react:start": "cd ./react && pnpm start",
+    "react:export": "cd ./react && pnpm export",
+    "react:deploy": "pnpm react:build && pnpm react:export",
     "copy-shared-files": "copyfiles ./config/* ./react/_shared-config ./svelte/_shared-config -f && copyfiles ./lib/* ./react/_shared-lib ./svelte/_shared-config -f",
-    "upgradeAndTest": "yarn upgrade --latest && yarn copy-shared-files && cd svelte && yarn upgradeAndTest",
-    "test": "yarn copy-shared-files && cd svelte && yarn buildAndTest"
+    "upgradeAndTest": "pnpm copy-shared-files && cd ./svelte && pnpm upgradeAndTest",
+    "test": "pnpm copy-shared-files && cd ./svelte && pnpm buildAndTest"
   },
   "keywords": [],
   "author": "Anton G. Neuhold Jr",
@@ -35,6 +35,5 @@
   },
   "devDependenciesNotes": {
     "eslint-plugin-jsx-a11y": "This is needed for eslint-config-airbnb to work"
-  },
-  "private": true
+  }
 }
