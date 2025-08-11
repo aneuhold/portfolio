@@ -12,7 +12,9 @@ const config = {
   },
   server: {
     fs: {
-      allow: ['./_shared-config', './src']
+      allow: [
+        '_shared-config',
+      ]
     }
   }
 };

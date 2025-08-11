@@ -14,12 +14,16 @@ const config = {
   ],
   kit: {
     adapter: adapter({
-      // default options are shown
       pages: 'build',
       assets: 'build',
-      fallback: null,
-      precompress: false
-    })
+      fallback: undefined,
+      precompress: false,
+      strict: true
+    }),
+    alias: {
+      src: 'src',
+      config: '_shared-config'
+    }
   },
   extensions: ['.svelte', '.md']
 };

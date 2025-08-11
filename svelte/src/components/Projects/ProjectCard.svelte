@@ -10,7 +10,7 @@
 </script>
 
 <div class="projectCard">
-  <div class="media" alt={imgAlt} style={`background-image: url(${imgUrl});`} />
+  <div class="media" aria-label={imgAlt} style={`background-image: url(${imgUrl});`}></div>
   <div class="textContent">
     <h3 class="header-4">{projectName}</h3>
     <p>{info}</p>
@@ -33,7 +33,9 @@
     flex-direction: column;
     // Crazy box-shadow!! Not really sure what is going on here. Copy pasted
     // from React material UI
-    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
+    box-shadow:
+      0px 2px 1px -1px rgb(0 0 0 / 20%),
+      0px 1px 1px 0px rgb(0 0 0 / 14%),
       0px 1px 3px 0px rgb(0 0 0 / 12%);
     border-radius: $border-radius;
   }
