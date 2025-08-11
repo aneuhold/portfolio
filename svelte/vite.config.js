@@ -1,6 +1,7 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'path';
 
+// eslint-disable-next-line jsdoc/check-tag-names
 /** @type {import('vite').UserConfig} */
 const config = {
   plugins: [sveltekit()],
@@ -12,9 +13,7 @@ const config = {
   },
   server: {
     fs: {
-      allow: [
-        '_shared-config',
-      ]
+      allow: ['_shared-config']
     }
   }
 };

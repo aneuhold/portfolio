@@ -5,21 +5,30 @@
     "checkJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["es2020", "DOM"],
-    "moduleResolution": "node",
-    "module": "es2020",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2020",
-    "types": ["jest", "vite/client"]
+    "moduleResolution": "bundler"
   },
+  // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
+  //
+  // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes
+  // from the referenced tsconfig.json - TypeScript does not merge them in
   "include": [
-    "src/**/*.d.ts",
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.svelte",
-    "_shared-config/**/*.*"
+    "./.svelte-kit/ambient.d.ts",
+    "./.svelte-kit/non-ambient.d.ts",
+    "./.svelte-kit/types/**/$types.d.ts",
+    "./vite.config.js",
+    "./vite.config.ts",
+    "./src/**/*.js",
+    "./src/**/*.ts",
+    "./src/**/*.svelte",
+    "./tests/**/*.js",
+    "./tests/**/*.ts",
+    "./tests/**/*.svelte",
+    // Below this point are the includes for this specific project. Everything
+    // above comes from .svelte-kit/tsconfig.json,
+    "./*.ts"
   ]
 }

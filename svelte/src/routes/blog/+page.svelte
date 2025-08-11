@@ -37,6 +37,6 @@
   });
 </script>
 
-{#each posts as post}
+{#each posts as post (post.title)}
   <p>{@html post.html}</p>
 {/each}

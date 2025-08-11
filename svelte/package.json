@@ -18,6 +18,7 @@
     "upgradeAndTest": "pnpm update --latest && pnpm buildAndTest"
   },
   "devDependencies": {
+    "@aneuhold/eslint-config": "^1.0.114",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "@testing-library/jest-dom": "^6.1.3",
