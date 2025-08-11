@@ -6,7 +6,7 @@
 
 <div class="container">
   <CardGrid>
-    {#each projects as project}
+    {#each projects as project (project.name)}
       <ProjectCard
         projectName={project.name}
         imgUrl={project.thumbnailUrl}
@@ -19,7 +19,7 @@
   </CardGrid>
 </div>
 
-<style lang="scss">
+<style>
   .container {
     display: flex;
     justify-content: center;

@@ -29,7 +29,7 @@
   </p>
 
   <div class="heroButtons">
-    {#each socialLinks as socialLink}
+    {#each socialLinks as socialLink (socialLink.name)}
       <SocialLink
         linkName={socialLink.name}
         url={socialLink.link}
@@ -39,11 +39,9 @@
   </div>
 </div>
 
-<style lang="scss">
-  @use '../global-styles/theme.scss';
-
+<style>
   .subtitle {
-    color: theme.$color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .hero {
@@ -56,6 +54,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: calc(theme.$standard-spacing * 4);
+    column-gap: calc(var(--standard-spacing) * 4);
   }
 </style>

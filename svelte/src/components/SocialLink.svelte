@@ -16,28 +16,24 @@
   </svg>
 </a>
 
-<style lang="scss">
-  @use '../global-styles/theme.scss';
-
-  $icon-size: 24px;
-
+<style>
   .svgLink {
     padding: 8px;
     border-radius: 50%;
 
-    // The height and the width are set below because for some reason it has
-    // 4px of extra height. Couldn't quite figure out why that was.
-    height: $icon-size;
-    width: $icon-size;
+    /* The height and the width are set below because for some reason it has
+       4px of extra height. Couldn't quite figure out why that was. */
+    height: 24px;
+    width: 24px;
   }
   .svgLink:hover {
-    background-color: theme.$color-shadow;
+    background-color: var(--color-shadow);
   }
 
   .svgIcon {
     width: 1em;
     height: 1em;
-    color: theme.$color-primary;
+    color: var(--color-primary);
     fill: currentColor;
     font-size: 1.5rem;
   }

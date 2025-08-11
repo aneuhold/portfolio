@@ -23,24 +23,20 @@
   </div>
 </div>
 
-<style lang="scss">
-  @use '../../global-styles/theme.scss';
-
-  $border-radius: calc(theme.$standard-spacing / 2);
-
+<style>
   .projectCard {
     display: flex;
     flex-direction: column;
-    // Crazy box-shadow!! Not really sure what is going on here. Copy pasted
-    // from React material UI
+    /* Crazy box-shadow!! Not really sure what is going on here. Copy pasted
+       from React material UI */
     box-shadow:
       0px 2px 1px -1px rgb(0 0 0 / 20%),
       0px 1px 1px 0px rgb(0 0 0 / 14%),
       0px 1px 3px 0px rgb(0 0 0 / 12%);
-    border-radius: $border-radius;
+    border-radius: calc(var(--standard-spacing) / 2);
   }
   h3 {
-    // Kind of a weird bottom margin, this is what Material UI has though.
+    /* Kind of a weird bottom margin, this is what Material UI has though. */
     margin: 0 0 0.35em 0;
   }
   p {
@@ -48,20 +44,20 @@
   }
   .media {
     display: block;
-    // padding-top is how tall the image is. This is currently a 16:9 ratio.
+    /* padding-top is how tall the image is. This is currently a 16:9 ratio. */
     padding-top: 56.25%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: calc(var(--standard-spacing) / 2) calc(var(--standard-spacing) / 2) 0 0;
   }
   .textContent {
     text-align: left;
     height: 100%;
-    padding: calc(theme.$standard-spacing * 2);
+    padding: calc(var(--standard-spacing) * 2);
   }
   .footer {
-    padding: theme.$standard-spacing;
+    padding: var(--standard-spacing);
     display: flex;
     flex-direction: row;
   }

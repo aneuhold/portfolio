@@ -1,10 +1,7 @@
 module.exports = {
   transform: {
     '^.+\\.svelte$': [
-      'svelte-jester',
-      {
-        preprocess: true
-      }
+      'svelte-jester'
     ],
     '^.+\\.ts$': [
       'ts-jest',
