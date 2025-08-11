@@ -1,13 +1,11 @@
-@use '../global-styles/theme.scss';
-
 html {
   font-family: 'Roboto', sans-serif;
-  color: theme.$color-text-primary;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
-// Defining the variables as CSS variables first allows for the variables
-// to show up in dev tools when viewing the actual site
+/* Defining the variables as CSS variables first allows for the variables
+   to show up in dev tools when viewing the actual site */
 :root {
   --color-text-primary: rgba(0, 0, 0, 0.87);
   --color-text-secondary: rgba(0, 0, 0, 0.6);
@@ -22,7 +20,7 @@ html {
   --background: #fff;
 }
 
-// A lot of the below styles are pulled from the react version of Material UI
+/* A lot of the below styles are pulled from the react version of Material UI */
 
 .header-2 {
   font-weight: 300;

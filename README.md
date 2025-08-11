@@ -6,7 +6,7 @@ Just a simple portfolio for different projects that have been worked on.
 
 ## Architecture
 
-There are two versions of this portfolio with some shared code between them. This was mainly done as practice managing a shared codebase with two largely different technologies and as a way to practice deployment for two different projects out of a monorepo.
+There are two versions of this portfolio with some shared code between them. Each app is developed and deployed separately on different domains.
 
 - [React portfolio](./react)
 - [Svelte portfolio](./svelte)
@@ -21,12 +21,14 @@ sequenceDiagram
 
 ## Dev Setup
 
+Overall, first run the installation command: `pnpm run i` in the root directory.
+
 To start development for react:
 
-- Run `yarn react` in the root directory
+- Run `pnpm react` in the root directory
 
-To start development for svelt:
+To start development for svelte:
 
-- Run `yarn svelte` in the root directory
+- Run `pnpm svelte` in the root directory
 
 Note that changes to the shared folders such as `./config` and `./lib` need to have the dev startup command ran again to copy those files down into the react directory.

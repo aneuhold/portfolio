@@ -14,27 +14,27 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v3
 
-      # Cache yarn packages
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-cache-v1-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-cache-v1-
+          node-version: 'lts/*'
+          cache: 'pnpm'
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            svelte/pnpm-lock.yaml
+            react/pnpm-lock.yaml
 
-      - name: Install dependencies for root and svelte
-        run: yarn && yarn i:svelte
+      - name: Install dependencies (root, react, svelte)
+        run: pnpm run i
 
       - name: Run tests
-        run: yarn test
+        run: pnpm test
 
       - name: Build the svelte site
-        run: yarn svelte:build
+        run: pnpm svelte:build
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v2.1

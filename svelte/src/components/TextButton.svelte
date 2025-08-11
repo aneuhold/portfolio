@@ -7,20 +7,19 @@
   {text}
 </a>
 
-<style lang="scss">
-  @use '../global-styles/theme.scss';
+<style>
   a {
     display: flex;
     flex-direction: row;
     padding: 4px 5px;
-    border-radius: calc(theme.$standard-spacing / 2);
+    border-radius: calc(var(--standard-spacing) / 2);
     text-decoration: none;
     justify-content: center;
     min-width: 64px;
-    color: theme.$color-primary;
+    color: var(--color-primary);
   }
 
   a:hover {
-    background-color: theme.$color-primary-100;
+    background-color: var(--color-primary-100);
   }
 </style>

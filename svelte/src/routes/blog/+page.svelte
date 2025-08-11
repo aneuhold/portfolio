@@ -21,20 +21,22 @@
     html: string;
   };
 
-  const postsData: PostsData = import.meta.globEager('../posts/*.md');
-  const postsRawStrings: { [filePath: string]: string } = import.meta.globEager('../posts/*.md', {
-    as: 'raw'
+  const postsData: PostsData = import.meta.glob('../posts/*.md', { eager: true });
+  const postsRawStrings: { [filePath: string]: string } = import.meta.glob('../posts/*.md', {
+    query: '?raw',
+    import: 'default',
+    eager: true
   });
 
   const posts: Post[] = Object.entries(postsData).map(([filePath, postData]) => {
     return {
       title: postData.metadata.title,
       date: postData.metadata.date,
-      html: marked.parse(stripFrontMatter(postsRawStrings[filePath]))
+      html: marked.parse(stripFrontMatter(postsRawStrings[filePath]), { async: false }) as string
     };
   });
 </script>
 
-{#each posts as post}
+{#each posts as post (post.title)}
   <p>{@html post.html}</p>
 {/each}

@@ -1,21 +1,19 @@
 <script lang="ts">
+  import socialLinks from 'config/socialLinks';
   import Link from './Link.svelte';
   import SocialLink from './SocialLink.svelte';
-  import socialLinks from 'config/socialLinks';
 </script>
 
 <div class="hero">
   <p class="header-4">
     <span>[Software Engineer]</span><br />
     +<br />
-    <i>{`< Web Developer />`}</i>
+    <i>&lt; Web Developer /&gt;</i>
   </p>
   <h1 class="header-2">Anton (Tony) Neuhold</h1>
   <p class="header-6 subtitle">
-    Hi! I'm a Software Engineer currently working at <Link
-      url="https://www.predictiveindex.com/"
-      linkText="The Predictive Index"
-    /> with a bachelors degree in the same from <Link
+    Hi! I'm a Senior Software Engineer with 4+ years of experience and a bachelors degree in
+    Software Engineering from <Link
       url="https://www.asu.edu/"
       linkText="Arizona State University"
     />. I live in <Link
@@ -29,7 +27,7 @@
   </p>
 
   <div class="heroButtons">
-    {#each socialLinks as socialLink}
+    {#each socialLinks as socialLink (socialLink.name)}
       <SocialLink
         linkName={socialLink.name}
         url={socialLink.link}
@@ -39,11 +37,9 @@
   </div>
 </div>
 
-<style lang="scss">
-  @use '../global-styles/theme.scss';
-
+<style>
   .subtitle {
-    color: theme.$color-text-secondary;
+    color: var(--color-text-secondary);
   }
 
   .hero {
@@ -56,6 +52,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    column-gap: calc(theme.$standard-spacing * 4);
+    column-gap: calc(var(--standard-spacing) * 4);
   }
 </style>

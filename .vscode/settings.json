@@ -4,14 +4,15 @@
   "editor.formatOnSave": true,
   // Use ESLint for all file types that it supports (which still uses prettier behind the scenes)
   "[typescript][javascript][javascriptreact][typescriptreact]": {
-    "editor.defaultFormatter": null,
-    "editor.formatOnSave": false
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "always"
   },
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  }
+  "eslint.useFlatConfig": true,
+  "eslint.run": "onSave",
+  // Below is super important for ESLint to run at all with Svelte
+  "eslint.validate": ["svelte", "javascript", "javascriptreact", "typescript", "typescriptreact"]
 }

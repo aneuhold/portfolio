@@ -5,15 +5,13 @@
 
 <a rel="noopener noreferrer" target="_blank" href={url}>{linkText}</a>
 
-<style lang="scss">
-  @use '../global-styles/theme.scss';
-
+<style>
   a {
-    color: theme.$color-primary;
-    text-decoration-color: theme.$color-primary-300;
+    color: var(--color-primary);
+    text-decoration-color: var(--color-primary-300);
   }
 
   a:hover {
-    text-decoration-color: theme.$color-primary;
+    text-decoration-color: var(--color-primary);
   }
 </style>

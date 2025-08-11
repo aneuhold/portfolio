@@ -3,7 +3,5 @@
   import Projects from 'src/components/Projects/Projects.svelte';
 </script>
 
-<template>
-  <Hero />
-  <Projects />
-</template>
+<Hero />
+<Projects />
