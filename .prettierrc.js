@@ -1,11 +1,11 @@
 /**
- * Base prettier config for ts-libs.
+ * Base prettier config for the portfolio project.
  *
  * This can be extended in another folder by requiring this file and spreading the config.
  *
  * For example:
  * ```js
- * import { config as baseConfig } from "../../prettierrc.js";
+ * import { default as baseConfig } from '../.prettierrc.js';
  *
  * const config = {
  *   ...baseConfig,
@@ -18,11 +18,10 @@
 const config = {
   semi: true,
   singleQuote: true,
+  useSpace: true,
   tabWidth: 2,
   trailingComma: 'none',
-  printWidth: 100,
-  plugins: ['prettier-plugin-svelte'],
-  overrides: [{ files: '*.svelte', options: { parser: 'svelte' } }]
+  printWidth: 100
 };
 
 export default config;

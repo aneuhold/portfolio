@@ -1,14 +1,14 @@
 <script lang="ts">
+  import socialLinks from 'config/socialLinks';
   import Link from './Link.svelte';
   import SocialLink from './SocialLink.svelte';
-  import socialLinks from 'config/socialLinks';
 </script>
 
 <div class="hero">
   <p class="header-4">
     <span>[Software Engineer]</span><br />
     +<br />
-    <i>{`< Web Developer />`}</i>
+    <i>&lt; Web Developer /&gt;</i>
   </p>
   <h1 class="header-2">Anton (Tony) Neuhold</h1>
   <p class="header-6 subtitle">

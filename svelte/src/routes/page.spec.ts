@@ -1,9 +1,13 @@
 import { render } from '@testing-library/svelte';
-import index from './+page.svelte';
+import { expect, it } from 'vitest';
+import IndexPage from './+page.svelte';
 
-it('it works at a basic level', async () => {
-  const { getByText } = render(index);
+it('works at a basic level', () => {
+  render(IndexPage);
 
-  const titleText = getByText('Anton (Tony) Neuhold');
-  expect(titleText).toBeDefined();
+  const headers = document.body.querySelectorAll('h1');
+  expect(headers.length).toBeGreaterThan(0);
+  expect(
+    headers.values().some((header) => header.textContent.includes('Anton (Tony) Neuhold'))
+  ).toBe(true);
 });
