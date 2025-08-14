@@ -7,14 +7,15 @@
   "private": true,
   "scripts": {
     "i": "pnpm i && cd ./react && pnpm i && cd ../svelte && pnpm i",
-    "svelte": "pnpm copy-shared-files && cd ./svelte && pnpm dev",
+    "svelte": "concurrently --prefix-colors auto --names \"config,svelte\" \"pnpm watch:shared\" \"cd ./svelte && pnpm dev\"",
     "svelte:build": "pnpm copy-shared-files && cd ./svelte && pnpm build",
     "react": "pnpm copy-shared-files && cd ./react && pnpm dev",
     "react:build": "pnpm copy-shared-files && cd ./react && pnpm build",
     "react:start": "cd ./react && pnpm start",
     "react:export": "cd ./react && pnpm export",
     "react:deploy": "pnpm react:build && pnpm react:export",
-    "copy-shared-files": "copyfiles ./config/* ./react/_shared-config ./svelte/_shared-config -f && copyfiles ./lib/* ./react/_shared-lib ./svelte/_shared-config -f",
+    "watch:shared": "nodemon --watch config --ext ts,js --exec pnpm copy-shared-files",
+    "copy-shared-files": "copyfiles ./config/* ./react/_shared-config ./svelte/_shared-config -f",
     "upgradeAndTest": "pnpm copy-shared-files && cd ./svelte && pnpm upgradeAndTest",
     "test": "pnpm copy-shared-files && cd ./svelte && pnpm buildAndTest"
   },
@@ -27,7 +28,9 @@
   },
   "devDependencies": {
     "@aneuhold/eslint-config": "^1.0.114",
+    "concurrently": "^9.2.0",
     "eslint": "^8.50.0",
+    "nodemon": "^3.1.10",
     "prettier": "^3.6.2"
   }
 }
