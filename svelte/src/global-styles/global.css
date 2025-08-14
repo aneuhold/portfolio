@@ -4,11 +4,14 @@
   --color-text-primary: rgba(0, 0, 0, 0.87);
   --color-text-secondary: rgba(0, 0, 0, 0.6);
 
-  --color-primary: hsla(164, 93%, 34%, 1);
-  --color-primary-300: hsl(from var(--color-primary) h s l / 0.4);
-  --color-primary-100: hsl(from var(--color-primary) h s l / 0.04);
+  --color-primary: hsla(164, 95%, 28%, 1);
+  --color-primary-300: hsl(from var(--color-primary) h s l / 0.5);
+  --color-primary-100: hsl(from var(--color-primary) h s l / 0.08);
   --color-secondary: hsla(78, 6%, 43%, 1);
-  --color-shadow: rgba(0, 0, 0, 0.04);
+  --color-accent: hsla(19, 97%, 65%, 1);
+  --color-accent-light: hsla(19, 97%, 75%, 0.3);
+  --color-shadow: rgba(0, 0, 0, 0.12);
+  --color-shadow-light: rgba(0, 0, 0, 0.06);
 
   --standard-spacing: 8px;
   --background: #fff;
@@ -19,8 +22,14 @@
 html {
   font-family: 'Roboto', sans-serif;
   color: var(--color-text-primary);
-  background: linear-gradient(35deg, var(--mint-green), hsla(19, 97%, 64%, 0.6));
+  background: linear-gradient(
+    135deg,
+    hsla(180, 100%, 88%, 1) 0%,
+    hsla(19, 97%, 70%, 0.8) 50%,
+    hsla(164, 95%, 85%, 0.9) 100%
+  );
   text-align: center;
+  min-height: 100vh;
 }
 
 /* A lot of the below styles are pulled from the react version of Material UI */
