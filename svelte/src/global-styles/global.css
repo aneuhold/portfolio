@@ -1,23 +1,26 @@
-html {
-  font-family: 'Roboto', sans-serif;
-  color: var(--color-text-primary);
-  text-align: center;
-}
-
 /* Defining the variables as CSS variables first allows for the variables
    to show up in dev tools when viewing the actual site */
 :root {
   --color-text-primary: rgba(0, 0, 0, 0.87);
   --color-text-secondary: rgba(0, 0, 0, 0.6);
 
-  --color-primary: #ff9800;
-  --color-primary-300: rgba(255, 152, 0, 0.4);
-  --color-primary-100: rgba(255, 152, 0, 0.04);
-  --color-secondary: #ff9800;
+  --color-primary: hsla(164, 93%, 34%, 1);
+  --color-primary-300: hsl(from var(--color-primary) h s l / 0.4);
+  --color-primary-100: hsl(from var(--color-primary) h s l / 0.04);
+  --color-secondary: hsla(78, 6%, 43%, 1);
   --color-shadow: rgba(0, 0, 0, 0.04);
 
   --standard-spacing: 8px;
   --background: #fff;
+
+  --mint-green: hsla(180, 100%, 90%, 1);
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  color: var(--color-text-primary);
+  background: linear-gradient(35deg, var(--mint-green), hsla(19, 97%, 64%, 0.6));
+  text-align: center;
 }
 
 /* A lot of the below styles are pulled from the react version of Material UI */

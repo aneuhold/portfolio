@@ -34,7 +34,18 @@
       0px 1px 1px 0px rgb(0 0 0 / 14%),
       0px 1px 3px 0px rgb(0 0 0 / 12%);
     border-radius: calc(var(--standard-spacing) / 2);
+    background-color: var(--background);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
+
+  /* Nice hover effect */
+  .projectCard:hover {
+    box-shadow:
+      0px 8px 12px -4px rgb(0 0 0 / 25%),
+      0px 4px 8px 0px rgb(0 0 0 / 18%),
+      0px 2px 16px 0px rgb(0 0 0 / 15%);
+  }
+
   h3 {
     /* Kind of a weird bottom margin, this is what Material UI has though. */
     margin: 0 0 0.35em 0;
