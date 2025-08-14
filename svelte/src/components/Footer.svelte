@@ -12,7 +12,6 @@
 
 <style>
   footer {
-    background-color: var(--background);
     padding: calc(var(--standard-spacing) * 6);
     display: flex;
     flex-direction: column;

@@ -30,5 +30,3 @@ To start development for react:
 To start development for svelte:
 
 - Run `pnpm svelte` in the root directory
-
-Note that changes to the shared folders such as `./config` and `./lib` need to have the dev startup command ran again to copy those files down into the react directory.

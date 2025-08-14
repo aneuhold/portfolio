@@ -17,9 +17,11 @@
     justify-content: center;
     min-width: 64px;
     color: var(--color-primary);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   a:hover {
     background-color: var(--color-primary-100);
+    box-shadow: 0 2px 8px var(--color-shadow-light);
   }
 </style>
