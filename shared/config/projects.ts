@@ -5,6 +5,10 @@ type Project = {
   demoLink?: string;
   codeLink: string;
   thumbnailUrl: string;
+  /**
+   * Thumbnail path is the "local" path.
+   */
+  thumbnailPath?: string;
   thumbnailDescription: string;
 };
 

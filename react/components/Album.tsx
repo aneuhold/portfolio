@@ -1,17 +1,16 @@
-import React from 'react';
 import {
-  CardContent,
-  CardActions,
-  CardMedia,
-  Card,
-  Grid,
   Button,
-  Typography,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
   Theme,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import projects from 'config/projects';
+import projects from 'shared/config/projects';
 
 const useStyles = makeStyles((theme: Theme) => ({
   layout: {

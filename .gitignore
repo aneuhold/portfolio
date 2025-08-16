@@ -31,5 +31,4 @@ out
 /package
 
 # Shared files
-*/_shared-config
-*/_shared-lib
+*/shared

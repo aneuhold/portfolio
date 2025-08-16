@@ -1,5 +1,5 @@
 <script lang="ts">
-  import projects from 'config/projects';
+  import projects from '$shared/config/projects';
   import CardGrid from '../CardGrid.svelte';
   import ProjectCard from './ProjectCard.svelte';
 </script>

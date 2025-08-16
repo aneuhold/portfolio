@@ -8,14 +8,14 @@ const viteConfig = defineConfig({
   resolve: {
     alias: {
       src: path.resolve('./src'),
-      config: path.resolve('./_shared-config')
+      $shared: path.resolve('./shared')
     },
     // Tell Vitest to use the `browser` entry points in `package.json` files, even though it's running in Node
     conditions: process.env.VITEST ? ['browser'] : undefined
   },
   server: {
     fs: {
-      allow: ['_shared-config']
+      allow: ['shared']
     }
   }
 });
