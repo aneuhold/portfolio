@@ -20,8 +20,7 @@ const config = {
       strict: true
     }),
     alias: {
-      src: 'src',
-      config: '_shared-config'
+      $shared: 'shared'
     }
   },
   extensions: ['.svelte', '.md']

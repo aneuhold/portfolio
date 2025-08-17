@@ -33,9 +33,6 @@ importers:
         specifier: ^17
         version: 17.0.2(react@17.0.2)
     devDependencies:
-      '@types/gtag.js':
-        specifier: ^0
-        version: 0.0.20
       '@types/node':
         specifier: ^16
         version: 16.18.126
@@ -439,9 +436,6 @@ packages:
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
-
-  '@types/gtag.js@0.0.20':
-    resolution: {integrity: sha512-wwAbk3SA2QeU67unN7zPxjEHmPmlXwZXZvQEpbEUQuMCRGgKyE1m6XDuTUA9b6pCGb/GqJmdfMOY5LuDjJSbbg==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -2874,8 +2868,6 @@ snapshots:
   '@popperjs/core@2.11.8': {}
 
   '@rtsao/scc@1.1.0': {}
-
-  '@types/gtag.js@0.0.20': {}
 
   '@types/json-schema@7.0.15': {}
 

@@ -1,16 +1,29 @@
 <script lang="ts">
   import TextButton from '../TextButton.svelte';
+  import type { Picture } from './Projects.svelte';
 
-  export let projectName: string;
-  export let imgUrl: string;
-  export let imgAlt: string;
-  export let info: string;
-  export let demoLink: string | undefined;
-  export let codeLink: string;
+  const {
+    projectName,
+    img,
+    imgAlt,
+    info,
+    demoLink,
+    codeLink
+  }: {
+    projectName: string;
+    img: Picture;
+    imgAlt: string;
+    info: string;
+    demoLink?: string;
+    codeLink: string;
+  } = $props();
 </script>
 
 <div class="projectCard">
-  <div class="media" aria-label={imgAlt} style={`background-image: url(${imgUrl});`}></div>
+  <div class="media" aria-label={imgAlt}>
+    <enhanced:img class="enhancedImage" src={img} alt={imgAlt} />
+  </div>
+
   <div class="textContent">
     <h3 class="header-4">{projectName}</h3>
     <p>{info}</p>
@@ -24,6 +37,14 @@
 </div>
 
 <style>
+  .enhancedImage {
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   .projectCard {
     display: flex;
     flex-direction: column;
@@ -62,6 +83,8 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: calc(var(--standard-spacing) / 2) calc(var(--standard-spacing) / 2) 0 0;
+    position: relative; /* enable absolutely positioned img inside */
+    overflow: hidden;
   }
   .textContent {
     text-align: left;

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
+import { useEffect } from 'react';
 import theme from '../theme';
-import pageView from 'lib/googleAnalytics';
 
 export default function CustomApp(props: AppProps): JSX.Element {
   const { Component, pageProps } = props;
