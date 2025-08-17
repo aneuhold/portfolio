@@ -46,7 +46,7 @@ export default function Album(): JSX.Element {
   return (
     <div className={classNames(classes.layout, classes.cardGrid)} id="projects">
       <Grid container justifyContent="center" spacing={4}>
-        {projects.map((card) => (
+        {Object.values(projects).map((card) => (
           <Grid item key={card.name} sm={6} md={4} lg={3}>
             <Card className={classes.card}>
               <CardMedia
