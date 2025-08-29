@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Footer from 'src/components/Footer.svelte';
-  import '../global-styles/global.css';
+  import Footer from '$components/Footer.svelte';
+  import '$shared/global-styles/global.css';
 </script>
 
 <slot />
