@@ -23,8 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # Next JS
-.Next
+.next
 out
+next-env.d.ts
 
 # Svelte
 .svelte-kit

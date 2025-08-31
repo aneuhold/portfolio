@@ -8,11 +8,12 @@
     "editor.formatOnSave": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "always"
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "explicit"
   },
   "eslint.useFlatConfig": true,
   "eslint.run": "onSave",
+  "eslint.format.enable": true,
   // Below is super important for ESLint to run at all with Svelte
   "eslint.validate": ["svelte", "javascript", "javascriptreact", "typescript", "typescriptreact"]
 }
