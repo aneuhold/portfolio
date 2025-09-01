@@ -38,6 +38,14 @@ const projects = {
     codeLink: 'https://github.com/aneuhold/main-scripts',
     thumbnailDescription: 'Main Scripts Thumbnail.'
   },
+  nextjs15Course: {
+    name: 'Next.js Invoices App',
+    heading: 'Next.js Invoices App',
+    info: 'A Next.js 15 course project that is an invoice app. It uses a backend with PostgreSQL and Neon + Vercel. See repo for login info.',
+    codeLink: 'https://github.com/aneuhold/nextjs-15-course',
+    demoLink: 'https://nextjs-15-course-xi.vercel.app/',
+    thumbnailDescription: 'Next.js 15 Invoices App thumbnail'
+  },
   halomodSpa: {
     name: 'HaloMod SPA',
     heading: 'HaloMod SPA',

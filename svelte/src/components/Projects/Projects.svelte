@@ -9,6 +9,7 @@
   import halomodSpaImg from '$shared/images/halomod-spa.png?enhanced';
   import localNpmRegistryImg from '$shared/images/local-npm-registry.png?enhanced';
   import mainScriptsImg from '$shared/images/main-scripts.png?enhanced';
+  import nextjs15Course from '$shared/images/nextjs15-invoiceapp.png?enhanced';
   import placesAndroidImg from '$shared/images/placesandroidapp.png?enhanced';
   import placesIosImg from '$shared/images/placesIosApp.png?enhanced';
   import pointspireImg from '$shared/images/pointspire.png?enhanced';
@@ -31,6 +32,7 @@
     localNpmRegistry: localNpmRegistryImg,
     personalEslintConfig: eslintConfigImg,
     personalTypescriptLibraries: tsLibsImg,
+    nextjs15Course,
     pointSpire: pointspireImg,
     battleShip: battleshipImg,
     blackJack: blackjackImg,

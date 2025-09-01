@@ -1,7 +1,7 @@
 <!--
-  @SocialLink
-
-  some markdown here
+  @component
+  
+  A link that displays an SVG icon.
 -->
 <script lang="ts">
   export let url: string;

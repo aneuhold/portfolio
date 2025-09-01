@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AnimatedBorderBackground from '../AnimatedBorderBackground.svelte';
   import TextButton from '../TextButton.svelte';
   import type { Picture } from './Projects.svelte';
 
@@ -19,22 +20,24 @@
   } = $props();
 </script>
 
-<div class="projectCard">
-  <div class="media" aria-label={imgAlt}>
-    <enhanced:img class="enhancedImage" src={img} alt={imgAlt} />
-  </div>
+<AnimatedBorderBackground className="projectCardBorder">
+  <div class="projectCard">
+    <div class="media" aria-label={imgAlt}>
+      <enhanced:img class="enhancedImage" src={img} alt={imgAlt} />
+    </div>
 
-  <div class="textContent">
-    <h3 class="header-4">{projectName}</h3>
-    <p>{info}</p>
+    <div class="textContent">
+      <h3 class="header-4">{projectName}</h3>
+      <p>{info}</p>
+    </div>
+    <div class="footer">
+      {#if demoLink}
+        <TextButton text="demo" url={demoLink} />
+      {/if}
+      <TextButton text="source" url={codeLink} />
+    </div>
   </div>
-  <div class="footer">
-    {#if demoLink}
-      <TextButton text="demo" url={demoLink} />
-    {/if}
-    <TextButton text="source" url={codeLink} />
-  </div>
-</div>
+</AnimatedBorderBackground>
 
 <style>
   .enhancedImage {
@@ -48,8 +51,9 @@
   .projectCard {
     display: flex;
     flex-direction: column;
+    height: 100%;
     /* Crazy box-shadow!! Not really sure what is going on here. Copy pasted
-       from React material UI */
+       from React Material UI */
     box-shadow:
       0px 2px 1px -1px rgb(0 0 0 / 20%),
       0px 1px 1px 0px rgb(0 0 0 / 14%),
@@ -59,8 +63,8 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Nice hover effect */
-  .projectCard:hover {
+  /* Nice hover effect 🎉 */
+  :global(.projectCardBorder:hover) .projectCard {
     box-shadow:
       0px 8px 12px -4px rgb(0 0 0 / 25%),
       0px 4px 8px 0px rgb(0 0 0 / 18%),

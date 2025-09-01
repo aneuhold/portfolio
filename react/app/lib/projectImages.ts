@@ -12,9 +12,10 @@ import exercisetracker from '$shared/images/exercisetracker.png';
 import halomodSpa from '$shared/images/halomod-spa.png';
 import localNpmRegistry from '$shared/images/local-npm-registry.png';
 import mainScripts from '$shared/images/main-scripts.png';
+import nextjs15Course from '$shared/images/nextjs15-invoiceapp.png';
 import placesAndroidApp from '$shared/images/placesandroidapp.png';
 import placesIosApp from '$shared/images/placesIosApp.png';
-import pointspire from '$shared/images/pointspire.png';
+import pointSpire from '$shared/images/pointspire.png';
 import pomodoroClock from '$shared/images/pomodoroclock.png';
 import tsLibs from '$shared/images/ts-libs.png';
 import urlShortener from '$shared/images/urlShortener.png';
@@ -23,7 +24,8 @@ const projectImages: { [key in ProjectKey]: StaticImageData } = {
   localNpmRegistry,
   personalEslintConfig: eslintConfig,
   personalTypescriptLibraries: tsLibs,
-  pointSpire: pointspire,
+  nextjs15Course,
+  pointSpire,
   battleShip: battleship,
   blackJack: blackjack,
   reactCalculator: calculator,
