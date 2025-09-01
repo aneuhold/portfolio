@@ -18,11 +18,8 @@
 
   --mint-green: hsla(180, 100%, 90%, 1);
 
-  --hdr-gradient: conic-gradient(
-    in oklch longer hue,
-    oklch(70% .3 0), oklch(70% .3 0)
-  );
-  --sdr-gradient: conic-gradient(, #ff0097, #ff0097);
+  --hdr-gradient: conic-gradient(in oklch longer hue, oklch(70% 0.3 0), oklch(70% 0.3 0));
+  --sdr-gradient: conic-gradient(#ff0097, #ff0097);
 }
 
 html {
