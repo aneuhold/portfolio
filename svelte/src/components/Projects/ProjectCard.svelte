@@ -64,7 +64,7 @@
     transform: translateZ(0);
   }
 
-  /* Nice hover effect 🎉 */
+  /* Nice hover effect 🎉 But only on devices that support hover so it isn't so jarring. */
   @media (hover: hover) {
     :global(.projectCardBorder:hover) .projectCard {
       box-shadow:

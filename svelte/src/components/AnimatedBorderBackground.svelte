@@ -43,7 +43,6 @@
     display: grid;
     grid-template-areas: 'stack';
     position: relative;
-    /* Create a new stacking context so internal z-indexing is predictable isolation: isolate; */
   }
 
   .animatedBorderBackground {
@@ -81,7 +80,6 @@
       calc(var(--border-width, var(--standard-spacing)) * -1),
       calc(var(--border-width, var(--standard-spacing)) * -1)
     );
-    /* filter: blur can cause full-screen repaints on iOS; keep it only for hover-capable devices */
     filter: blur(var(--blur-amount, var(--standard-spacing)));
   }
 
