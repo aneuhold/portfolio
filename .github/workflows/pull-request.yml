@@ -30,14 +30,15 @@ jobs:
       - name: Install dependencies (root, react, svelte)
         run: pnpm run i
 
-      - name: Run tests
-        run: pnpm test
-
       - name: Build the svelte site
         run: pnpm svelte:build
 
       - name: Build the react site
         run: pnpm react:build
+
+      # Run tests after the builds are done
+      - name: Run tests
+        run: pnpm test
 
       - name: Deploy to Netlify (Svelte)
         uses: nwtgck/actions-netlify@v2.1

@@ -8,5 +8,5 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
     rules: {}
   },
-  { ignores: ['**/next-env.d.ts'] }
+  { ignores: ['**/next-env.d.ts', 'out'] }
 ];
