@@ -1,24 +1,15 @@
-'use client';
-
-import { Box, Link, Typography } from '@mui/material';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', p: 6 }}>
-      <Typography variant="h6" align="center" gutterBottom>
+    <footer className={styles.footer}>
+      <span className="header-6">
         See the code for this website{' '}
-        <Link
-          href="https://github.com/aneuhold/portfolio"
-          rel="noopener noreferrer"
-          target="_blank"
-          color="primary"
-        >
+        <a href="https://github.com/aneuhold/portfolio" rel="noopener noreferrer" target="_blank">
           here!
-        </Link>
-      </Typography>
-      <Typography variant="subtitle1" align="center" color="text.secondary" component="p">
-        © {new Date().getFullYear()} Anton Neuhold
-      </Typography>
-    </Box>
+        </a>
+      </span>
+      <span className="subtitle-1">©{new Date().getFullYear()} Anton Neuhold</span>
+    </footer>
   );
 }

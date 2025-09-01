@@ -1,61 +1,50 @@
-'use client';
-
 import projectImages, { getImageSrc } from '$lib/projectImages';
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography
-} from '@mui/material';
-import projects, { type ProjectKey } from 'shared/config/projects';
+import projects, { type ProjectKey } from '$shared/config/projects';
+import styles from './Album.module.css';
 
 export default function Album() {
   return (
-    <Box
-      id="projects"
-      sx={{
-        width: 'auto',
-        mx: 3,
-        pt: 8,
-        pb: 8,
-        '@media (min-width:1200px)': {
-          width: 1100,
-          mx: 'auto'
-        }
-      }}
-    >
-      <Grid container justifyContent="center" spacing={4}>
+    <section id="projects" className={styles.container}>
+      <div className={styles.cardGrid}>
         {Object.entries(projects).map(([key, card]) => (
-          <Grid item key={card.name} sm={6} md={4} lg={3}>
-            <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <CardMedia
-                sx={{ pt: '56.25%' }}
-                image={getImageSrc(projectImages[key as ProjectKey])}
+          <article className={styles.projectCard} key={card.name}>
+            <div className={styles.media} aria-label={card.thumbnailDescription}>
+              {/* 16:9 media wrapper; use absolutely positioned img */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.enhancedImage}
+                src={getImageSrc(projectImages[key as ProjectKey])}
+                alt={card.thumbnailDescription}
+                loading="lazy"
               />
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {card.heading}
-                </Typography>
-                <Typography>{card.info}</Typography>
-              </CardContent>
-              <CardActions>
-                {card.demoLink ? (
-                  <Button size="small" color="primary" href={card.demoLink || ''} target="_blank">
-                    Demo
-                  </Button>
-                ) : null}
-                <Button size="small" color="primary" href={card.codeLink} target="_blank">
-                  Source
-                </Button>
-              </CardActions>
-            </Card>
-          </Grid>
+            </div>
+            <div className={styles.textContent}>
+              <h3 className="header-4">{card.heading}</h3>
+              <p>{card.info}</p>
+            </div>
+            <div className={styles.projectCardFooter}>
+              {card.demoLink ? (
+                <a
+                  className="button-text"
+                  href={card.demoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Demo
+                </a>
+              ) : null}
+              <a
+                className="button-text"
+                href={card.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Source
+              </a>
+            </div>
+          </article>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </section>
   );
 }

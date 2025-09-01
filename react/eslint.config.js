@@ -7,5 +7,6 @@ export default [
     // other override settings. e.g. for `files: ['**/*.test.*']`
     files: ['**/*.ts', '**/*.tsx'],
     rules: {}
-  }
+  },
+  { ignores: ['**/next-env.d.ts'] }
 ];
