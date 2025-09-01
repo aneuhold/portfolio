@@ -59,7 +59,7 @@ export default function Hero() {
           <br />
           <br />
           When not working, or learning new things about development, I like to exercise and hang
-          out with my two pets and beautiful wife. Check out some social media links and projects
+          out with my three pets and beautiful wife. Check out some social media links and projects
           below:
         </Typography>
         <Box sx={{ mt: 4 }}>
