@@ -2,16 +2,21 @@ import Image, { type StaticImageData } from 'next/image';
 import TextButton from '../TextButton';
 import styles from './Project.module.css';
 
-type Props = {
+export default function Project({
+  title,
+  info,
+  imgSrc,
+  imgAlt,
+  demoLink,
+  codeLink
+}: {
   title: string;
   info: string;
   imgSrc: StaticImageData;
   imgAlt: string;
   demoLink?: string;
   codeLink: string;
-};
-
-export default function Project({ title, info, imgSrc, imgAlt, demoLink, codeLink }: Props) {
+}) {
   return (
     <article className={styles.projectCard}>
       <div className={styles.media} aria-label={imgAlt}>

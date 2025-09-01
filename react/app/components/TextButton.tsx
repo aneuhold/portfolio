@@ -1,11 +1,6 @@
 import styles from './TextButton.module.css';
 
-type Props = {
-  url: string;
-  text: string;
-};
-
-export default function TextButton({ url, text }: Props) {
+export default function TextButton({ url, text }: { url: string; text: string }) {
   return (
     <a
       className={`button-text ${styles.button}`}

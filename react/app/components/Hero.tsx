@@ -1,3 +1,4 @@
+import Link from '$components/Link';
 import socialLinks from '$shared/config/socialLinks';
 import styles from './Hero.module.css';
 
@@ -14,18 +15,17 @@ export default function Hero() {
       <p className={`header-6 ${styles.subtitle}`}>
         Hi! I'm a Senior Software Engineer with 4+ years of experience and a bachelors degree in
         Software Engineering from{' '}
-        <a href="https://www.asu.edu/" target="_blank" rel="noopener noreferrer">
-          Arizona State University
-        </a>
+        <Link
+          url="https://www.asu.edu/"
+          linkText="Arizona State University"
+          ariaLabel="Arizona State University"
+        />
         . I live in{' '}
-        <a
-          href="https://www.google.com/maps/place/Canby,+OR+97013/@45.2711453,-122.7227492,13z"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Canby, OR on Google Maps"
-        >
-          Canby, OR
-        </a>
+        <Link
+          url="https://www.google.com/maps/place/Canby,+OR+97013/@45.2711453,-122.7227492,13z"
+          linkText="Canby, OR"
+          ariaLabel="Canby, OR on Google Maps"
+        />
         .
         <br />
         <br />
