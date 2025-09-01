@@ -12,6 +12,14 @@ export default function Footer() {
           ariaLabel="Portfolio GitHub Repo"
         />
       </span>
+      <span className="subtitle-2">
+        Built with React & Next.js •{' '}
+        <Link
+          linkText="View SvelteKit version"
+          url="https://tonyneuhold.com"
+          ariaLabel="SvelteKit version of portfolio"
+        />
+      </span>
       <span className="subtitle-1">©{new Date().getFullYear()} Anton Neuhold</span>
     </footer>
   );
