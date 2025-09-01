@@ -61,15 +61,18 @@
     border-radius: calc(var(--standard-spacing) / 2);
     background-color: var(--background);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
   }
 
   /* Nice hover effect 🎉 */
-  :global(.projectCardBorder:hover) .projectCard {
-    box-shadow:
-      0px 8px 12px -4px rgb(0 0 0 / 25%),
-      0px 4px 8px 0px rgb(0 0 0 / 18%),
-      0px 2px 16px 0px rgb(0 0 0 / 15%);
-    transform: translateY(-4px);
+  @media (hover: hover) {
+    :global(.projectCardBorder:hover) .projectCard {
+      box-shadow:
+        0px 8px 12px -4px rgb(0 0 0 / 25%),
+        0px 4px 8px 0px rgb(0 0 0 / 18%),
+        0px 2px 16px 0px rgb(0 0 0 / 15%);
+      transform: translateY(-4px);
+    }
   }
 
   h3 {

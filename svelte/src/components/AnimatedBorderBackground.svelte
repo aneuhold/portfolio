@@ -43,11 +43,11 @@
     display: grid;
     grid-template-areas: 'stack';
     position: relative;
+    /* Create a new stacking context so internal z-indexing is predictable isolation: isolate; */
   }
 
   .animatedBorderBackground {
     grid-area: stack;
-    z-index: -1;
     display: block;
     width: 100%;
     height: 100%;
@@ -55,6 +55,7 @@
     border-radius: var(--border-radius, calc(var(--standard-spacing) / 2));
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
   }
 
   .animatedBorderBackground::before {
@@ -72,19 +73,33 @@
     border-radius: 50%;
   }
 
-  /* Hover effects */
-  .animatedBorderStack:hover .animatedBorderBackground {
-    width: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
-    height: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
-    transform: translate(
-      calc(var(--border-width, var(--standard-spacing)) * -1),
-      calc(var(--border-width, var(--standard-spacing)) * -1)
-    );
-    filter: blur(var(--blur-amount, var(--standard-spacing)));
+  /* Hover effects
+     Only enable on devices that actually have hover to avoid touch-start flicker on mobile. */
+  @media (hover: hover) {
+    .animatedBorderStack:hover .animatedBorderBackground {
+      width: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
+      height: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
+      transform: translate(
+        calc(var(--border-width, var(--standard-spacing)) * -1),
+        calc(var(--border-width, var(--standard-spacing)) * -1)
+      );
+      /* filter: blur can cause full-screen repaints on iOS; keep it only for hover-capable devices */
+      filter: blur(var(--blur-amount, var(--standard-spacing)));
+    }
+
+    .animatedBorderStack:hover .animatedBorderBackground::before {
+      animation: rotate var(--animation-duration, 5s) linear infinite;
+    }
   }
 
-  .animatedBorderStack:hover .animatedBorderBackground::before {
-    animation: rotate var(--animation-duration, 5s) linear infinite;
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animatedBorderStack:hover .animatedBorderBackground,
+    .animatedBorderStack:hover .animatedBorderBackground::before {
+      transition: none;
+      animation: none;
+      filter: none;
+    }
   }
 
   .content {
