@@ -1,3 +1,4 @@
+import Link from '$components/Link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -5,9 +6,11 @@ export default function Footer() {
     <footer className={styles.footer}>
       <span className="header-6">
         See the code for this website{' '}
-        <a href="https://github.com/aneuhold/portfolio" rel="noopener noreferrer" target="_blank">
-          here!
-        </a>
+        <Link
+          linkText="here!"
+          url="https://github.com/aneuhold/portfolio"
+          ariaLabel="Portfolio GitHub Repo"
+        />
       </span>
       <span className="subtitle-1">©{new Date().getFullYear()} Anton Neuhold</span>
     </footer>
