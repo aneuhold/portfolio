@@ -1,6 +1,6 @@
 <script lang="ts">
   import { marked } from 'marked';
-  import stripFrontMatter from 'src/util/stripFrontMatter';
+  import stripFrontMatter from '../../util/stripFrontMatter';
 
   /**
    * The type of data that is returned from `import.meta.globEager` for blog
