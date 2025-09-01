@@ -47,7 +47,6 @@
 
   .animatedBorderBackground {
     grid-area: stack;
-    z-index: -1;
     display: block;
     width: 100%;
     height: 100%;
@@ -55,6 +54,8 @@
     border-radius: var(--border-radius, calc(var(--standard-spacing) / 2));
     position: relative;
     overflow: hidden;
+    transform: translateZ(0);
+    will-change: filter, transform;
   }
 
   .animatedBorderBackground::before {
@@ -72,7 +73,6 @@
     border-radius: 50%;
   }
 
-  /* Hover effects */
   .animatedBorderStack:hover .animatedBorderBackground {
     width: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
     height: calc(100% + calc(var(--border-width, var(--standard-spacing)) * 2));
@@ -85,6 +85,16 @@
 
   .animatedBorderStack:hover .animatedBorderBackground::before {
     animation: rotate var(--animation-duration, 5s) linear infinite;
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .animatedBorderStack:hover .animatedBorderBackground,
+    .animatedBorderStack:hover .animatedBorderBackground::before {
+      transition: none;
+      animation: none;
+      filter: none;
+    }
   }
 
   .content {
