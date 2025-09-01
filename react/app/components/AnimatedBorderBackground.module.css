@@ -2,8 +2,6 @@
   display: grid;
   grid-template-areas: 'stack';
   position: relative;
-  /* Create a new stacking context so internal z-indexing is predictable */
-  isolation: isolate;
 }
 
 .animatedBorderBackground {
