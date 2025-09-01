@@ -1,10 +1,11 @@
+import Image, { type StaticImageData } from 'next/image';
 import TextButton from '../TextButton';
 import styles from './Project.module.css';
 
 type Props = {
   title: string;
   info: string;
-  imgSrc: string;
+  imgSrc: StaticImageData;
   imgAlt: string;
   demoLink?: string;
   codeLink: string;
@@ -14,9 +15,15 @@ export default function Project({ title, info, imgSrc, imgAlt, demoLink, codeLin
   return (
     <article className={styles.projectCard}>
       <div className={styles.media} aria-label={imgAlt}>
-        {/* 16:9 media wrapper; use absolutely positioned img */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img className={styles.enhancedImage} src={imgSrc} alt={imgAlt} loading="lazy" />
+        {/* 16:9 media wrapper; use Next.js Image with fill for responsive layout */}
+        <Image
+          className={styles.enhancedImage}
+          src={imgSrc}
+          alt={imgAlt}
+          placeholder="blur"
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
       </div>
       <div className={styles.textContent}>
         <h3 className="header-4">{title}</h3>

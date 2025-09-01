@@ -39,6 +39,3 @@ const projectImages: { [key in ProjectKey]: StaticImageData } = {
 };
 
 export default projectImages;
-export function getImageSrc(img: string | StaticImageData): string {
-  return typeof img === 'string' ? img : img.src;
-}

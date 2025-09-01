@@ -1,4 +1,4 @@
-import projectImages, { getImageSrc } from '$lib/projectImages';
+import projectImages from '$lib/projectImages';
 import projects, { type ProjectKey } from '$shared/config/projects';
 import CardGrid from '../CardGrid';
 import Project from './Project';
@@ -13,7 +13,7 @@ export default function Projects() {
             key={card.name}
             title={card.heading}
             info={card.info}
-            imgSrc={getImageSrc(projectImages[key as ProjectKey])}
+            imgSrc={projectImages[key as ProjectKey]}
             imgAlt={card.thumbnailDescription}
             demoLink={card.demoLink}
             codeLink={card.codeLink}
