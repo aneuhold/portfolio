@@ -2,21 +2,26 @@ import Image, { type StaticImageData } from 'next/image';
 import TextButton from '../TextButton';
 import styles from './Project.module.css';
 
-export default function Project({
-  title,
-  info,
-  imgSrc,
-  imgAlt,
-  demoLink,
-  codeLink
-}: {
+type ProjectProps = {
+  /** The project title/heading */
   title: string;
+  /** Detailed description of the project */
   info: string;
+  /** Static image data for the project thumbnail */
   imgSrc: StaticImageData;
+  /** Alt text for the project image */
   imgAlt: string;
+  /** Optional URL to the live demo (if available) */
   demoLink?: string;
+  /** URL to the source code repository */
   codeLink: string;
-}) {
+};
+
+/**
+ * Individual project card component that displays project information.
+ * Shows project image, title, description, and action buttons for demo and source code.
+ */
+export default function Project({ title, info, imgSrc, imgAlt, demoLink, codeLink }: ProjectProps) {
   return (
     <article className={styles.projectCard}>
       <div className={styles.media} aria-label={imgAlt}>

@@ -1,3 +1,7 @@
+/**
+ * Head component that defines the HTML head metadata for the application.
+ * Includes meta tags for character encoding, viewport, description, and external resources.
+ */
 export default function Head() {
   return (
     <>

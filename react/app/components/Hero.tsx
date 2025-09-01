@@ -2,6 +2,10 @@ import Link from '$components/Link';
 import socialLinks from '$shared/config/socialLinks';
 import styles from './Hero.module.css';
 
+/**
+ * Hero section component that displays the main introduction and social links.
+ * Features a personal introduction, professional background, and interactive social media icons.
+ */
 export default function Hero() {
   return (
     <div className={styles.hero}>

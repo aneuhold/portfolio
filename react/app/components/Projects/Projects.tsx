@@ -4,6 +4,10 @@ import CardGrid from '../CardGrid';
 import Project from './Project';
 import styles from './Projects.module.css';
 
+/**
+ * Projects section component that displays a grid of project cards.
+ * Fetches project data from configuration and renders each project as a card.
+ */
 export default function Projects() {
   return (
     <section id="projects" className={styles.container}>

@@ -21,6 +21,10 @@ export const metadata = {
     'A portfolio with various projects and social links for the developer Anton G Neuhold Jr.'
 };
 
+/**
+ * Root layout component that wraps the entire application.
+ * Sets up fonts, metadata, and provides the HTML structure for all pages.
+ */
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
