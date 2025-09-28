@@ -1,4 +1,4 @@
-import Image from 'next-export-optimize-images/image';
+import Picture from 'next-export-optimize-images/picture';
 import { type StaticImageData } from 'next/image';
 import AnimatedBorderBackground from '../AnimatedBorderBackground';
 import TextButton from '../TextButton';
@@ -38,13 +38,13 @@ export default function Project({
     <AnimatedBorderBackground className={styles.projectCardBorder}>
       <article className={styles.projectCard}>
         <div className={styles.media} aria-label={imgAlt}>
-          <Image
+          <Picture
             className={styles.enhancedImage}
             src={imgSrc}
             alt={imgAlt}
             placeholder="blur"
             fill
-            sizes="(min-resolution: 2x) 600w, 300w"
+            sizes="(min-resolution: 2x) 600px, 300px"
             priority={priority}
             loading={priority ? 'eager' : 'lazy'}
             quality={90} // High quality for portfolio images

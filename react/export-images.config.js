@@ -5,18 +5,16 @@ const config = {
   // Output directory
   outDir: 'out',
 
-  // Image formats to generate (modern formats for better compression)
   formats: ['avif', 'webp'],
 
   // Quality settings for different formats
   quality: {
-    avif: 80,
     webp: 85,
     png: 90,
     jpeg: 90
   },
 
-  // Responsive image breakpoints to generate
+  // Only generate the exact sizes we need for portfolio thumbnails
   sizes: [300, 600],
 
   // Cache directory for faster rebuilds
@@ -33,14 +31,11 @@ const config = {
   // Enable lossy compression for better file sizes
   enableLossless: false,
 
-  // Convert PNG to more efficient formats when possible
+  // Convert PNG to WebP only
   convertFormat: [
     ['png', 'webp'],
-    ['png', 'avif'],
     ['jpg', 'webp'],
-    ['jpg', 'avif'],
-    ['jpeg', 'webp'],
-    ['jpeg', 'avif']
+    ['jpeg', 'webp']
   ]
 };
 

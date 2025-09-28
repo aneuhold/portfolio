@@ -27,7 +27,7 @@
         class="enhancedImage"
         src={img}
         alt={imgAlt}
-        sizes="(min-resolution: 2x) 600w, 300w"
+        sizes="(min-resolution: 2x) 600px, 300px"
       />
     </div>
 
