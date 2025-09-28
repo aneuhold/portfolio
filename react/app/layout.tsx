@@ -1,20 +1,12 @@
 import '$shared/global-styles/global.css';
 import { Metadata } from 'next';
-import { Roboto, Roboto_Mono } from 'next/font/google';
+import { Roboto } from 'next/font/google';
 import { ReactNode } from 'react';
 
 const roboto = Roboto({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
+  weight: ['300', '400', '500'],
   display: 'swap',
-  variable: '--font-roboto',
-  preload: true // Preload critical font
-});
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
   preload: true // Preload critical font
 });
 
@@ -34,7 +26,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} ${robotoMono.variable}`}>{children}</body>
+      <body className={roboto.className}>{children}</body>
     </html>
   );
 }
