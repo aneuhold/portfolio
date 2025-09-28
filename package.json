@@ -12,6 +12,7 @@
     "svelte:preview": "cd ./svelte && pnpm preview",
     "react": "concurrently --prefix-colors auto --names \"shared,react\" \"pnpm watch:shared\" \"cd ./react && pnpm dev\"",
     "react:build": "pnpm copy-shared-files && cd ./react && pnpm build",
+    "react:preview": "cd ./react && pnpm preview",
     "watch:shared": "nodemon --watch shared --ext ts,js,png,css --exec pnpm copy-shared-files",
     "copy-shared-files": "rimraf ./react/shared ./svelte/shared && copyfiles ./shared/**/* ./svelte/ && copyfiles ./shared/**/* ./react/",
     "upgradeAndTest": "pnpm copy-shared-files && cd ./svelte && pnpm upgradeAndTest",

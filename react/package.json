@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --no-lint",
-    "preview": "pnpm dlx serve out -l 3000",
+    "build": "next build --no-lint && next-export-optimize-images",
+    "preview": "pnpm run build && pnpm dlx serve out -l 3000",
     "start": "next start",
     "lint": "eslint ."
   },
   "dependencies": {
     "next": "^15.5.4",
+    "next-export-optimize-images": "^4.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

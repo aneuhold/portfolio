@@ -1,4 +1,5 @@
-import Image, { type StaticImageData } from 'next/image';
+import Image from 'next-export-optimize-images/image';
+import { type StaticImageData } from 'next/image';
 import AnimatedBorderBackground from '../AnimatedBorderBackground';
 import TextButton from '../TextButton';
 import styles from './Project.module.css';
@@ -16,25 +17,37 @@ type ProjectProps = {
   demoLink?: string;
   /** URL to the source code repository */
   codeLink: string;
+  /** Whether this image should be loaded with priority (for above-the-fold content) */
+  priority?: boolean;
 };
 
 /**
  * Individual project card component that displays project information.
  * Shows project image, title, description, and action buttons for demo and source code.
  */
-export default function Project({ title, info, imgSrc, imgAlt, demoLink, codeLink }: ProjectProps) {
+export default function Project({
+  title,
+  info,
+  imgSrc,
+  imgAlt,
+  demoLink,
+  codeLink,
+  priority = false
+}: ProjectProps) {
   return (
     <AnimatedBorderBackground className={styles.projectCardBorder}>
       <article className={styles.projectCard}>
         <div className={styles.media} aria-label={imgAlt}>
-          {/* 16:9 media wrapper; use Next.js Image with fill for responsive layout */}
           <Image
             className={styles.enhancedImage}
             src={imgSrc}
             alt={imgAlt}
             placeholder="blur"
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(min-resolution: 2x) 600w, 300w"
+            priority={priority}
+            loading={priority ? 'eager' : 'lazy'}
+            quality={90} // High quality for portfolio images
           />
         </div>
         <div className={styles.textContent}>
