@@ -39,9 +39,11 @@
     "svelte-check": "^4.3.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",
+    "vite-imagetools": "^8.0.0",
     "vitest": "^3.2.4"
   },
   "devDependenciesComments": {
-    "prettier-plugin-svelte": "As of 7/26/2025 it isn't clear why this is explicitly needed. ESLint starts throwing some errors about this package if it isn't there, even though it turns out to be a transient dependency, likely through @aneuhold/eslint-config."
+    "prettier-plugin-svelte": "As of 7/26/2025 it isn't clear why this is explicitly needed. ESLint starts throwing some errors about this package if it isn't there, even though it turns out to be a transient dependency, likely through @aneuhold/eslint-config.",
+    "vite-imagetools": "Needed to support the `?enhanced` image import syntax for @sveltejs/enhanced-img"
   }
 }

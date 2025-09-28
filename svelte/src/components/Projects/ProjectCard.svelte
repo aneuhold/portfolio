@@ -23,7 +23,12 @@
 <AnimatedBorderBackground className="projectCardBorder">
   <div class="projectCard">
     <div class="media" aria-label={imgAlt}>
-      <enhanced:img class="enhancedImage" src={img} alt={imgAlt} />
+      <enhanced:img
+        class="enhancedImage"
+        src={img}
+        alt={imgAlt}
+        sizes="(min-resolution: 2x) 600w, 300w"
+      />
     </div>
 
     <div class="textContent">
