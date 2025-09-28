@@ -8,6 +8,6 @@ export default [
     rules: {}
   },
   {
-    ignores: ['**/lib']  
-  }    
-];   
+    ignores: ['**/lib', 'svelte', 'react']
+  },
+];

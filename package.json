@@ -2,19 +2,23 @@
   "name": "portfolio",
   "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.17.1",
   "type": "module",
   "private": true,
   "scripts": {
     "i": "pnpm i && cd ./react && pnpm i && cd ../svelte && pnpm i",
     "svelte": "concurrently --prefix-colors auto --names \"shared,svelte\" \"pnpm watch:shared\" \"cd ./svelte && pnpm dev\"",
     "svelte:build": "pnpm copy-shared-files && cd ./svelte && pnpm build",
+    "svelte:preview": "cd ./svelte && pnpm preview",
     "react": "concurrently --prefix-colors auto --names \"shared,react\" \"pnpm watch:shared\" \"cd ./react && pnpm dev\"",
     "react:build": "pnpm copy-shared-files && cd ./react && pnpm build",
+    "react:preview": "cd ./react && pnpm preview",
     "watch:shared": "nodemon --watch shared --ext ts,js,png,css --exec pnpm copy-shared-files",
     "copy-shared-files": "rimraf ./react/shared ./svelte/shared && copyfiles ./shared/**/* ./svelte/ && copyfiles ./shared/**/* ./react/",
     "upgradeAndTest": "pnpm copy-shared-files && cd ./svelte && pnpm upgradeAndTest",
-    "test": "pnpm copy-shared-files && cd ./svelte && pnpm test"
+    "test": "pnpm copy-shared-files && cd ./svelte && pnpm test",
+    "sub:eslint": "local-npm subscribe @aneuhold/eslint-config",
+    "unsub": "local-npm unsubscribe"
   },
   "keywords": [],
   "author": "Anton G. Neuhold Jr",
@@ -24,9 +28,10 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "@aneuhold/eslint-config": "^1.3.2",
+    "@aneuhold/eslint-config": "^1.3.4",
+    "@aneuhold/local-npm-registry": "^0.2.12",
     "concurrently": "^9.2.1",
-    "eslint": "^9.34.0",
+    "eslint": "^9.36.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1"

@@ -8,15 +8,17 @@
     />
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
-    <!-- Material Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-    <!-- Roboto -->
+
+    <!-- Font pre-connects (only used because the fonts are critical) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Roboto font (used throughout the site) The font weights are all used. -->
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500;0,400;1,400;0,300;1,300&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"
     />
-    <!-- Roboto Mono -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     %sveltekit.head%
   </head>

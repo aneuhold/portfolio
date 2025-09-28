@@ -5,9 +5,8 @@ export default [
   ...svelteConfig,
   {
     rules: {
-      // Disabled because it seemed to be causing issues with a generic type
-      // that is used in an assertion `as type` at the end of a method
-      '@typescript-eslint/no-unnecessary-type-parameters': 'off'
+      // Extra rules here
     }
   }
 ];
+   

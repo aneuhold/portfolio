@@ -12,7 +12,7 @@ export default function Projects() {
   return (
     <section id="projects" className={styles.container}>
       <CardGrid>
-        {Object.entries(projects).map(([key, card]) => (
+        {Object.entries(projects).map(([key, card], index) => (
           <Project
             key={card.name}
             title={card.heading}
@@ -21,6 +21,7 @@ export default function Projects() {
             imgAlt={card.thumbnailDescription}
             demoLink={card.demoLink}
             codeLink={card.codeLink}
+            priority={index < 4} // Prioritize loading for first 4 images (likely above-the-fold)
           />
         ))}
       </CardGrid>
