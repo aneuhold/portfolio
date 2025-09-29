@@ -17,11 +17,13 @@ import placesAndroidApp from '$shared/images/placesandroidapp.png';
 import placesIosApp from '$shared/images/placesIosApp.png';
 import pointSpire from '$shared/images/pointspire.png';
 import pomodoroClock from '$shared/images/pomodoroclock.png';
+import tiddlyDrive2 from '$shared/images/tiddlydrive2.png';
 import tsLibs from '$shared/images/ts-libs.png';
 import urlShortener from '$shared/images/urlShortener.png';
 
 const projectImages: { [key in ProjectKey]: StaticImageData } = {
   localNpmRegistry,
+  tiddlyDrive2,
   personalEslintConfig: eslintConfig,
   personalTypescriptLibraries: tsLibs,
   nextjs15Course,
