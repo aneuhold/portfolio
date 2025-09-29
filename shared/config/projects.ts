@@ -24,6 +24,14 @@ const projects = {
     codeLink: 'https://github.com/aneuhold/ts-libs',
     thumbnailDescription: 'Personal TypeScript Libraries Thumbnail.'
   },
+  tiddlyDrive2: {
+    name: 'Tiddly Drive 2',
+    heading: 'Tiddly Drive 2',
+    info: 'A Google Marketplace Google Drive plugin that allows you to save and load TiddlyWikis from Google Drive.',
+    codeLink: 'https://github.com/aneuhold/tiddlydrive',
+    thumbnailDescription: 'Tiddly Drive 2 Logo.',
+    demoLink: 'https://workspace.google.com/marketplace/app/tiddly_drive_2/477983451498?flow_type=2'
+  },
   personalEslintConfig: {
     name: 'Personal ESLint Config',
     heading: 'Personal ESLint Config',

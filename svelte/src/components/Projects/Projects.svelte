@@ -17,6 +17,7 @@
   import placesIosImg from '$shared/images/placesIosApp.png?w=600;300&enhanced';
   import pointspireImg from '$shared/images/pointspire.png?w=600;300&enhanced';
   import pomodoroImg from '$shared/images/pomodoroclock.png?w=600;300&enhanced';
+  import tiddlyDriveImg from '$shared/images/tiddlydrive2.png?w=600;300&enhanced';
   import tsLibsImg from '$shared/images/ts-libs.png?w=600;300&enhanced';
   import urlShortenerImg from '$shared/images/urlShortener.png?w=600;300&enhanced';
 
@@ -33,6 +34,7 @@
    */
   const projectImages: { [key in ProjectKey]: Picture } = {
     localNpmRegistry: localNpmRegistryImg,
+    tiddlyDrive2: tiddlyDriveImg,
     personalEslintConfig: eslintConfigImg,
     personalTypescriptLibraries: tsLibsImg,
     nextjs15Course,
