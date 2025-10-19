@@ -10,6 +10,8 @@ jobs:
   testAndDeploy:
     name: 'Test and Deploy'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +20,7 @@ jobs:
         uses: pnpm/action-setup@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
