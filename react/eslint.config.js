@@ -8,5 +8,5 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
     rules: {}
   },
-  { ignores: ['**/next-env.d.ts', 'out'] }
+  { ignores: ['**/next-env.d.ts', 'out', 'lighthouserc.js'] }
 ];
