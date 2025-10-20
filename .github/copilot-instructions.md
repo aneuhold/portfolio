@@ -5,6 +5,7 @@
 - A couple frameworks are used. Primarily SvelteKit, and Vitest for testing. But there's a secondary project using React and Next.js which should ideally have the same content as the primary SvelteKit project.
 - Avoid code duplication; reuse existing code when possible
 - Whenever running tests, always use the Vitest extension, and don't run the test command in the terminal
+- Never write summary documents unless explicitly asked
 
 # Code Style (TypeScript)
 
