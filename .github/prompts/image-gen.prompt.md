@@ -1,6 +1,6 @@
 ---
 description: 'Generates an image prompt for an associated repository of code.'
-tools: ['codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'runTests', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'get_commit', 'get_file_contents', 'list_branches', 'list_commits', 'search_code', 'search_repositories']
+tools: ['edit/editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'github/get_commit', 'github/get_file_contents', 'github/list_branches', 'github/list_commits', 'github/search_code', 'github/search_repositories', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'extensions', 'runTests']
 model: GPT-4o
 mode: agent
 ---
