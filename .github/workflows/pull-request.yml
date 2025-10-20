@@ -85,8 +85,7 @@ jobs:
         with:
           urls: |
             ${{ steps.netlify-svelte.outputs.deploy-url }}
-          budgetPath: ./svelte/budget.json
-          configPath: ./lighthouserc.js
+          configPath: ./lighthouserc.yml
           temporaryPublicStorage: true
 
       - name: Run Lighthouse CI (React)
@@ -94,6 +93,5 @@ jobs:
         with:
           urls: |
             ${{ steps.netlify-react.outputs.deploy-url }}
-          budgetPath: ./react/budget.json
-          configPath: ./lighthouserc.js
+          configPath: ./lighthouserc.yml
           temporaryPublicStorage: true
