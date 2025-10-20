@@ -81,6 +81,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Run Lighthouse CI (Svelte)
+        id: lighthouse-svelte
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
@@ -89,9 +90,87 @@ jobs:
           temporaryPublicStorage: true
 
       - name: Run Lighthouse CI (React)
+        id: lighthouse-react
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
             ${{ steps.netlify-react.outputs.deploy-url }}
           configPath: ./lighthouserc.yml
           temporaryPublicStorage: true
+
+      - name: Post Lighthouse Results to PR
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const manifestSvelte = JSON.parse('${{ steps.lighthouse-svelte.outputs.manifest }}');
+            const manifestReact = JSON.parse('${{ steps.lighthouse-react.outputs.manifest }}');
+            const linksSvelte = JSON.parse('${{ steps.lighthouse-svelte.outputs.links }}');
+            const linksReact = JSON.parse('${{ steps.lighthouse-react.outputs.links }}');
+
+            function formatScore(score) {
+              const percentage = Math.round(score * 100);
+              let emoji = '🔴';
+              if (percentage >= 90) emoji = '🟢';
+              else if (percentage >= 50) emoji = '🟡';
+              return `${emoji} ${percentage}`;
+            }
+
+            function formatResults(manifest, links, siteName) {
+              if (!manifest || manifest.length === 0) return `### ${siteName}\n\nNo results available.\n\n`;
+              
+              const result = manifest[0];
+              const summary = result.summary;
+              const reportLink = links[result.url] || 'N/A';
+              
+              return `### ${siteName}
+
+            | Category | Score |
+            |----------|-------|
+            | 🎭 Performance | ${formatScore(summary.performance)} |
+            | ♿ Accessibility | ${formatScore(summary.accessibility)} |
+            | 🏆 Best Practices | ${formatScore(summary['best-practices'])} |
+            | 🔍 SEO | ${formatScore(summary.seo)} |
+            | 📱 PWA | ${formatScore(summary.pwa)} |
+
+            📊 [View Full Report](${reportLink})
+
+            `;
+            }
+
+            const commentBody = `## 🚦 Lighthouse CI Results
+
+            ${formatResults(manifestSvelte, linksSvelte, '🔷 Svelte Site')}
+            ${formatResults(manifestReact, linksReact, '⚛️ React Site')}
+            ---
+            _Updated on ${new Date().toUTCString()}_`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚦 Lighthouse CI Results')
+            );
+
+            // Update or create comment
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
