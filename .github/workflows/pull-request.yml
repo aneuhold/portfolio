@@ -15,6 +15,7 @@ jobs:
       issues: write
       pull-requests: write
       deployments: write
+      statuses: write
 
     steps:
       - uses: actions/checkout@v4
@@ -79,25 +80,11 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_REACT_SITE_ID }}
         timeout-minutes: 1
 
-      - name: Wait for Netlify Deploy (Svelte)
-        uses: jakepartusch/wait-for-netlify-action@v1.4
-        id: wait-for-netlify-svelte
-        with:
-          site_name: 'epic-bassi-85e884'
-          max_timeout: 600
-
-      - name: Wait for Netlify Deploy (React)
-        uses: jakepartusch/wait-for-netlify-action@v1.4
-        id: wait-for-netlify-react
-        with:
-          site_name: 'react-portfoio'
-          max_timeout: 600
-
       - name: Run Lighthouse CI (Svelte)
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            ${{ steps.wait-for-netlify-svelte.outputs.url }}
+            ${{ steps.netlify-svelte.outputs.deploy-url }}
           budgetPath: ./svelte/budget.json
           configPath: ./svelte/lighthouserc.js
           uploadArtifacts: true
@@ -107,7 +94,7 @@ jobs:
         uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
-            ${{ steps.wait-for-netlify-react.outputs.url }}
+            ${{ steps.netlify-react.outputs.deploy-url }}
           budgetPath: ./react/budget.json
           configPath: ./react/lighthouserc.js
           uploadArtifacts: true
