@@ -39,7 +39,7 @@ jobs:
         run: pnpm react:build
 
       - name: Deploy to Netlify (Svelte)
-        uses: nwtgck/actions-netlify@v2.1
+        uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './svelte/build'
           production-branch: main
@@ -56,7 +56,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Deploy to Netlify (React)
-        uses: nwtgck/actions-netlify@v2.1
+        uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './react/out'
           production-branch: main
