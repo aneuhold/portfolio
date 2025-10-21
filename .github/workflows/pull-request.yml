@@ -126,7 +126,7 @@ jobs:
               const reportLink = links[result.url] || 'N/A';
               
               // Show run count if multiple runs
-              const runInfo = manifest.length > 1 ? `\n_📊 Median of ${manifest.length} runs shown_\n` : '';
+              const runInfo = manifest.length > 1 ? `\n_Median of ${manifest.length} runs shown_\n` : '';
               
               return `### ${siteName}
 
@@ -147,7 +147,7 @@ jobs:
             ${formatResults(manifestSvelte, linksSvelte, '🔷 Svelte Site')}
             ${formatResults(manifestReact, linksReact, '⚛️ React Site')}
             ---
-            _Updated on ${new Date().toUTCString()}_`;
+            _Updated on ${new Date().toLocaleString("en-US"), {timeZone: "PST"}}_`;
 
             // Find existing comment
             const { data: comments } = await github.rest.issues.listComments({
