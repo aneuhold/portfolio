@@ -7,67 +7,219 @@ on:
       - main
 
 jobs:
-  testAndDeploy:
-    name: 'Test and Deploy'
+  # Svelte: Build, Test, Deploy & Lighthouse (runs in parallel with React)
+  svelte:
+    name: '🔷 Svelte: Build, Test & Deploy'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+      statuses: write
+    outputs:
+      deploy-url: ${{ steps.netlify.outputs.deploy-url }}
+      lighthouse-manifest: ${{ steps.lighthouse.outputs.manifest }}
+      lighthouse-links: ${{ steps.lighthouse.outputs.links }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Set up PNPM
-        uses: pnpm/action-setup@v3
+      - name: Setup workspace
+        uses: ./.github/actions/setup-pnpm-workspace
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      # Cache Vite build output for faster subsequent builds
+      - name: Cache Vite build
+        uses: actions/cache@v4
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
-          cache-dependency-path: |
-            pnpm-lock.yaml
-            svelte/pnpm-lock.yaml
-            react/pnpm-lock.yaml
+          path: svelte/.vite
+          key: ${{ runner.os }}-vite-${{ hashFiles('svelte/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-vite-
 
-      - name: Install dependencies (root, react, svelte)
-        run: pnpm run i
-
-      - name: Build the svelte site
+      - name: Build Svelte site
         run: pnpm svelte:build
 
-      - name: Build the react site
-        run: pnpm react:build
-
-      # Run tests after the builds are done
       - name: Run tests
         run: pnpm test
 
-      - name: Deploy to Netlify (Svelte)
-        uses: nwtgck/actions-netlify@v2.1
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        id: netlify
         with:
           publish-dir: './svelte/build'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: '${{ github.event.pull_request.title }} Deploy Preview'
-          enable-pull-request-comment: true
+          enable-pull-request-comment: false
           enable-commit-comment: false
-          overwrites-pull-request-comment: true
           github-deployment-description: 'Netlify Deploy Preview (Svelte)'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SVELTE_SITE_ID }}
         timeout-minutes: 1
 
-      - name: Deploy to Netlify (React)
-        uses: nwtgck/actions-netlify@v2.1
+      - name: Run Lighthouse CI
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.deploy-url }}
+          configPath: ./lighthouserc.yml
+          temporaryPublicStorage: true
+
+  # React: Build, Deploy & Lighthouse (runs in parallel with Svelte)
+  react:
+    name: '⚛️ React: Build & Deploy'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      deployments: write
+      statuses: write
+    outputs:
+      deploy-url: ${{ steps.netlify.outputs.deploy-url }}
+      lighthouse-manifest: ${{ steps.lighthouse.outputs.manifest }}
+      lighthouse-links: ${{ steps.lighthouse.outputs.links }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup workspace
+        uses: ./.github/actions/setup-pnpm-workspace
+
+      # Cache Next.js build output for faster subsequent builds
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            react/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('react/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-
+
+      - name: Build React site
+        run: pnpm react:build
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        id: netlify
         with:
           publish-dir: './react/out'
           production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: '${{ github.event.pull_request.title }} Deploy Preview (React)'
-          enable-pull-request-comment: true
+          enable-pull-request-comment: false
           enable-commit-comment: false
-          overwrites-pull-request-comment: true
           github-deployment-description: 'Netlify Deploy Preview (React)'
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_REACT_SITE_ID }}
         timeout-minutes: 1
+
+      - name: Run Lighthouse CI
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            ${{ steps.netlify.outputs.deploy-url }}
+          configPath: ./lighthouserc.yml
+          temporaryPublicStorage: true
+
+  # Post combined results to PR after both jobs complete
+  comment:
+    name: '💬 Post Results to PR'
+    needs: [svelte, react]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+    if: always() # Run even if one job fails
+
+    steps:
+      - name: Post Lighthouse Results to PR
+        uses: actions/github-script@v7
+        if: github.event_name == 'pull_request'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const manifestSvelte = JSON.parse('${{ needs.svelte.outputs.lighthouse-manifest }}' || '[]');
+            const manifestReact = JSON.parse('${{ needs.react.outputs.lighthouse-manifest }}' || '[]');
+            const linksSvelte = JSON.parse('${{ needs.svelte.outputs.lighthouse-links }}' || '{}');
+            const linksReact = JSON.parse('${{ needs.react.outputs.lighthouse-links }}' || '{}');
+
+            function formatScore(score) {
+              const percentage = Math.round(score * 100);
+              let emoji = '🔴';
+              if (percentage >= 90) emoji = '🟢';
+              else if (percentage >= 50) emoji = '🟡';
+              return `${emoji} ${percentage}`;
+            }
+
+            function formatResults(manifest, links, siteName, deployUrl, jobResult) {
+              if (jobResult !== 'success') {
+                return `### ${siteName}\n\n⚠️ Build failed - check workflow logs.\n\n`;
+              }
+              
+              if (!manifest || manifest.length === 0) {
+                return `### ${siteName}\n\n🔗 **Preview**: ${deployUrl}\n\nNo Lighthouse results available.\n\n`;
+              }
+              
+              // Find the representative run (median), or fall back to first result
+              const result = manifest.find(r => r.isRepresentativeRun) || manifest[0];
+              const summary = result.summary;
+              const reportLink = links[result.url] || 'N/A';
+              
+              // Show run count if multiple runs
+              const runInfo = manifest.length > 1 ? `\n_Median of ${manifest.length} runs shown_\n` : '';
+              
+              return `### ${siteName}
+
+            🔗 **Preview**: ${deployUrl}
+
+            | Category | Score |
+            |----------|-------|
+            | 🎭 Performance | ${formatScore(summary.performance)} |
+            | ♿ Accessibility | ${formatScore(summary.accessibility)} |
+            | 🏆 Best Practices | ${formatScore(summary['best-practices'])} |
+            | 🔍 SEO | ${formatScore(summary.seo)} |
+            | 📱 PWA | ${formatScore(summary.pwa || 0)} |
+            ${runInfo}
+            📊 [View Full Report](${reportLink})
+            `;
+            }
+
+            const commentBody = `## 🚦 Lighthouse CI Results
+
+            ${formatResults(manifestSvelte, linksSvelte, '🔷 Svelte Site', '${{ needs.svelte.outputs.deploy-url }}', '${{ needs.svelte.result }}')}
+            ${formatResults(manifestReact, linksReact, '⚛️ React Site', '${{ needs.react.outputs.deploy-url }}', '${{ needs.react.result }}')}
+            ---
+            _Updated on ${new Date().toLocaleString("en-US", {timeZone: "PST"})}_`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('🚦 Lighthouse CI Results')
+            );
+
+            // Update or create comment
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }

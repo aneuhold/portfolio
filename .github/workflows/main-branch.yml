@@ -10,6 +10,8 @@ jobs:
   deploy:
     name: 'Deploy'
     runs-on: ubuntu-latest
+    permissions:
+      deployments: write
 
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +20,7 @@ jobs:
         uses: pnpm/action-setup@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           cache: 'pnpm'
@@ -37,7 +39,7 @@ jobs:
         run: pnpm react:build
 
       - name: Deploy to Netlify (Svelte)
-        uses: nwtgck/actions-netlify@v2.1
+        uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './svelte/build'
           production-branch: main
@@ -54,7 +56,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Deploy to Netlify (React)
-        uses: nwtgck/actions-netlify@v2.1
+        uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './react/out'
           production-branch: main
