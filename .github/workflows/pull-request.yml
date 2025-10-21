@@ -21,6 +21,9 @@ jobs:
       lighthouse-links: ${{ steps.lighthouse.outputs.links }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup workspace
         uses: ./.github/actions/setup-pnpm-workspace
 
@@ -78,6 +81,9 @@ jobs:
       lighthouse-links: ${{ steps.lighthouse.outputs.links }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Setup workspace
         uses: ./.github/actions/setup-pnpm-workspace
 

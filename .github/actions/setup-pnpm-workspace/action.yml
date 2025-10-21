@@ -4,9 +4,6 @@ description: 'Sets up Node.js, PNPM, and installs dependencies with caching'
 runs:
   using: 'composite'
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
     - name: Set up PNPM
       uses: pnpm/action-setup@v3
 
