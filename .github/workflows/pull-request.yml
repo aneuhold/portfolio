@@ -120,9 +120,13 @@ jobs:
             function formatResults(manifest, links, siteName) {
               if (!manifest || manifest.length === 0) return `### ${siteName}\n\nNo results available.\n\n`;
               
-              const result = manifest[0];
+              // Find the representative run (median), or fall back to first result
+              const result = manifest.find(r => r.isRepresentativeRun) || manifest[0];
               const summary = result.summary;
               const reportLink = links[result.url] || 'N/A';
+              
+              // Show run count if multiple runs
+              const runInfo = manifest.length > 1 ? `\n_📊 Median of ${manifest.length} runs shown_\n` : '';
               
               return `### ${siteName}
 
@@ -132,10 +136,9 @@ jobs:
             | ♿ Accessibility | ${formatScore(summary.accessibility)} |
             | 🏆 Best Practices | ${formatScore(summary['best-practices'])} |
             | 🔍 SEO | ${formatScore(summary.seo)} |
-            | 📱 PWA | ${formatScore(summary.pwa)} |
-
+            | 📱 PWA | ${formatScore(summary.pwa || 0)} |
+            ${runInfo}
             📊 [View Full Report](${reportLink})
-
             `;
             }
 
