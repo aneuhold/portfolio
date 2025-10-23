@@ -1,6 +1,7 @@
 import '$shared/global-styles/global.css';
 import { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
+import Script from 'next/script';
 import { ReactNode } from 'react';
 
 const roboto = Roboto({
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
   }
 };
 
+const GA_MEASUREMENT_ID = 'G-JJX60BKWFQ';
+
 /**
  * Root layout component that wraps the entire application.
  * Sets up fonts, metadata, and provides the HTML structure for all pages.
@@ -26,6 +29,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}', {
+  page_path: window.location.pathname,
+});
+        `}
+      </Script>
       <body className={roboto.className}>{children}</body>
     </html>
   );
