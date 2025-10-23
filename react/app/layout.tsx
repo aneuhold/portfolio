@@ -29,18 +29,30 @@ const GA_MEASUREMENT_ID = 'G-JJX60BKWFQ';
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script id="google-analytics-deferred" strategy="afterInteractive">
         {`
+// Initialize Google Analytics with deferred loading for better performance
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}', {
   page_path: window.location.pathname,
 });
+
+// Defer loading of the Google Tag Manager script
+function loadGoogleAnalytics() {
+  const script = document.createElement('script');
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+// Load after page is interactive, or after 1 second (whichever comes first)
+if (document.readyState === 'complete') {
+  setTimeout(loadGoogleAnalytics, 1000);
+} else {
+  window.addEventListener('load', () => setTimeout(loadGoogleAnalytics, 1000));
+}
         `}
       </Script>
       <body className={roboto.className}>{children}</body>
