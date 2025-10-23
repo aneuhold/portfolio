@@ -18,7 +18,6 @@
     "lighthouse": "pnpm svelte:lighthouse && pnpm react:lighthouse",
     "watch:shared": "nodemon --watch shared --ext ts,js,png,css --exec pnpm copy-shared-files",
     "copy-shared-files": "rimraf ./react/shared ./svelte/shared && copyfiles ./shared/**/* ./svelte/ && copyfiles ./shared/**/* ./react/",
-    "upgradeAndTest": "pnpm copy-shared-files && cd ./svelte && pnpm upgradeAndTest",
     "test": "pnpm copy-shared-files && cd ./svelte && pnpm test",
     "sub:eslint": "local-npm subscribe @aneuhold/eslint-config",
     "unsub": "local-npm unsubscribe"
