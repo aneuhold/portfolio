@@ -1,11 +1,32 @@
 # Overall Project Guidelines
 
-- Frontend project to act as a Portfolio for a Senior Software Engineer
-- Generally TypeScript source code with pnpm package management
-- A couple frameworks are used. Primarily SvelteKit, and Vitest for testing. But there's a secondary project using React and Next.js which should ideally have the same content as the primary SvelteKit project.
+- Frontend portfolio showcasing a Senior Software Engineer's work
+- TypeScript monorepo with pnpm workspace management
+- Two parallel implementations: SvelteKit and Next.js (React)
+- Shared assets/config in `/shared/`, copied to both projects via `pnpm copy-shared-files`
+- Tests: Vitest - always use Vitest extension, not terminal
+- CI/CD: Parallel GitHub Actions jobs for Svelte and React with Netlify deployments
 - Avoid code duplication; reuse existing code when possible
-- Whenever running tests, always use the Vitest extension, and don't run the test command in the terminal
 - Never write summary documents unless explicitly asked
+
+## Project Structure
+
+```
+/                       # Root workspace
+├── svelte/            # SvelteKit app (primary)
+├── react/             # Next.js app (secondary)
+├── shared/            # Shared config, styles, images
+└── .github/
+    ├── actions/setup-pnpm-workspace/  # Composite action for CI setup
+    └── workflows/pull-request.yml     # Parallel build/deploy jobs/lighthouse checks
+```
+
+## Build System
+
+- Root scripts orchestrate both projects (`pnpm svelte:build`, `pnpm react:build`)
+- Shared files must be copied before builds via `pnpm copy-shared-files`
+- GitHub Actions: Svelte and React jobs run in parallel with build caching
+- Vite cache (Svelte) and Next.js cache preserved between CI runs
 
 # Code Style (TypeScript)
 
@@ -18,7 +39,7 @@
 
 ## Documentation & Naming
 
-- Add JSDoc for all methods, functions, and classes (include `@param`, omit `@returns`)
+- Add JSDoc for all methods, functions, and classes
 - Add JSDoc for public class properties only if complex
 - Never prefix functions/methods with underscores
 
@@ -38,3 +59,7 @@
 
 - Use PascalCase for enum names and values
 - Use TypeScript `enum` (not `const enum` or `type`)
+
+# When Writing a PR Review
+
+- For each comment on the PR that you make, provide a concise example prompt that could be used to generate the code change via GitHub Copilot at the end of the comment in a code block.

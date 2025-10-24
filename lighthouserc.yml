@@ -30,12 +30,14 @@ ci:
         - maxNumericValue: 1500
 
       # Resource size budgets
+      # Note: These budgets include Google Analytics (~141KB gzipped)
+      # which loads after page is interactive for better performance
       resource-summary:script:size:
         - error
-        - maxNumericValue: 128000 # 125KB in bytes
+        - maxNumericValue: 300000 # ~293KB - allows for app bundle + Google Analytics
       resource-summary:total:size:
         - error
-        - maxNumericValue: 307200 # 300KB in bytes
+        - maxNumericValue: 500000 # ~488KB - allows for all resources + Google Analytics
 
       is-crawlable: off # This is expected for preview deployments
 

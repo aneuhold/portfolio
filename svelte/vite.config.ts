@@ -24,7 +24,15 @@ const vitestConfig = vitestDefineConfig({
   test: {
     exclude: ['node_modules/**/*'],
     globals: true,
-    environment: 'jsdom'
+    environment: 'jsdom',
+    server: {
+      deps: {
+        // Inline @testing-library/svelte so its .svelte.js files (which use Svelte 5 runes like
+        // $state and $props) are compiled by the Svelte compiler during tests. Without this,
+        // Vitest would use the SSR exports where runes throw "rune_outside_svelte" errors.
+        inline: ['@testing-library/svelte']
+      }
+    }
   }
 });
 
