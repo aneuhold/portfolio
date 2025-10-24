@@ -37,7 +37,7 @@
         document.head.appendChild(script);
       }
 
-      // Load after page is interactive, or after 3 seconds (whichever comes first)
+      // Load after page is interactive, or after 1 second (whichever comes first)
       if (document.readyState === 'complete') {
         setTimeout(loadGoogleAnalytics, 1000);
       } else {
