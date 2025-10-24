@@ -5,10 +5,10 @@ Just a simple portfolio for different projects that have been worked on.
 ## 🚀 Live Sites
 
 <!-- prettier-ignore -->
-| Framework | Deploy Status | Live Site |
-|-----------|---------------|-----------|
-| **SvelteKit** | [![Svelte Netlify Status](https://api.netlify.com/api/v1/badges/2d6fd0ad-7d78-48c5-b277-4632b2581cc4/deploy-status)](https://app.netlify.com/projects/epic-bassi-85e884/deploys) | **[🔗 View Portfolio](https://tonyneuhold.com/)** |
-| **React/Next.js** | [![React Netlify Status](https://api.netlify.com/api/v1/badges/455c5be4-6bad-4b85-8cec-6dd2e257f449/deploy-status)](https://app.netlify.com/projects/react-portfoio/deploys) | **[🔗 View Portfolio](https://react.tonyneuhold.com/)** |
+| Framework | Live Site |
+|-----------|-----------|
+| **SvelteKit** | **[🔗 View Portfolio](https://tonyneuhold.com/)** |
+| **React/Next.js** | **[🔗 View Portfolio](https://react.tonyneuhold.com/)** |
 
 ## Architecture
 
@@ -36,3 +36,7 @@ To start development for react:
 To start development for svelte:
 
 - Run `pnpm svelte` in the root directory
+
+## Analytics
+
+- [Link to Google Analytics for the Portfolio](https://analytics.google.com/analytics/web/#/a169638120p509733093/reports/intelligenthome) (Mainly setup as an experiment)
