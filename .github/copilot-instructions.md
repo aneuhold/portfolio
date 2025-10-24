@@ -39,7 +39,7 @@
 
 ## Documentation & Naming
 
-- Add JSDoc for all methods, functions, and classes (include `@param`, omit `@returns`)
+- Add JSDoc for all methods, functions, and classes
 - Add JSDoc for public class properties only if complex
 - Never prefix functions/methods with underscores
 
@@ -59,3 +59,7 @@
 
 - Use PascalCase for enum names and values
 - Use TypeScript `enum` (not `const enum` or `type`)
+
+# When Writing a PR Review
+
+- For each comment on the PR that you make, provide a concise example prompt that could be used to generate the code change via GitHub Copilot at the end of the comment in a code block.
