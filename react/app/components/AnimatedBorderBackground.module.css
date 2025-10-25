@@ -7,8 +7,10 @@
 .animatedBorderBackground {
   grid-area: stack;
   display: block;
-  width: 100%;
-  height: 100%;
+  /* Start slightly smaller than the container because of the interpolation of a single pixel that
+    happens for the cards when the screen is various sizes */
+  width: 99%;
+  height: 99%;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: var(--border-radius, calc(var(--standard-spacing) / 2));
   position: relative;
