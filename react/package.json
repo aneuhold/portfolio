@@ -12,7 +12,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "next": "^15.5.4",
+    "next": "^15.5.6",
     "next-export-optimize-images": "^4.7.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -21,7 +21,7 @@
     "next": "Version 16 is not being used yet as of 10/22/2025 because there was a bug that was preventing static export when using next-export-optimize-images. It seems like a simple bug though. It should be addressed in https://github.com/dc7290/next-export-optimize-images/issues/1249."
   },
   "devDependencies": {
-    "@aneuhold/eslint-config": "^1.3.12",
+    "@aneuhold/eslint-config": "^1.3.13",
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "19.2.2",
