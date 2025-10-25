@@ -15,10 +15,12 @@
     "react:build": "pnpm copy-shared-files && cd ./react && pnpm build",
     "react:preview": "cd ./react && pnpm preview",
     "react:lighthouse": "pnpm react:build && lhci autorun --config=./lighthouserc.yml --collect.staticDistDir=./react/out",
+    "build": "pnpm svelte:build && pnpm react:build",
     "lighthouse": "pnpm svelte:lighthouse && pnpm react:lighthouse",
     "watch:shared": "nodemon --watch shared --ext ts,js,png,css --exec pnpm copy-shared-files",
     "copy-shared-files": "rimraf ./react/shared ./svelte/shared && copyfiles ./shared/**/* ./svelte/ && copyfiles ./shared/**/* ./react/",
     "test": "pnpm copy-shared-files && cd ./svelte && pnpm test",
+    "upgrade-deps": "pnpm upgrade --latest && cd ./react && pnpm upgrade --latest && cd ../svelte && pnpm upgrade --latest",
     "sub:eslint": "local-npm subscribe @aneuhold/eslint-config",
     "unsub": "local-npm unsubscribe"
   },
@@ -30,8 +32,8 @@
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@aneuhold/eslint-config": "^1.3.12",
-    "@aneuhold/local-npm-registry": "^0.2.13",
+    "@aneuhold/eslint-config": "^1.3.13",
+    "@aneuhold/local-npm-registry": "^0.2.14",
     "@lhci/cli": "^0.15.1",
     "concurrently": "^9.2.1",
     "eslint": "^9.38.0",
