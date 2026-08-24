@@ -1,6 +1,5 @@
-import tsLibConfig from '@aneuhold/eslint-config/src/ts-lib-config.js';
+import tsLibConfig from '@aneuhold/eslint-config/src/configs/ts-lib-config';
 
-/** @type {import('@typescript-eslint/utils').TSESLint.FlatConfig.ConfigArray} */
 export default [
   ...tsLibConfig,
   {
@@ -8,6 +7,6 @@ export default [
     rules: {}
   },
   {
-    ignores: ['**/lib', 'svelte', 'react']
-  },
+    ignores: ['**/lib', 'eslint.config.ts', 'svelte', 'react']
+  }
 ];
