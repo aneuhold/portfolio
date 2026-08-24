@@ -149,6 +149,8 @@ const projects = {
 } satisfies ProjectMap;
 
 // Export as a more generic type to make it easier to use in components.
-export default projects as ProjectMap;
+const genericProjects: ProjectMap = projects;
+
+export default genericProjects;
 
 export type ProjectKey = keyof typeof projects;

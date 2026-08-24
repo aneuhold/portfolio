@@ -32,11 +32,12 @@
     return {
       title: postData.metadata.title,
       date: postData.metadata.date,
-      html: marked.parse(stripFrontMatter(postsRawStrings[filePath]), { async: false }) as string
+      html: marked.parse(stripFrontMatter(postsRawStrings[filePath]), { async: false })
     };
   });
 </script>
 
 {#each posts as post (post.title)}
+  <!-- eslint-disable-next-line svelte/no-at-html-tags -- The HTML is built from local markdown files at build time. -->
   <p>{@html post.html}</p>
 {/each}
