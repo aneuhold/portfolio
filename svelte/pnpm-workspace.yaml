@@ -2,6 +2,13 @@
 # root. Without it pnpm walks up to the root workspace file and ignores this
 # app's lockfile.
 
+# `sharp` needs its install script to resolve the image binaries used by the
+# production build. `@parcel/watcher` only backs an optional file watcher, so it
+# is left unbuilt.
+allowBuilds:
+  '@parcel/watcher': false
+  sharp: true
+
 # Hold back any package published within the last 7 days, so a freshly
 # released bad version can't sneak into installs/updates.
 # 7 * 24 * 60 minutes = 10080.
