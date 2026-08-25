@@ -16,8 +16,8 @@ importers:
         version: 0.12.8(svelte@5.56.9(@typescript-eslint/types@8.67.0))
     devDependencies:
       '@aneuhold/eslint-config':
-        specifier: ^3.0.2
-        version: 3.0.2(@angular/cli@21.2.21(@types/node@24.9.1))(eslint@10.8.1(jiti@2.7.0))(prettier@3.9.6)(svelte@5.56.9(@typescript-eslint/types@8.67.0))(typescript@6.0.3)
+        specifier: ^3.0.3
+        version: 3.0.3(@angular/cli@21.2.21(@types/node@24.9.1))(eslint@10.8.1(jiti@2.7.0))(prettier@3.9.6)(svelte@5.56.9(@typescript-eslint/types@8.67.0))(typescript@6.0.3)
       '@aneuhold/local-npm-registry':
         specifier: ^1.0.1
         version: 1.0.1(typanion@3.14.0)
@@ -128,8 +128,8 @@ packages:
   '@aneuhold/core-ts-lib@2.4.8':
     resolution: {integrity: sha512-itc+ae1R/qqPOwGODR+bDd/+EePABxY6DlnHcdbwoUg+1XUVuude3quVoIUlGSJH5ANX6NtpA6oUMPSCZN5hRg==}
 
-  '@aneuhold/eslint-config@3.0.2':
-    resolution: {integrity: sha512-pKkM6GXZS4gVrH4iJQlyZEO27jPYeDWXGUTiTRfPxuKeIO7xrNsStxgB7Fhj+r/sQtGvYV960ld8ZCPIM5jnLw==}
+  '@aneuhold/eslint-config@3.0.3':
+    resolution: {integrity: sha512-jfjaXO5iC4VZGDtCKTBm1hHf6dn2nNeqa+aHe6o7sUo81+tQXnIlv65S3PScGwh2VIDCAaj8ACpPO11vu/sLLQ==}
     peerDependencies:
       eslint: '>= 10.2.1'
       prettier: '>= 3.8.3'
@@ -4870,7 +4870,7 @@ snapshots:
 
   '@aneuhold/core-ts-lib@2.4.8': {}
 
-  '@aneuhold/eslint-config@3.0.2(@angular/cli@21.2.21(@types/node@24.9.1))(eslint@10.8.1(jiti@2.7.0))(prettier@3.9.6)(svelte@5.56.9(@typescript-eslint/types@8.67.0))(typescript@6.0.3)':
+  '@aneuhold/eslint-config@3.0.3(@angular/cli@21.2.21(@types/node@24.9.1))(eslint@10.8.1(jiti@2.7.0))(prettier@3.9.6)(svelte@5.56.9(@typescript-eslint/types@8.67.0))(typescript@6.0.3)':
     dependencies:
       '@eslint/js': 10.0.1(eslint@10.8.1(jiti@2.7.0))
       '@next/eslint-plugin-next': 16.3.1(eslint@10.8.1(jiti@2.7.0))

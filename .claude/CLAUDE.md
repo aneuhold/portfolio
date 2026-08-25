@@ -2,26 +2,6 @@
 
 # portfolio
 
-## Language
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/lang/typescript.md
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/lang/css.md
-
-## Runtime
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/runtime/node.md
-
-## Framework
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/framework/svelte.md
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/framework/sveltekit.md
-
-## Tooling
-
-@../node_modules/@aneuhold/robot-instructions/src/instructions/tooling/vitest.md
-
 ## This repo
 
 A frontend portfolio showcasing a Senior Software Engineer's work, managed with pnpm. Two parallel implementations of the same site, SvelteKit (primary) and Next.js (secondary), share assets and config from `shared/`. Each app has its own `package.json` and lockfile and deploys to its own Netlify site.
@@ -71,3 +51,10 @@ Lint and type checks live in the apps: `pnpm lint` in either app, `pnpm check` (
 ### Before considering a task complete
 
 1. Run + fix any issues that come up: `pnpm test` at the root, then `pnpm lint` and `pnpm check` in `svelte`, and `pnpm lint` in `react`.
+
+@../node_modules/@aneuhold/robot-instructions/src/instructions/lang/typescript.md
+@../node_modules/@aneuhold/robot-instructions/src/instructions/lang/css.md
+@../node_modules/@aneuhold/robot-instructions/src/instructions/runtime/node.md
+@../node_modules/@aneuhold/robot-instructions/src/instructions/framework/svelte.md
+@../node_modules/@aneuhold/robot-instructions/src/instructions/framework/sveltekit.md
+@../node_modules/@aneuhold/robot-instructions/src/instructions/tooling/vitest.md

@@ -28,6 +28,10 @@ out
 **/next-env.d.ts
 *.tsbuildinfo
 
+# next-image-export-optimizer generated images and its hash cache
+nextImageExportOptimizer
+next-image-export-optimizer-hashes.json
+
 # Svelte
 .svelte-kit
 /package
