@@ -1,5 +1,4 @@
 import { NextConfig } from 'next';
-import withExportImages from 'next-export-optimize-images';
 import path from 'path';
 
 const nextConfig: NextConfig = {
@@ -7,18 +6,29 @@ const nextConfig: NextConfig = {
   // Emit a fully static site to the `out/` directory on build.
   // See: https://nextjs.org/docs/app/building-your-application/deploying/static-exports
   output: 'export',
-  // With next-export-optimize-images, we can use optimized images with static exports
   images: {
-    // Only the specific sizes we need for our portfolio thumbnails
+    loader: 'custom',
+    // Only the specific sizes needed for the portfolio thumbnails. The two lists
+    // are unioned into `srcset`. The actual code shows: `let widths = [...blurSize, ...imageSizes, ...deviceSizes];`
+    // here: https://github.com/Niels-IO/next-image-export-optimizer/blob/master/src/optimizeImages.ts#L377.
+    // So just specify one set to only generate the 300 + 600 once.
     imageSizes: [300, 600],
-    // Override default deviceSizes to prevent huge images
-    deviceSizes: [300, 600],
-    // Enable modern formats for better performance
-    formats: ['image/avif', 'image/webp']
+    deviceSizes: []
+  },
+  // Only added here because next-image-export-optimizer says to and warns otherwise. Don't see an
+  // issue with builds though when it is removed.
+  transpilePackages: ['next-image-export-optimizer'],
+  env: {
+    nextImageExportOptimizer_exportFolderPath: 'out',
+    nextImageExportOptimizer_quality: '90',
+    nextImageExportOptimizer_storePicturesInWEBP: 'true',
+    nextImageExportOptimizer_exportFolderName: 'nextImageExportOptimizer',
+    nextImageExportOptimizer_generateAndUseBlurImages: 'true',
+    nextImageExportOptimizer_remoteImageCacheTTL: '0'
   },
   // Helps on static hosts by ensuring directory-style URLs map to index.html
   trailingSlash: true,
   outputFileTracingRoot: path.join(__dirname, '../')
 };
 
-export default withExportImages(nextConfig);
+export default nextConfig;

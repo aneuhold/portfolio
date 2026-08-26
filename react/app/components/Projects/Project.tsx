@@ -1,4 +1,4 @@
-import Picture from 'next-export-optimize-images/picture';
+import ExportedImage from 'next-image-export-optimizer';
 import { type StaticImageData } from 'next/image';
 import AnimatedBorderBackground from '../AnimatedBorderBackground';
 import TextButton from '../TextButton';
@@ -17,8 +17,8 @@ type ProjectProps = {
   demoLink?: string;
   /** URL to the source code repository */
   codeLink: string;
-  /** Whether this image should be loaded with priority (for above-the-fold content) */
-  priority?: boolean;
+  /** Whether this image should be preloaded (for above-the-fold content) */
+  preload?: boolean;
 };
 
 /**
@@ -32,22 +32,21 @@ export default function Project({
   imgAlt,
   demoLink,
   codeLink,
-  priority = false
+  preload = false
 }: ProjectProps) {
   return (
     <AnimatedBorderBackground className={styles.projectCardBorder}>
       <article className={styles.projectCard}>
         <div className={styles.media} aria-label={imgAlt}>
-          <Picture
+          <ExportedImage
             className={styles.enhancedImage}
             src={imgSrc}
             alt={imgAlt}
             placeholder="blur"
             fill
             sizes="(min-resolution: 2x) 600px, 300px"
-            priority={priority}
-            loading={priority ? 'eager' : 'lazy'}
-            quality={90} // High quality for portfolio images
+            preload={preload}
+            loading={preload ? 'eager' : 'lazy'}
           />
         </div>
         <div className={styles.textContent}>

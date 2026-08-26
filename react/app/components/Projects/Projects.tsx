@@ -1,5 +1,5 @@
 import projectImages from '$lib/projectImages';
-import projects, { type ProjectKey } from '$shared/config/projects';
+import projects from '$shared/config/projects';
 import CardGrid from '../CardGrid';
 import Project from './Project';
 import styles from './Projects.module.css';
@@ -17,11 +17,11 @@ export default function Projects() {
             key={card.name}
             title={card.heading}
             info={card.info}
-            imgSrc={projectImages[key as ProjectKey]}
+            imgSrc={projectImages[key]}
             imgAlt={card.thumbnailDescription}
             demoLink={card.demoLink}
             codeLink={card.codeLink}
-            priority={index < 4} // Prioritize loading for first 4 images (likely above-the-fold)
+            preload={index < 4} // Preload the first 4 images (likely above-the-fold)
           />
         ))}
       </CardGrid>

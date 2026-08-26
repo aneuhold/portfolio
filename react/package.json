@@ -2,31 +2,31 @@
   "name": "react",
   "author": "Anton G. Neuhold Jr",
   "license": "ISC",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@11.23.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --no-lint && next-export-optimize-images",
+    "dev": "next dev",
+    "build": "next build && next-image-export-optimizer",
     "preview": "pnpm run build && pnpm dlx serve out -l 3000",
     "start": "next start",
-    "lint": "eslint ."
+    "check": "tsc --noEmit",
+    "lint": "eslint .",
+    "sub:eslint": "local-npm subscribe @aneuhold/eslint-config"
   },
   "dependencies": {
-    "next": "^15.5.6",
-    "next-export-optimize-images": "^4.7.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
-  },
-  "dependenciesComments": {
-    "next": "Version 16 is not being used yet as of 10/22/2025 because there was a bug that was preventing static export when using next-export-optimize-images. It seems like a simple bug though. It should be addressed in https://github.com/dc7290/next-export-optimize-images/issues/1249."
+    "next": "^16.3.1",
+    "next-image-export-optimizer": "^1.20.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@aneuhold/eslint-config": "^1.3.13",
-    "@types/node": "^24.9.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "19.2.2",
-    "eslint": "^9.38.0",
-    "prettier": "^3.6.2",
-    "typescript": "^5.9.3"
+    "@aneuhold/eslint-config": "^3.0.3",
+    "@aneuhold/local-npm-registry": "^1.0.1",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "19.2.4",
+    "eslint": "^10.8.1",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3"
   }
 }

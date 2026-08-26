@@ -21,7 +21,7 @@ import tiddlyDrive2 from '$shared/images/tiddlydrive2.png';
 import tsLibs from '$shared/images/ts-libs.png';
 import urlShortener from '$shared/images/urlShortener.png';
 
-const projectImages: { [key in ProjectKey]: StaticImageData } = {
+const projectImages: Record<string, StaticImageData> = {
   localNpmRegistry,
   tiddlyDrive2,
   personalEslintConfig: eslintConfig,
@@ -40,6 +40,6 @@ const projectImages: { [key in ProjectKey]: StaticImageData } = {
   placesIosApp,
   reactPomodoroClock: pomodoroClock,
   urlShortener
-};
+} satisfies { [key in ProjectKey]: StaticImageData };
 
 export default projectImages;

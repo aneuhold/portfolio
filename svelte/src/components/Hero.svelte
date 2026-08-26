@@ -22,8 +22,8 @@
     />.
     <br />
     <br />
-    When not working, or learning new things about development, I like to exercise and hang out with
-    my three pets and beautiful wife. Check out some social media links and projects below:
+    When not working, or learning new things about development, I like to exercise and hang out with my
+    three pets and beautiful wife. Check out some social media links and projects below:
   </p>
 
   <div class="heroButtons">

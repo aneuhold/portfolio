@@ -32,7 +32,7 @@
   /**
    * Maps project keys to their respective image paths.
    */
-  const projectImages: { [key in ProjectKey]: Picture } = {
+  const projectImages: Record<string, Picture> = {
     localNpmRegistry: localNpmRegistryImg,
     tiddlyDrive2: tiddlyDriveImg,
     personalEslintConfig: eslintConfigImg,
@@ -51,12 +51,12 @@
     placesIosApp: placesIosImg,
     reactPomodoroClock: pomodoroImg,
     urlShortener: urlShortenerImg
-  };
+  } satisfies { [key in ProjectKey]: Picture };
 
   const projectsWithImages = Object.entries(projects).map(([key, project]) => {
     return {
       ...project,
-      thumbnail: projectImages[key as ProjectKey]
+      thumbnail: projectImages[key]
     };
   });
 </script>
