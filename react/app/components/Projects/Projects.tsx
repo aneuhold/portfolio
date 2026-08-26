@@ -21,7 +21,7 @@ export default function Projects() {
             imgAlt={card.thumbnailDescription}
             demoLink={card.demoLink}
             codeLink={card.codeLink}
-            priority={index < 4} // Prioritize loading for first 4 images (likely above-the-fold)
+            preload={index < 4} // Preload the first 4 images (likely above-the-fold)
           />
         ))}
       </CardGrid>

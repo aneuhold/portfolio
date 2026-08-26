@@ -5,8 +5,8 @@
   "packageManager": "pnpm@11.23.0",
   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --no-lint && next-image-export-optimizer",
+    "dev": "next dev",
+    "build": "next build && next-image-export-optimizer",
     "preview": "pnpm run build && pnpm dlx serve out -l 3000",
     "start": "next start",
     "check": "tsc --noEmit",
@@ -14,7 +14,7 @@
     "sub:eslint": "local-npm subscribe @aneuhold/eslint-config"
   },
   "dependencies": {
-    "next": "^15.5.23",
+    "next": "^16.3.1",
     "next-image-export-optimizer": "^1.20.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"

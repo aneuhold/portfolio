@@ -17,8 +17,8 @@ type ProjectProps = {
   demoLink?: string;
   /** URL to the source code repository */
   codeLink: string;
-  /** Whether this image should be loaded with priority (for above-the-fold content) */
-  priority?: boolean;
+  /** Whether this image should be preloaded (for above-the-fold content) */
+  preload?: boolean;
 };
 
 /**
@@ -32,7 +32,7 @@ export default function Project({
   imgAlt,
   demoLink,
   codeLink,
-  priority = false
+  preload = false
 }: ProjectProps) {
   return (
     <AnimatedBorderBackground className={styles.projectCardBorder}>
@@ -45,8 +45,8 @@ export default function Project({
             placeholder="blur"
             fill
             sizes="(min-resolution: 2x) 600px, 300px"
-            priority={priority}
-            loading={priority ? 'eager' : 'lazy'}
+            preload={preload}
+            loading={preload ? 'eager' : 'lazy'}
           />
         </div>
         <div className={styles.textContent}>
