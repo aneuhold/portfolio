@@ -15,7 +15,7 @@ export default function Projects() {
         {Object.entries(projects).map(([key, card], index) => (
           <Project
             key={card.name}
-            title={card.heading}
+            title={card.name}
             info={card.info}
             imgSrc={projectImages[key]}
             imgAlt={card.thumbnailDescription}

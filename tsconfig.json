@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": ".",
     "target": "ESNEXT",
-    "module": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "importHelpers": true,
