@@ -11,13 +11,13 @@
   import Link from '../Link.svelte';
   import TextButton from '../TextButton.svelte';
 
-  const { project }: { project: Project } = $props();
+  const { project, row }: { project: Project; row: number } = $props();
 
   const dates = $derived(timelineService.formatRange(project.startDate, project.endDate));
 </script>
 
 {#if project.tier === ProjectTier.Featured}
-  <article class="project">
+  <article class="project" style:--row={row}>
     <div class="card">
       <enhanced:img
         class="thumbnail"
@@ -38,14 +38,21 @@
     <div class="stem"></div>
   </article>
 {:else}
-  <div class="compactProject">
+  <div class="compactProject" style:--row={row}>
     <span class="dates">{dates}</span>
     <Link url={project.codeLink} linkText={project.name} />
   </div>
 {/if}
 
 <style>
+  .project,
+  .compactProject {
+    grid-column: 2;
+    grid-row: var(--row);
+  }
+
   .project {
+    margin-block-end: calc(var(--standard-spacing) * 2);
     padding: calc(var(--standard-spacing) * 2);
     border: 1px solid var(--color-accent);
   }
@@ -61,6 +68,7 @@
     display: flex;
     gap: var(--standard-spacing);
     padding-block: calc(var(--standard-spacing) / 2);
+    padding-inline-start: calc(var(--standard-spacing) * 2);
   }
 
   .links {

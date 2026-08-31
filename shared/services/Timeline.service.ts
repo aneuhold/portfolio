@@ -30,6 +30,21 @@ class TimelineService {
   }
 
   /**
+   * The first grid row an era's rail covers: the row below the previous era's card, or the top of
+   * the timeline for the newest era. Rows follow the built order, so an item's row is its index
+   * plus one.
+   *
+   * @param items The built timeline.
+   * @param eraIndex Where in it the era sits.
+   */
+  eraRailStartRow(items: TimelineItem[], eraIndex: number): number {
+    const previousEraIndex = items.findLastIndex(
+      (item, index) => index < eraIndex && item.kind === TimelineItemKind.Era
+    );
+    return previousEraIndex + 2;
+  }
+
+  /**
    * Renders a month-precision range, such as "Sep 2025 – Jan 2026". An absent end reads as "now",
    * and a range that starts and ends in the same month collapses to that month.
    *

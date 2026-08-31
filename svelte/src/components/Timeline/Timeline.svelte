@@ -14,19 +14,29 @@
 </script>
 
 <section class="timeline">
-  {#each items as item (item.name)}
+  {#each items as item, index (item.key)}
     {#if item.kind === TimelineItemKind.Era}
-      <EraCard era={item} />
+      <EraCard
+        era={item}
+        row={index + 1}
+        railFrom={timelineService.eraRailStartRowRow(items, index)}
+      />
     {:else}
-      <ProjectCard project={item} />
+      <ProjectCard project={item} row={index + 1} />
     {/if}
   {/each}
 </section>
 
 <style>
+  /* One grid for the whole page: the era rail, then the content. Rows are slots, one per item, so
+     an era's rail can span the projects above it without leaving the grid. No row gap, because the
+     rail and the era card have to meet. */
   .timeline {
+    --rail-width: calc(var(--standard-spacing) * 5);
+    --corner: var(--standard-spacing);
+
     display: grid;
-    gap: var(--standard-spacing);
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
     padding: calc(var(--standard-spacing) * 4);
   }
 </style>
