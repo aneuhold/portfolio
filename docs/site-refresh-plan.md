@@ -1,6 +1,6 @@
 # Site Refresh Plan
 
-Status: design direction agreed, work history data outstanding.
+Status: design direction agreed, data sources identified.
 
 ## Requirements
 
@@ -30,6 +30,35 @@ Within an era, the projects that started during it come first, and the era's own
 
 `docs/wireframe/index.html` is the working wireframe of this, with placeholder content.
 
+### Data
+
+Two types, `Era` in a new `shared/config/eras.ts` and `Project` in the existing `shared/config/projects.ts`. Dates are month precision, with the day set to 1.
+
+```ts
+type Era = {
+  name: string;
+  info: string;
+  startDate: Date;
+  endDate?: Date;
+};
+
+type Project = {
+  name: string;
+  heading: string;
+  info: string;
+  startDate: Date;
+  endDate?: Date;
+  demoLink?: string;
+  codeLink: string;
+  thumbnailDescription: string;
+};
+```
+
+An absent `endDate` means ongoing: the current job, or a project still being worked on.
+
+Nothing links a project to an era. Membership is derived from the dates, which keeps one fact in one place and means adding a job later re-slots the projects around it without touching `projects.ts`. Eras sort by `startDate` descending. `endDate`, or today when it is absent, places a project's card; `startDate` places the foot of its stem. A project whose `startDate` falls in an earlier era than its card is exactly the case the shape language describes as a stem crossing an era boundary.
+
+Still open on `Project`: the featured and compact tiers. The design calls for the distinction and it is not on the type yet.
 
 ### Requirement 1, resolved by the structure
 
@@ -41,15 +70,15 @@ The word "archive" never appears. Each era section is headed by the organization
 
 Two shapes, one rotated from the other. See `docs/wireframe/index.html`.
 
-**An era is an L.** A vertical rail carries the era colour down the left, and at the bottom it turns right into the employer card. One continuous form, no overlap and no seam.
+**An era is an L.** A vertical rail carries the era color down the left, and at the bottom it turns right into the employer card. One continuous form, no overlap and no seam.
 
 **A project is the same L turned 180 degrees.** A card runs across the top and a narrow stem descends from its right end, reaching back down to the date the project started. A stem that crosses an era boundary means the project outlived the job it began in.
 
 Each project takes one lane further inward than the one above it, so its card is shorter by exactly one lane width and the stems never collide. Lanes are reused once a stem has ended.
 
-Both shapes are filled rather than outlined. Two abutting fills of one colour read as a single shape, which is what makes the join clean. An outline would need a concave rounded corner, which `border-radius` cannot produce, and would mean an SVG path or a clipped double layer for no gain.
+Both shapes are filled rather than outlined. Two abutting fills of one color read as a single shape, which is what makes the join clean. An outline would need a concave rounded corner, which `border-radius` cannot produce, and would mean an SVG path or a clipped double layer for no gain.
 
-The era colour therefore appears only on the L, never behind the work. Colour on the axis reads as "when". Colour behind the work reads as "who for".
+The era color therefore appears only on the L, never behind the work. Color on the axis reads as "when". Color behind the work reads as "who for".
 
 ### Layout
 
@@ -64,13 +93,6 @@ A project element spans from its card down to its start slot, so most of its are
 `--hdr-gradient` currently fires on card hover and reads as decoration. It gets a job instead: it is the marker for "now".
 
 It is the top of the gutter. In the current era the band carries the full HDR conic gradient, and each era down the page steps it toward flat and unsaturated. One element carries both the era identity and the narrative of recency. It also keeps its hover role on featured cards, which is where it already earns its place.
-
-### Affiliation
-
-The gutter resolves most of the risk that personal projects read as employer work. One guard remains, because it is cheap and the page is a professional claim:
-
-- Projects carry an explicit affiliation marker, so personal work is labelled as personal wherever it sits on the timeline.
-- Era cards are worded as context rather than ownership, along the lines of "While at CurrentCo".
 
 ### Motion
 
@@ -101,16 +123,14 @@ Easing and duration tokens live in `shared/global-styles/motion.css` so CSS tran
 
 Both apps get the same set, Svelte with scoped `<style>` blocks and React with CSS modules, per existing convention.
 
-| Component | Role |
-| --- | --- |
-| `Timeline` | Maps the built timeline to era sections. Replaces today's `Projects`. |
-| `EraSection` | Gutter segment, sticky era label, project list, era card at the bottom. |
-| `EraCard` | Organization, title, dates, summary, highlights. |
-| `ProjectCard` | Existing card, restyled. Used for `Featured` projects only. |
-| `ProjectRow` | New. Compact dated row, no image, for `Compact` projects. |
-| `EraGutter` | The band carrying the era hue and, at the top of the page, the HDR gradient. |
+| Component      | Role                                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `Timeline`     | Owns the page grid and renders every era in order. Replaces today's `Projects`.                                           |
+| `EraContainer` | One era: its rail, its `ProjectCard`s, and its `EraCard` at the bottom.                                                   |
+| `EraCard`      | The era's `name`, its date range, and its `info`.                                                                         |
+| `ProjectCard`  | One project: the card and the stem down to its start date. Featured projects show an image, compact ones are a dated row. |
 
-`Hero`, `Footer`, `Link`, `SocialLink`, `TextButton`, `CardGrid`, and `AnimatedBorderBackground` carry over. `CardGrid` is reused inside `EraSection` for featured projects rather than being replaced.
+`Hero`, `Footer`, `Link`, `SocialLink`, `TextButton`, and `AnimatedBorderBackground` carry over. `CardGrid` is not used by the timeline; projects place directly onto the page grid.
 
 ### CSS features in play
 
@@ -132,10 +152,29 @@ Both apps render `Hero`, `Projects`, `Footer` on one page. The Svelte app also h
 
 `shared/global-styles/global.css` defines the theme on `:root`: a green primary, an orange accent, a mint green, a Material-derived type scale, and a fixed three-stop `linear-gradient` page background. Light mode only. Several card shadows are hardcoded `rgb(0 0 0 / n%)` rather than tokens, and get tokenized as part of this work.
 
-## Needed Before Implementation
+## Data Sources
 
-1. **Work history.** For each job and for school: organization, title, location, start and end month, a one or two sentence summary, and two or three highlights. Nothing in the repo has this today.
-2. **Project start dates.** Approximate month and year for each of the 18 projects. These place every project on the timeline.
+Neither dataset exists in this repo. Both are gathered at the start of implementation and written directly into the new structures.
+
+### Eras, from the resume repository
+
+`aneuhold/resume` holds the work history in `src/data/`, aggregated by `careerData.ts`:
+
+- `src/data/experience/` exports an `Experience` per job: `company`, `location`, `startDate`, `endDate`, and a `positions` map of titles held.
+- `src/data/education/` exports an `Education` per institution: `institution`, `degree`, `location`, `startDate`, `endDate`.
+
+Both already use `Date` with an optional `endDate`, so the dates copy across unchanged and an ongoing entry stays ongoing. `name` comes from `company` or `institution`. `info` is the one field with no counterpart, and gets written for the timeline rather than lifted: the resume entries carry per-position responsibilities, which is more than an era card should say.
+
+The data is copied, not imported. The two repos stay independent, and the timeline shows a deliberately shorter version of the history.
+
+### Project dates, from GitHub activity
+
+Each project's `codeLink` points at its repository, so commit history gives the `startDate` and, where work has stopped, the `endDate`. Two cases need care:
+
+- Some links point into a monorepo subdirectory, such as `ts-libs/tree/main/packages/local-npm-registry`. Those need commit history scoped to that path, not the repository's creation date.
+- Some point at repositories under another owner, such as `halomod/TheHaloMod-SPA`.
+
+Month precision is enough, so a first and last commit rounded to the month is the whole job.
 
 ## Implementation Steps
 
