@@ -56,7 +56,7 @@ type Project = {
 
 An absent `endDate` means ongoing: the current job, or a project still being worked on.
 
-Nothing links a project to an era. Membership is derived from the dates, which keeps one fact in one place and means adding a job later re-slots the projects around it without touching `projects.ts`. Eras sort by `startDate` descending. `endDate`, or today when it is absent, places a project's card; `startDate` places the foot of its stem. A project whose `startDate` falls in an earlier era than its card is exactly the case the shape language describes as a stem crossing an era boundary.
+Nothing links a project to an era. Membership is derived from the dates, which keeps one fact in one place and means adding a job later re-slots the projects around it without touching `projects.ts`. Eras sort by `startDate` descending. `endDate`, or today when it is absent, places a project's card; `startDate` places the end of its rail. A project whose `startDate` falls in an earlier era than its card is exactly the case the shape language describes as a project rail crossing an era boundary.
 
 Still open on `Project`: the featured and compact tiers. The design calls for the distinction and it is not on the type yet.
 
@@ -72,9 +72,9 @@ Two shapes, one rotated from the other. See `docs/wireframe/index.html`.
 
 **An era is an L.** A vertical rail carries the era color down the left, and at the bottom it turns right into the employer card. One continuous form, no overlap and no seam.
 
-**A project is the same L turned 180 degrees.** A card runs across the top and a narrow stem descends from its right end, reaching back down to the date the project started. A stem that crosses an era boundary means the project outlived the job it began in.
+**A project is the same L turned 180 degrees.** A card runs across the top and a narrow rail descends from its right end, reaching back down to the date the project started. A rail that crosses an era boundary means the project outlived the job it began in.
 
-Each project takes one lane further inward than the one above it, so its card is shorter by exactly one lane width and the stems never collide. Lanes are reused once a stem has ended.
+Each project takes one lane further inward than the one above it, so its card is shorter by exactly one lane width and the rails never collide. Lanes are reused once a rail has ended.
 
 Both shapes are filled rather than outlined. Two abutting fills of one color read as a single shape, which is what makes the join clean. An outline would need a concave rounded corner, which `border-radius` cannot produce, and would mean an SVG path or a clipped double layer for no gain.
 
@@ -82,11 +82,11 @@ The era color therefore appears only on the L, never behind the work. Color on t
 
 ### Layout
 
-One grid for the whole page. Column 1 is the era rail, column 2 is the content, and the remaining columns are stem lanes. Rows are slots: one per project, one per employer card.
+One grid for the whole page. Column 1 is the era rail, column 2 is the content, and the remaining columns are project rail lanes. Rows are slots: one per project, one per employer card.
 
-Because every element sits on that one grid, a stem runs from its own card down into an earlier era without leaving it, and nothing needs measuring at runtime. Eras carry `display: contents` so they stay real elements for semantics while their children place directly onto the timeline grid.
+Because every element sits on that one grid, a project rail runs from its own card down into an earlier era without leaving it, and nothing needs measuring at runtime. Eras carry `display: contents` so they stay real elements for semantics while their children place directly onto the timeline grid.
 
-A project element spans from its card down to its start slot, so most of its area is empty. That area takes `pointer-events: none`, with the card and stem re-enabling it, otherwise the empty span swallows clicks meant for what sits beneath.
+A project element spans from its card down to its start slot, so most of its area is empty. That area takes `pointer-events: none`, with the card and rail re-enabling it, otherwise the empty span swallows clicks meant for what sits beneath.
 
 ### What the HDR gradient does
 
@@ -128,7 +128,7 @@ Both apps get the same set, Svelte with scoped `<style>` blocks and React with C
 | `Timeline`     | Owns the page grid and renders every era in order. Replaces today's `Projects`.                                           |
 | `EraContainer` | One era: its rail, its `ProjectCard`s, and its `EraCard` at the bottom.                                                   |
 | `EraCard`      | The era's `name`, its date range, and its `info`.                                                                         |
-| `ProjectCard`  | One project: the card and the stem down to its start date. Featured projects show an image, compact ones are a dated row. |
+| `ProjectCard`  | One project: the card and the rail down to its start date. Featured projects show an image, compact ones are a dated row. |
 
 `Hero`, `Footer`, `Link`, `SocialLink`, `TextButton`, and `AnimatedBorderBackground` carry over. `CardGrid` is not used by the timeline; projects place directly onto the page grid.
 

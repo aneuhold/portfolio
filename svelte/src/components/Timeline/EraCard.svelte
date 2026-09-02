@@ -1,21 +1,22 @@
 <!--
   @component
 
-  An era's L: a rail carrying its colour down the page, turning at the bottom into the card that
-  says who it was with, when it ran, and what it amounted to.
-
-  The L is never drawn as an L. It is two rectangles of one colour meeting at a square corner,
-  which is what lets `border-radius` alone shape it: an outlined L would need a concave rounded
-  corner, which CSS cannot produce.
+  An era: a card saying who it was with, when it ran, and what it amounted to, with a rail running
+  up the left of the page from the card to where the era ended.
 -->
 <script lang="ts">
   import type { Era } from '$shared/config/eras';
-  import timelineService from '$shared/services/Timeline.service';
+  import timelineService, { type TimelinePlacement } from '$shared/services/Timeline.service';
 
-  const { era, row, railFrom }: { era: Era; row: number; railFrom: number } = $props();
+  const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();
 </script>
 
-<section class="era" style:--row={row} style:--from={railFrom}>
+<section
+  class="era"
+  style:--row={placement.row}
+  style:--rail-line={placement.railLine}
+  style:--lane={placement.lane}
+>
   <div class="rail"></div>
   <div class="card">
     <h2 class="header-4">{era.name}</h2>
@@ -25,15 +26,15 @@
 </section>
 
 <style>
-  /* The era keeps its element for semantics while its two halves place onto the page grid. 
-    display: contents makes it so that the grid will extend a little further to the next children.
-  */
+  /* The era keeps its element for semantics, and display: contents lets its rail and card place
+     directly onto the timeline grid instead of into a box of their own. */
   .era {
     display: contents;
   }
 
-  /* Each era further down the page sits a step closer to the background, so colour reads as
-     recency. Both halves take their step from the same row, so the join stays invisible. */
+  /* Each era further down the page sits a step closer to the background, so color reads as
+     recency. The rail and the card take their step from the same row, so the join between them
+     stays invisible. */
   .rail,
   .card {
     background: color-mix(
@@ -45,13 +46,15 @@
 
   .rail {
     grid-column: 1;
-    grid-row: var(--from) / var(--row);
+    grid-row: var(--rail-line) / var(--row);
     border-radius: var(--corner) var(--corner) 0 0;
   }
 
   .card {
     grid-column: 1 / -1;
     grid-row: var(--row);
+    /* Stop short of the project rails crossing this row. */
+    margin-inline-end: calc(var(--lane) * var(--lane-width));
     margin-block-end: calc(var(--standard-spacing) * 4);
     padding: calc(var(--standard-spacing) * 2);
     border-radius: 0 var(--corner) var(--corner) var(--corner);

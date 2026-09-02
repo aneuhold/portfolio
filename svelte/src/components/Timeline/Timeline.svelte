@@ -2,7 +2,7 @@
   @component
 
   The page's timeline: every era and project in one reverse chronological list, so scrolling down
-  moves backwards through time. Owns the grid that every rail, card and stem places onto.
+  moves backwards through time. Owns the grid that every rail and card places onto.
 -->
 <script lang="ts">
   import timelineService from '$shared/services/Timeline.service';
@@ -10,19 +10,15 @@
   import EraCard from './EraCard.svelte';
   import ProjectCard from './ProjectCard.svelte';
 
-  const items = timelineService.build();
+  const timeline = timelineService.build();
 </script>
 
 <section class="timeline">
-  {#each items as item, index (item.key)}
+  {#each timeline as { item, placement } (item.key)}
     {#if item.kind === TimelineItemKind.Era}
-      <EraCard
-        era={item}
-        row={index + 1}
-        railFrom={timelineService.eraRailStartRowRow(items, index)}
-      />
+      <EraCard era={item} {placement} />
     {:else}
-      <ProjectCard project={item} row={index + 1} />
+      <ProjectCard project={item} {placement} />
     {/if}
   {/each}
 </section>
@@ -32,11 +28,14 @@
      an era's rail can span the projects above it without leaving the grid. No row gap, because the
      rail and the era card have to meet. */
   .timeline {
-    --rail-width: calc(var(--standard-spacing) * 5);
+    --era-rail-width: calc(var(--standard-spacing) * 5);
+    --lane-width: calc(var(--standard-spacing) * 2);
+    --project-rail-width: calc(var(--standard-spacing) / 2);
+    --card-gap: calc(var(--standard-spacing) * 2);
     --corner: var(--standard-spacing);
 
     display: grid;
-    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+    grid-template-columns: var(--era-rail-width) minmax(0, 1fr);
     padding: calc(var(--standard-spacing) * 4);
   }
 </style>
