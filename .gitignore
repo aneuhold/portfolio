@@ -35,6 +35,3 @@ next-image-export-optimizer-hashes.json
 # Svelte
 .svelte-kit
 /package
-
-# Shared files
-*/shared

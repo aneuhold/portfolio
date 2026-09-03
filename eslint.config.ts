@@ -7,6 +7,7 @@ export default [
     rules: {}
   },
   {
-    ignores: ['**/lib', 'eslint.config.ts', 'svelte', 'react']
+    // .claude has GSAP examples in it
+    ignores: ['**/lib', '.claude', 'eslint.config.ts', 'svelte', 'react']
   }
 ];

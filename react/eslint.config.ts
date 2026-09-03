@@ -8,7 +8,6 @@ export default [
     rules: {}
   },
   {
-    // `shared` is a generated copy of the root `shared` folder, linted at the root.
-    ignores: ['shared', '**/next-env.d.ts', 'out', 'eslint.config.ts']
+    ignores: ['**/next-env.d.ts', 'out', 'eslint.config.ts']
   }
 ];
