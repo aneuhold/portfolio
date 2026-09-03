@@ -5,8 +5,8 @@
   moves backwards through time. Owns the grid that every rail and card places onto.
 -->
 <script lang="ts">
-  import timelineService from '$shared/services/Timeline.service';
-  import { TimelineItemKind } from '$shared/types/TimelineItemBase';
+  import timelineService from 'shared/services/Timeline.service';
+  import { TimelineItemKind } from 'shared/types/TimelineItemBase';
   import EraCard from './EraCard.svelte';
   import ProjectCard from './ProjectCard.svelte';
 

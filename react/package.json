@@ -2,7 +2,6 @@
   "name": "react",
   "author": "Anton G. Neuhold Jr",
   "license": "ISC",
-  "packageManager": "pnpm@11.23.0",
   "type": "module",
   "scripts": {
     "dev": "next dev",
@@ -17,7 +16,8 @@
     "next": "^16.3.1",
     "next-image-export-optimizer": "^1.20.1",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "shared": "workspace:*"
   },
   "devDependencies": {
     "@aneuhold/eslint-config": "^3.0.3",

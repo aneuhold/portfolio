@@ -15,9 +15,14 @@ const nextConfig: NextConfig = {
     imageSizes: [300, 600],
     deviceSizes: []
   },
-  // Only added here because next-image-export-optimizer says to and warns otherwise. Don't see an
-  // issue with builds though when it is removed.
-  transpilePackages: ['next-image-export-optimizer'],
+  transpilePackages: [
+    // Only added here because next-image-export-optimizer says to and warns otherwise. Don't see an
+    // issue with builds though when it is removed.
+    'next-image-export-optimizer',
+    // `shared` ships TypeScript source rather than a build, so Next has to compile
+    // it alongside the app.
+    'shared'
+  ],
   env: {
     nextImageExportOptimizer_exportFolderPath: 'out',
     nextImageExportOptimizer_quality: '90',

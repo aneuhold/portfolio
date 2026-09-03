@@ -18,9 +18,6 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "paths": {
-      "$shared/*": [
-        "./shared/*"
-      ],
       "$components/*": [
         "./app/components/*"
       ],

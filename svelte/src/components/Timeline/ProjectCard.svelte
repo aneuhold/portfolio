@@ -5,8 +5,8 @@
   running down from it to the date the work started; a compact one gets a dated row.
 -->
 <script lang="ts">
-  import { type Project, ProjectTier } from '$shared/config/projects';
-  import timelineService, { type TimelinePlacement } from '$shared/services/Timeline.service';
+  import { type Project, ProjectTier } from 'shared/config/projects';
+  import timelineService, { type TimelinePlacement } from 'shared/services/Timeline.service';
   import projectImages from '../../util/projectImages';
   import Link from '../Link.svelte';
   import TextButton from '../TextButton.svelte';

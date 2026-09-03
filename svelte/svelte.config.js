@@ -20,7 +20,6 @@ const config = {
       strict: true
     }),
     alias: {
-      $shared: 'shared',
       $components: 'src/components'
     }
   },

@@ -7,7 +7,6 @@ export default [
     rules: {}
   },
   {
-    // `shared` is a generated copy of the root `shared` folder, linted at the root.
-    ignores: ['shared', 'eslint.config.ts']
+    ignores: ['eslint.config.ts']
   }
 ];

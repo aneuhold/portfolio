@@ -2,7 +2,6 @@
   "name": "svelte",
   "version": "0.0.1",
   "license": "ISC",
-  "packageManager": "pnpm@11.23.0",
   "type": "module",
   "scripts": {
     "dev": "vite dev --port 3020 --open",
@@ -19,7 +18,8 @@
   },
   "dependencies": {
     "marked": "^18.0.9",
-    "mdsvex": "^0.12.8"
+    "mdsvex": "^0.12.8",
+    "shared": "workspace:*"
   },
   "devDependencies": {
     "@aneuhold/eslint-config": "^3.0.3",

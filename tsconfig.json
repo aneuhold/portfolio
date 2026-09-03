@@ -17,5 +17,6 @@
     "skipLibCheck": true
     // "allowImportingTsExtensions": true
   },
+  "include": ["packages/**/*.ts"],
   "exclude": ["node_modules"]
 }
