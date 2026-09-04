@@ -1,5 +1,5 @@
 import projectImages from '$lib/projectImages';
-import projects from 'shared/config/projects';
+import { projects } from 'shared';
 import CardGrid from '../CardGrid';
 import Project from './Project';
 import styles from './Projects.module.css';

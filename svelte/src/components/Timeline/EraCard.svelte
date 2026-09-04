@@ -5,8 +5,7 @@
   up the left of the page from the card to where the era ended.
 -->
 <script lang="ts">
-  import type { Era } from 'shared/config/eras';
-  import timelineService, { type TimelinePlacement } from 'shared/services/Timeline.service';
+  import { type Era, type TimelinePlacement, timelineService } from 'shared';
 
   const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();
 </script>

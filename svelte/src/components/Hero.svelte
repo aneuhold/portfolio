@@ -1,5 +1,5 @@
 <script lang="ts">
-  import socialLinks from 'shared/config/socialLinks';
+  import { socialLinks } from 'shared';
   import Link from './Link.svelte';
   import SocialLink from './SocialLink.svelte';
 </script>

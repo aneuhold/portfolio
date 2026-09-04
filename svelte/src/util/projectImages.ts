@@ -1,4 +1,4 @@
-import type { ProjectKey } from 'shared/config/projects';
+import type { ProjectKey } from 'shared';
 // Explicitly request 600px and 300px variants for all project thumbnails. Query params must end
 // with &enhanced to trigger the enhanced image processing (just due to lazy typing is all.)
 import battleship from 'shared/images/battleship.png?w=600;300&enhanced';

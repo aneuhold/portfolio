@@ -18,7 +18,7 @@ A frontend portfolio showcasing a Senior Software Engineer's work, managed with 
     └── workflows/                     # Parallel Svelte and React build/deploy/lighthouse jobs
 ```
 
-`packages/shared` publishes nothing and builds nothing. Its `exports` map points at TypeScript source, CSS, and PNGs directly, so both apps compile it as part of their own build and an edit is picked up with no intermediate step. Import from it by package subpath, such as `shared/config/projects` or `shared/images/blackjack.png`; add an `exports` entry before importing from a new directory.
+`packages/shared` publishes nothing and builds nothing. Its `exports` map points at TypeScript source, CSS, and PNGs directly, so both apps compile it as part of their own build and an edit is picked up with no intermediate step.
 
 ### Quick commands
 

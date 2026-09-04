@@ -1,4 +1,4 @@
-import { ProjectKey } from 'shared/config/projects';
+import type { ProjectKey } from 'shared';
 import type { StaticImageData } from 'next/image';
 
 // Static image imports from the shared images directory
