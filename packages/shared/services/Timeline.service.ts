@@ -1,5 +1,5 @@
-import eras, { type Era } from '../config/eras';
-import projects, { type Project, ProjectTier } from '../config/projects';
+import { eras, type Era } from '../config/eras';
+import { projects, ProjectTier, type Project } from '../config/projects';
 import { TimelineItemKind } from '../types/TimelineItemBase';
 
 /**
@@ -116,7 +116,8 @@ class TimelineService {
 }
 
 const timelineService = new TimelineService();
-export default timelineService;
+
+export { timelineService };
 
 /**
  * One element of the timeline, with the grid placement worked out for it.

@@ -12,7 +12,7 @@ export type Era = TimelineItemBase & {
 
 type EraMap = { [eraKey: string]: Era };
 
-const eras = {
+const eraDefinitions = {
   secondNature: {
     key: 'secondNature',
     kind: TimelineItemKind.Era,
@@ -38,7 +38,5 @@ const eras = {
   }
 } satisfies EraMap;
 
-// Export as a more generic type to make it easier to use in components.
-const genericEras: EraMap = eras;
-
-export default genericEras;
+// Exported as a more generic type to make it easier to use in components.
+export const eras: EraMap = eraDefinitions;

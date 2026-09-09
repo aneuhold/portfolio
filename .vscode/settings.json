@@ -11,6 +11,9 @@
     "source.fixAll.eslint": "always",
     "source.organizeImports": "explicit"
   },
+  // Lets the TypeScript server see `.svelte` files, so a symbol in `shared` lists its
+  // usages inside components and not just in `.ts` files.
+  "svelte.enable-ts-plugin": true,
   "eslint.useFlatConfig": true,
   "eslint.run": "onSave",
   "eslint.format.enable": true,

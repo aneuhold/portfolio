@@ -20,7 +20,7 @@ export enum ProjectTier {
 
 type ProjectMap = { [projectKey: string]: Project };
 
-const projects = {
+const projectDefinitions = {
   localNpmRegistry: {
     key: 'localNpmRegistry',
     kind: TimelineItemKind.Project,
@@ -226,9 +226,7 @@ const projects = {
   }
 } satisfies ProjectMap;
 
-// Export as a more generic type to make it easier to use in components.
-const genericProjects: ProjectMap = projects;
+// Exported as a more generic type to make it easier to use in components.
+export const projects: ProjectMap = projectDefinitions;
 
-export default genericProjects;
-
-export type ProjectKey = keyof typeof projects;
+export type ProjectKey = keyof typeof projectDefinitions;

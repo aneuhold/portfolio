@@ -16,7 +16,7 @@
     "react:lighthouse": "pnpm react:build && lhci autorun --config=./lighthouserc.yml --collect.staticDistDir=./react/out",
     "build": "pnpm svelte:build && pnpm react:build",
     "lighthouse": "pnpm svelte:lighthouse && pnpm react:lighthouse",
-    "check": "pnpm -r --parallel check",
+    "check": "tsc -b packages/shared && pnpm -r --parallel check",
     "lint": "eslint && pnpm --filter svelte lint && pnpm --filter react lint",
     "test": "pnpm --filter svelte test",
     "upgrade:core": "pnpm up -r '@aneuhold/*' --latest",

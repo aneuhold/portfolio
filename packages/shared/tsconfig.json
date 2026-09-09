@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    // `composite` is what allows the apps to reference this project, and referencing it
+    // is what makes cross-project navigation work. It requires declaration output, so
+    // the declarations go to a gitignored folder that only `tsc` and `svelte-check`
+    // read. Editors and both bundlers keep using the TypeScript source directly.
+    "composite": true,
+    "rootDir": ".",
+    "outDir": "./.tsbuild",
+    "emitDeclarationOnly": true
+  },
+  "include": ["**/*.ts"]
+}
