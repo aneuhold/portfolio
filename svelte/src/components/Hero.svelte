@@ -43,7 +43,7 @@
   }
 
   .hero {
-    margin: 0 auto;
+    margin: calc(var(--standard-spacing) * 3) auto;
     max-width: 600px;
   }
 
@@ -53,5 +53,6 @@
     flex-wrap: wrap;
     justify-content: center;
     column-gap: calc(var(--standard-spacing) * 4);
+    margin-block-start: calc(var(--standard-spacing) * 3);
   }
 </style>
