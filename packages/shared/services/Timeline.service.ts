@@ -49,8 +49,8 @@ class TimelineService {
   }
 
   /**
-   * Gives every item its row, and the number of lanes taken up beside it by the project rails
-   * that pass through that row.
+   * Gives every item its row, how many eras back from the present it sits, and the number of lanes
+   * taken up beside it by the project rails that pass through that row.
    *
    * A card inset by a given number of lanes still reaches the edge of the innermost lane it clears,
    * so it would overlap a rail running down that lane. Every item is therefore inset past all the
@@ -63,6 +63,7 @@ class TimelineService {
   #placeItems(items: TimelineItem[], now: Date): TimelineEntry[] {
     const laneLastRows: number[] = [];
     let previousEraRow = 0;
+    let erasPlaced = 0;
 
     return items.map((item, index) => {
       const row = index + 1;
@@ -70,11 +71,13 @@ class TimelineService {
         (depth, lastRow, index) => (lastRow >= row ? index + 1 : depth),
         0
       );
+      const eraDepth = erasPlaced;
       let railLine: number;
 
       if (item.kind === TimelineItemKind.Era) {
         railLine = previousEraRow + 1;
         previousEraRow = row;
+        erasPlaced += 1;
       } else if (item.tier === ProjectTier.Compact) {
         railLine = row + 1;
       } else {
@@ -82,7 +85,7 @@ class TimelineService {
         laneLastRows[lane] = railLine - 1;
       }
 
-      return { item, placement: { row, railLine, lane } };
+      return { item, placement: { row, railLine, lane, eraDepth } };
     });
   }
 
@@ -150,4 +153,9 @@ export type TimelinePlacement = {
    * the edge and, for a project, the lane its own rail runs down.
    */
   lane: number;
+  /**
+   * How many eras back from the present the item sits, so color can carry recency. 0 is the era
+   * still running.
+   */
+  eraDepth: number;
 };

@@ -1,0 +1,9 @@
+/* Durations and easings, kept in one place so CSS transitions and GSAP defaults draw on the same
+   values. */
+:root {
+  --duration-fast: 0.3s;
+  --duration-base: 0.5s;
+
+  /* The Material standard curve, already in use across the site. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
