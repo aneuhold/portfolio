@@ -37,8 +37,24 @@ class TimelineService {
     if (!endDate) {
       return `${start} – now`;
     }
-    const end = this.#monthFormat.format(endDate);
-    return start === end ? start : `${start} – ${end}`;
+    if (this.isSingleMonth(startDate, endDate)) {
+      return start;
+    }
+    return `${start} – ${this.#monthFormat.format(endDate)}`;
+  }
+
+  /**
+   * Whether a range renders as one month, which it does when it opens and closes in the same one.
+   * A range still open never does, since it reads as running to now.
+   *
+   * @param startDate The month the range opens in.
+   * @param endDate The month it closes in, absent while it is still open.
+   */
+  isSingleMonth(startDate: Date, endDate?: Date): boolean {
+    return (
+      endDate !== undefined &&
+      this.#monthFormat.format(startDate) === this.#monthFormat.format(endDate)
+    );
   }
 
   /**

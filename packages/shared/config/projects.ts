@@ -73,7 +73,7 @@ const projectDefinitions = {
     name: 'HaloMod SPA',
     info: 'Capstone project for the ASU Software Engineering program. Done on a team of 5 for an Astrophysics doctorate.',
     startDate: new Date('2020-10-01'),
-    endDate: new Date('2022-02-01'),
+    endDate: new Date('2021-06-25'),
     codeLink: 'https://github.com/halomod/TheHaloMod-SPA',
     thumbnailDescription: 'HaloMod SPA Thumbnail.'
   },
