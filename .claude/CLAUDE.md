@@ -50,6 +50,7 @@ Run these from the root directory.
 - A change to the site's content or appearance belongs in both apps unless the request says otherwise. Keep the two implementations at parity.
 - The React app uses CSS modules (`<Component>.module.css`) next to each component. The Svelte app uses component-scoped `<style>` blocks. Both draw colors from the custom properties in `packages/shared/global-styles/global.css`.
 - Never write summary documents unless explicitly asked.
+- Don't start the dev server on your own if it's already running. Check if the dev already has it running first and use that if it is.
 
 ### Before considering a task complete
 

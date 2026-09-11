@@ -1,5 +1,5 @@
 import { eras, type Era } from '../config/eras';
-import { projects, ProjectTier, type Project } from '../config/projects';
+import { projects, type Project } from '../config/projects';
 import { TimelineItemKind } from '../types/TimelineItemBase';
 
 /**
@@ -41,6 +41,15 @@ class TimelineService {
     return start === end ? start : `${start} – ${end}`;
   }
 
+  /**
+   * Whether a project came and went on a single date.
+   *
+   * @param project The project being sized up.
+   */
+  isCompact(project: Project): boolean {
+    return project.endDate?.getTime() === project.startDate.getTime();
+  }
+
   #buildTimeline(): TimelineEntry[] {
     const now = new Date();
     const items: TimelineItem[] = [...Object.values(eras), ...Object.values(projects)];
@@ -78,7 +87,7 @@ class TimelineService {
         railLine = previousEraRow + 1;
         previousEraRow = row;
         erasPlaced += 1;
-      } else if (item.tier === ProjectTier.Compact) {
+      } else if (this.isCompact(item)) {
         railLine = row + 1;
       } else {
         railLine = this.#projectRailLine(items, item, now);
