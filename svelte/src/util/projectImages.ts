@@ -11,7 +11,9 @@ import exerciseTracker from 'shared/images/exercisetracker.png?w=600;300&enhance
 import halomodSpa from 'shared/images/halomod-spa.png?w=600;300&enhanced';
 import localNpmRegistry from 'shared/images/local-npm-registry.png?w=600;300&enhanced';
 import mainScripts from 'shared/images/main-scripts.png?w=600;300&enhanced';
+import mesoPro from 'shared/images/mesopro.png?w=600;300&enhanced';
 import nextjs15Course from 'shared/images/nextjs15-invoiceapp.png?w=600;300&enhanced';
+import personalDashboard from 'shared/images/personal-dashboard.png?w=600;300&enhanced';
 import placesAndroidApp from 'shared/images/placesandroidapp.png?w=600;300&enhanced';
 import placesIosApp from 'shared/images/placesIosApp.png?w=600;300&enhanced';
 import pointSpire from 'shared/images/pointspire.png?w=600;300&enhanced';
@@ -32,8 +34,10 @@ const projectImages: Record<string, Picture> = {
   halomodSpa,
   localNpmRegistry,
   mainScripts,
+  mesoPro,
   mongodbExerciseTracker: exerciseTracker,
   nextjs15Course,
+  personalDashboard,
   personalEslintConfig: eslintConfig,
   personalTypescriptLibraries: tsLibs,
   placesAndroidApp,

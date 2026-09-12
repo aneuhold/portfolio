@@ -10,6 +10,26 @@ export type Project = TimelineItemBase & {
 type ProjectMap = { [projectKey: string]: Project };
 
 const projectDefinitions = {
+  mesoPro: {
+    key: 'mesoPro',
+    kind: TimelineItemKind.Project,
+    name: 'MesoPro',
+    info: 'A hypertrophy training app that plans mesocycles and adjusts weights, reps, and sets from logged performance. Built with SvelteKit and shipped to Android with Capacitor, on top of my Google Cloud backend.',
+    startDate: new Date('2026-02-01'),
+    demoLink: 'https://mesopro.tonyneuhold.com',
+    codeLink: 'https://github.com/aneuhold/workout',
+    thumbnailDescription: 'MesoPro Logo.'
+  },
+  personalDashboard: {
+    key: 'personalDashboard',
+    kind: TimelineItemKind.Project,
+    name: 'Personal Dashboard',
+    info: 'A personal dashboard for the things I use day to day, centered on shared and recurring tasks. Built with SvelteKit and Svelte Material UI, on top of my Google Cloud backend.',
+    startDate: new Date('2023-11-01'),
+    demoLink: 'https://dashboard.tonyneuhold.com',
+    codeLink: 'https://github.com/aneuhold/dashboard',
+    thumbnailDescription: 'Personal Dashboard Logo.'
+  },
   localNpmRegistry: {
     key: 'localNpmRegistry',
     kind: TimelineItemKind.Project,
