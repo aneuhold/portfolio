@@ -35,6 +35,11 @@
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: calc(var(--standard-spacing) * 2);
     row-gap: var(--standard-spacing);
+
+    /* Dates drop under the title */
+    @media (width < 40rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   h3 {
@@ -46,12 +51,5 @@
     color: var(--color-text-secondary);
     /* Um. Seemed like an okay trade-off here? */
     text-wrap: pretty;
-  }
-
-  /* Dates drop under the title */
-  @media (width < 40rem) {
-    .cardText {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 </style>

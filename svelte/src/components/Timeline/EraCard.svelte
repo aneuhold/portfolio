@@ -64,6 +64,10 @@
     background-color: var(--era-color);
     color: var(--background);
     box-shadow: var(--shadow-resting);
+
+    @media (width < 40rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   h2 {
@@ -75,6 +79,12 @@
     grid-row: 1 / span 2;
     align-self: center;
     white-space: nowrap;
+
+    /* The tenure drops under the name rather than squeezing it. */
+    @media (width < 40rem) {
+      grid-column: auto;
+      grid-row: auto;
+    }
   }
 
   .info,
@@ -90,27 +100,13 @@
   .runningAtStart {
     display: none;
 
+    @media (width < 48rem) {
+      display: block;
+    }
+
     a {
       color: var(--background);
       text-decoration-color: color-mix(in oklab, var(--background) 50%, transparent);
-    }
-  }
-
-  @media (width < 48rem) {
-    .runningAtStart {
-      display: block;
-    }
-  }
-
-  /* The tenure drops under the name rather than squeezing it. */
-  @media (width < 40rem) {
-    .card {
-      grid-template-columns: minmax(0, 1fr);
-    }
-
-    .tenure {
-      grid-column: auto;
-      grid-row: auto;
     }
   }
 </style>

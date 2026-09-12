@@ -30,6 +30,11 @@
     border-radius: calc(var(--era-rail-width) / 2);
     background-color: var(--era-color);
 
+    /* The overview pinned above the cards stands in for the era rail on a narrow screen. */
+    @media (width < 48rem) {
+      display: none;
+    }
+
     /* A faint line from the node, under the project rails, across to the card. */
     &::before {
       content: '';
@@ -53,13 +58,6 @@
       border: calc(var(--era-rail-width) / 3) solid var(--era-color);
       border-radius: 50%;
       background-color: var(--background);
-    }
-  }
-
-  /* The overview pinned above the cards stands in for the era rail on a narrow screen. */
-  @media (width < 48rem) {
-    .rail {
-      display: none;
     }
   }
 </style>

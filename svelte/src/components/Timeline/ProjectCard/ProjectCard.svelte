@@ -56,6 +56,11 @@
     background-color: var(--background);
     box-shadow: var(--shadow-resting);
     scroll-margin-block-start: var(--scroll-offset);
+
+    /* Thumbnail stacks above content */
+    @media (width < 40rem) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 
   /* The thumbnail, with how long the work ran underneath it. */
@@ -94,13 +99,6 @@
       margin-block-end: var(--card-gap);
       border-end-start-radius: var(--radius-lg);
       border-end-end-radius: var(--radius-lg);
-    }
-  }
-
-  /* Thumbnail stacks above content */
-  @media (width < 40rem) {
-    .card {
-      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

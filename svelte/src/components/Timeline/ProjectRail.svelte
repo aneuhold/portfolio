@@ -42,6 +42,11 @@
     --rail-color: oklch(from var(--color-primary) 60% 0.13 calc(h + var(--lane) * 50));
 
     grid-column: 2 / span var(--lane-span);
+
+    /* The overview pinned above the cards stands in for the rails on a narrow screen. */
+    @media (width < 48rem) {
+      display: none;
+    }
   }
 
   /* Centred in its lane, running from the row where the project ended to the top of the card's row,
@@ -119,19 +124,15 @@
     border-radius: 50%;
     background-color: var(--background);
 
+    /* Gives way to the overview on a narrow screen, like the rails. */
+    @media (width < 48rem) {
+      display: none;
+    }
+
     /* The last dated row in a run keeps a card gap below it, so its node keeps the same gap to
        stay centred on it. */
     &:not(:has(+ .node)) {
       margin-block-end: var(--card-gap);
-    }
-  }
-
-  /* The overview pinned above the cards stands in for the rails on a narrow screen. */
-  @media (width < 48rem) {
-    .rail,
-    .corner,
-    .node {
-      display: none;
     }
   }
 </style>
