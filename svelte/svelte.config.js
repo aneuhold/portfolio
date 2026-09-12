@@ -1,4 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { mdsvex } from 'mdsvex';
 
 // eslint-disable-next-line jsdoc/check-tag-names
@@ -9,6 +10,11 @@ const config = {
   preprocess: [
     mdsvex({
       extensions: ['.md']
+    }),
+    // TypeScript that emits code, such as an enum, needs the script preprocessor. See
+    // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/preprocess.md
+    vitePreprocess({
+      script: true
     })
   ],
   kit: {
