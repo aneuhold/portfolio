@@ -1,93 +1,68 @@
 <!--
   @component
 
-  An era: a card saying who it was with, when it ran, and what it amounted to, with a rail running
-  up the left of the page from the card to where the era ended.
+  The card heading its era, saying who it was with, when, for how long, and what it amounted to. On
+  a narrow screen, where there are no project rails, the card also names the projects still running
+  from before the era began.
 -->
 <script lang="ts">
-  import { type Era, type TimelinePlacement } from 'shared';
-  import TimelineDates from './TimelineDates.svelte';
+  import { type Era, TextColor, type TimelinePlacement, timelineService } from 'shared';
+  import TimelineDates, { TimelineDatesSize } from './TimelineDates.svelte';
 
   const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();
+
+  const projectsRunningAtStart = $derived(timelineService.projectsRunningAtStart(era));
 </script>
 
 <section
-  class="era"
+  class="card"
   style:--row={placement.row}
-  style:--rail-line={placement.railLine}
-  style:--lane={placement.lane}
   style:--era-depth={placement.eraDepth}
+  data-year={placement.year}
 >
-  <div class="rail"></div>
-  <div class="card">
-    <h2 class="header-4">{era.name}</h2>
-    <TimelineDates startDate={era.startDate} endDate={era.endDate} />
-    <p class="info">{era.info}</p>
-  </div>
+  <h2 class="header-4">{era.name}</h2>
+  <p class="tenure">
+    <TimelineDates
+      startDate={era.startDate}
+      endDate={era.endDate}
+      useDuration
+      size={TimelineDatesSize.Large}
+      color={TextColor.Inherit}
+    />
+  </p>
+  <TimelineDates startDate={era.startDate} endDate={era.endDate} />
+  <p class="info">{era.info}</p>
+  {#if projectsRunningAtStart.length > 0}
+    <p class="runningAtStart">
+      Still running from before:
+      {#each projectsRunningAtStart as project, index (project.key)}{index > 0 ? ', ' : ''}<a
+          href="#project-{project.key}">{project.name}</a
+        >{/each}
+    </p>
+  {/if}
 </section>
 
 <style>
-  /* The era keeps its element for semantics, and display: contents lets its rail and card place
-     directly onto the timeline grid instead of into a box of their own. */
-  .era {
-    /* How much of the primary's chroma each era further back gives up, and the floor it stops at.
-       Lightness is held, which keeps the contrast of the white text the same at every step. */
-    --era-lightness: 44%;
-    --era-chroma-step: 0.27;
-    --era-chroma-floor: 0.15;
-    /* Kinda crazy fill calculation to just make it a little darker as it goes down. */
-    --era-color: oklch(
-      from var(--color-primary) var(--era-lightness)
-        calc(c * max(var(--era-chroma-floor), 1 - var(--era-depth) * var(--era-chroma-step))) h
-    );
-
-    display: contents;
-  }
-
-  .rail,
+  /* The name and the tenure share the top, the dates sit under the name, and the summary takes the
+     rest. */
   .card {
-    background-color: var(--era-color);
-    color: var(--background);
-  }
-
-  .rail {
-    position: relative;
-    grid-column: 1;
-    grid-row: var(--rail-line) / var(--row);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  }
-
-  /* Rounds the corner into the card */
-  .rail::after {
-    content: '';
-    position: absolute;
-    inset-block-end: 0;
-    inset-inline-start: 100%;
-    inline-size: var(--radius-lg);
-    block-size: var(--radius-lg);
-    background: radial-gradient(
-      circle at 100% 0,
-      transparent calc(var(--radius-lg) - 1px),
-      var(--era-color) var(--radius-lg)
-    );
-  }
-
-  /* Name and dates share the first line, the summary takes the second. */
-  .card {
+    /* The year label sits level with the middle of the era's name. */
+    --node-offset: var(--era-node-offset);
     /* The ground here is dark, so a step back from the name is a step off white, not off black. */
     --color-text-secondary: color-mix(in oklab, var(--background) 76%, transparent);
 
-    grid-column: 1 / -1;
+    position: relative;
+    grid-column: -2;
     grid-row: var(--row);
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: calc(var(--standard-spacing) * 2);
-    row-gap: var(--standard-spacing);
-    /* Stops short of the project rails crossing this row. */
-    margin-inline-end: calc(var(--lane) * var(--lane-width));
-    margin-block-end: var(--era-gap);
+    row-gap: calc(var(--standard-spacing) / 2);
+    margin-block: var(--era-space) var(--card-gap);
     padding: calc(var(--card-padding) * 1.5);
-    border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+    border-radius: var(--radius-lg);
+    background-color: var(--era-color);
+    color: var(--background);
     box-shadow: var(--shadow-resting);
   }
 
@@ -95,17 +70,47 @@
     text-wrap: balance;
   }
 
-  .info {
+  .tenure {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    white-space: nowrap;
+  }
+
+  .info,
+  .runningAtStart {
     grid-column: 1 / -1;
+    margin-block-start: var(--standard-spacing);
     color: var(--color-text-secondary);
     text-wrap: pretty;
   }
 
-  /* The card is as wide as the page, so it steps down at the width the timeline itself does: the
-     dates drop under the name rather than squeezing it. */
+  /* The project rails show what carried on from earlier eras, so the card only names it once they
+     give way on a narrow screen. */
+  .runningAtStart {
+    display: none;
+
+    a {
+      color: var(--background);
+      text-decoration-color: color-mix(in oklab, var(--background) 50%, transparent);
+    }
+  }
+
+  @media (width < 48rem) {
+    .runningAtStart {
+      display: block;
+    }
+  }
+
+  /* The tenure drops under the name rather than squeezing it. */
   @media (width < 40rem) {
     .card {
       grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tenure {
+      grid-column: auto;
+      grid-row: auto;
     }
   }
 </style>
