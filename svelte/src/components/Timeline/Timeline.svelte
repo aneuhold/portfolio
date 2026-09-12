@@ -111,13 +111,16 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
-    /* The year beside the first row of each year, measured back across the gutter from the row's
-       leading edge and level with the row's node. */
+    /* The year beside the first row of each year, level with the row's node. It is measured back
+       across the gutter from the row's leading edge to the era rail's column, and ends a standard
+       spacing short of it, like the now label. */
     :global([data-year])::after {
       content: attr(data-year);
       position: absolute;
       inset-block-start: var(--node-offset);
-      inset-inline-end: calc(100% + var(--gutter-width) + var(--lane-width) / 2);
+      inset-inline-end: calc(
+        100% + var(--gutter-width) + var(--lane-width) / 2 + var(--standard-spacing) / 2
+      );
       translate: 0 -50%;
       color: var(--color-text-primary);
       opacity: 0.65;
@@ -133,17 +136,20 @@
     }
   }
 
-  /* Sits on the top edge of the grid, where every project rail still running begins. */
+  /* Sits on the top edge of the grid, where every project rail still running begins. The label
+     takes the year column, and its line runs on from the end of that column to the cards. */
   .now {
     position: relative;
-    grid-column: 1 / -2;
+    grid-column: 1;
     grid-row: 1;
     align-self: start;
+    padding-inline-end: calc(var(--standard-spacing) / 2);
     translate: 0 -50%;
     color: color-mix(in oklab, var(--color-text-primary) 65%, transparent);
     font-size: 0.6875rem;
     line-height: 1;
     letter-spacing: 0.08em;
+    text-align: end;
 
     /* Gives way to the overview's now line on a narrow screen. */
     @media (width < 48rem) {
@@ -156,7 +162,8 @@
       content: '';
       position: absolute;
       inset-block-start: 50%;
-      inset-inline: var(--year-width) 0;
+      inset-inline-start: 100%;
+      inline-size: var(--gutter-width);
       block-size: var(--now-thickness);
       translate: 0 -50%;
       border-radius: var(--now-thickness);

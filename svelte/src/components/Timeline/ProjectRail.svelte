@@ -16,18 +16,16 @@
 {#if timelineDatesService.isSingleDate(project.startDate, project.endDate)}
   <div class="node" style:--row={placement.row} style:--era-depth={placement.eraDepth}></div>
 {:else}
-  {#if hasRailAbove}
-    <div
-      class="rail"
-      style:--row={placement.row}
-      style:--rail-grid-line={placement.railGridLine}
-      style:--lane={placement.lane}
-      style:--lane-span={placement.lane + 2}
-    ></div>
-  {/if}
+  <div
+    class="rail"
+    class:railStart={!hasRailAbove}
+    style:--row={placement.row}
+    style:--rail-grid-line={placement.railGridLine}
+    style:--lane={placement.lane}
+    style:--lane-span={placement.lane + 2}
+  ></div>
   <div
     class="corner"
-    class:railStart={!hasRailAbove}
     style:--row={placement.row}
     style:--lane={placement.lane}
     style:--lane-span={placement.lane + 2}
@@ -58,11 +56,24 @@
     margin-inline-end: calc((var(--lane-width) - var(--project-rail-width)) / 2);
     border-radius: var(--project-rail-width) var(--project-rail-width) 0 0;
     background-color: var(--rail-color);
+
+    /* With no rows to run up, the rail is only its rounded top end, because the corner's border
+       can't round both sides of its own top end. It is centred on the top edge of the card's row,
+       which is where the rounding finishes and the corner's square top begins. */
+    &.railStart {
+      grid-row: var(--row);
+      align-self: start;
+      block-size: var(--project-rail-width);
+      translate: 0 -50%;
+    }
   }
 
   /* Carries the rail on down its lane past the node, then turns it and runs it back along the row
      to the edge of the era rail. */
   .corner {
+    /* How far below the node the rail turns. */
+    --corner-drop: calc(var(--standard-spacing) * 3);
+
     position: relative;
     grid-row: var(--row);
     align-self: start;
@@ -72,12 +83,6 @@
     border-inline-end: var(--project-rail-width) solid var(--rail-color);
     border-block-end: var(--project-rail-width) solid var(--rail-color);
     border-end-end-radius: var(--radius-lg);
-
-    /* With no rail above it, the corner is where the rail begins, so its top end is rounded off
-       too. */
-    &.railStart {
-      border-start-end-radius: var(--project-rail-width);
-    }
 
     /* A faint line from the node across whatever lanes are left to its right, to the card. */
     &::before {
