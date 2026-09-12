@@ -38,6 +38,7 @@
 
     display: grid;
     grid-template-columns: var(--era-rail-width) minmax(0, 1fr);
+    column-gap: calc(var(--lane-width) - var(--project-rail-width));
     margin-inline: auto;
     max-inline-size: 68rem;
     padding: calc(var(--standard-spacing) * 2) calc(var(--standard-spacing) * 3);
