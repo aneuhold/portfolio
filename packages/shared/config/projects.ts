@@ -58,15 +58,17 @@ const projectDefinitions = {
     thumbnailDescription: 'Tiddly Drive 2 Logo.',
     demoLink: 'https://workspace.google.com/marketplace/app/tiddly_drive_2/477983451498?flow_type=2'
   },
-  personalEslintConfig: {
-    key: 'personalEslintConfig',
-    kind: TimelineItemKind.Project,
-    name: 'Personal ESLint Config',
-    info: 'A published personal ESLint config that I use in my projects. It is available on NPM.',
-    startDate: new Date('2024-05-01'),
-    codeLink: 'https://github.com/aneuhold/eslint-config',
-    thumbnailDescription: 'Personal ESLint Config Thumbnail.'
-  },
+  // Commented out because it isn't as important as the other ones. Could be added back if the
+  // UI has enough room or it makes sense.
+  // personalEslintConfig: {
+  //   key: 'personalEslintConfig',
+  //   kind: TimelineItemKind.Project,
+  //   name: 'Personal ESLint Config',
+  //   info: 'A published personal ESLint config that I use in my projects. It is available on NPM.',
+  //   startDate: new Date('2024-05-01'),
+  //   codeLink: 'https://github.com/aneuhold/eslint-config',
+  //   thumbnailDescription: 'Personal ESLint Config Thumbnail.'
+  // },
   mainScripts: {
     key: 'mainScripts',
     kind: TimelineItemKind.Project,
