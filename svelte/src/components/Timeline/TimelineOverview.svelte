@@ -68,7 +68,6 @@
   .overview {
     /* The era bar and every lane share one thickness. */
     --overview-lane-width: calc(var(--standard-spacing) * 0.75);
-    --hairline: color-mix(in oklab, var(--color-text-primary) 8%, transparent);
 
     position: sticky;
     z-index: 1;

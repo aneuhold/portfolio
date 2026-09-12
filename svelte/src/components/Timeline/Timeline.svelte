@@ -52,6 +52,8 @@
     --era-rail-width: calc(var(--standard-spacing) * 1.5);
     --project-rail-width: calc(var(--standard-spacing) / 2);
     --now-thickness: 3px;
+    /* A faint line for dividers and edges. */
+    --hairline: color-mix(in oklab, var(--color-text-primary) 8%, transparent);
     --card-padding: calc(var(--standard-spacing) * 2);
     /* How far down its card a node sits, which is level with the middle of the card's name. */
     --era-node-offset: calc(var(--card-padding) * 1.5 + 1rem);
