@@ -7,10 +7,10 @@
 -->
 <script lang="ts">
   import { type Project, type TimelinePlacement, timelineService } from 'shared';
-  import projectImages from '../../util/projectImages';
-  import Link from '../Link.svelte';
-  import TextButton from '../TextButton.svelte';
-  import TimelineDates from './TimelineDates.svelte';
+  import Link from '../../Link.svelte';
+  import TimelineDates from '../TimelineDates.svelte';
+  import ProjectCardContent from './ProjectCardContent.svelte';
+  import ProjectCardThumbnail from './ProjectCardThumbnail.svelte';
 
   const { project, placement }: { project: Project; placement: TimelinePlacement } = $props();
 </script>
@@ -29,25 +29,8 @@
     style:--lane={placement.lane}
   >
     <div class="card">
-      <enhanced:img
-        class="thumbnail"
-        src={projectImages[project.key]}
-        alt={project.thumbnailDescription}
-        sizes="(min-resolution: 2x) 600px, 300px"
-      />
-      <div class="cardContent">
-        <div class="cardText">
-          <h3 class="header-6">{project.name}</h3>
-          <TimelineDates startDate={project.startDate} endDate={project.endDate} />
-          <p class="info">{project.info}</p>
-        </div>
-        <div class="links">
-          {#if project.demoLink}
-            <TextButton text="demo" url={project.demoLink} />
-          {/if}
-          <TextButton text="source" url={project.codeLink} />
-        </div>
-      </div>
+      <ProjectCardThumbnail {project} />
+      <ProjectCardContent {project} />
     </div>
     {#if placement.railLine > placement.row + 1}
       <div class="rail"></div>
@@ -78,11 +61,11 @@
     box-shadow: var(--shadow-resting);
   }
 
+  /* The thumbnail's column grows with the card between its bounds; the content takes the rest. */
   .card {
     grid-row: var(--row);
-    container-type: inline-size;
     display: grid;
-    grid-auto-columns: auto minmax(0, 1fr);
+    grid-template-columns: clamp(9rem, 22%, 12rem) minmax(0, 1fr);
     gap: var(--card-padding);
     margin-block-end: var(--card-gap);
     padding: var(--card-padding);
@@ -98,71 +81,6 @@
     inline-size: var(--project-rail-width);
     margin-block: calc(-1 * var(--card-gap)) var(--card-gap);
     border-radius: 0 0 var(--project-rail-width) var(--project-rail-width);
-  }
-
-  /* One shape for every thumbnail, whatever the screenshot behind it, so the column of cards reads
-     as a set. */
-  .thumbnail {
-    display: block;
-    /* Needs 100% to keep it inside the box it is given */
-    inline-size: 100%;
-    /* Overrides the normal height of the image so the ratio decides */
-    block-size: auto;
-    /** 3/2 just kinda looks good */
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    /* Because some screenshots have a header */
-    object-position: center top;
-    border-radius: var(--radius-md);
-  }
-
-  /* Holds the stuff that isn't the thumbnail*/
-  .cardContent {
-    grid-column: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: var(--standard-spacing);
-  }
-
-  .cardText {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    column-gap: calc(var(--standard-spacing) * 2);
-    row-gap: var(--standard-spacing);
-  }
-
-  h3 {
-    text-wrap: balance;
-  }
-
-  .info {
-    grid-column: 1 / -1;
-    color: var(--color-text-secondary);
-    /* Um. Seemed like an okay trade-off here? */
-    text-wrap: pretty;
-  }
-
-  /* Pulled back by the buttons' own inline padding so their labels sit on the text's left edge. */
-  .links {
-    display: flex;
-    gap: var(--standard-spacing);
-    margin-inline-start: calc(var(--standard-spacing) * -1);
-  }
-
-  @container (inline-size >= 32rem) {
-    .thumbnail {
-      inline-size: clamp(9rem, 22cqi, 12rem);
-    }
-
-    .cardContent {
-      grid-area: 1 / 2;
-    }
-
-    /* Wide enough for the dates to sit out at the end of the title's line rather than under it. */
-    .cardText {
-      grid-template-columns: minmax(0, 1fr) auto;
-    }
   }
 
   .compactProject {
@@ -189,5 +107,13 @@
     margin-block-end: var(--card-gap);
     border-end-start-radius: var(--radius-lg);
     border-end-end-radius: var(--radius-lg);
+  }
+
+  /* The card steps down at the width the timeline itself does: the thumbnail stacks above the
+     content and takes the card's full width. */
+  @media (width < 40rem) {
+    .card {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 </style>

@@ -7,7 +7,7 @@
 <script lang="ts">
   import { TimelineItemKind, timelineService } from 'shared';
   import EraCard from './EraCard.svelte';
-  import ProjectCard from './ProjectCard.svelte';
+  import ProjectCard from './ProjectCard/ProjectCard.svelte';
 
   const timeline = timelineService.build();
 </script>
