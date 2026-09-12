@@ -35,10 +35,12 @@
         alt={project.thumbnailDescription}
         sizes="(min-resolution: 2x) 600px, 300px"
       />
-      <div class="cardText">
-        <h3 class="header-6">{project.name}</h3>
-        <TimelineDates startDate={project.startDate} endDate={project.endDate} />
-        <p class="info">{project.info}</p>
+      <div class="cardContent">
+        <div class="cardText">
+          <h3 class="header-6">{project.name}</h3>
+          <TimelineDates startDate={project.startDate} endDate={project.endDate} />
+          <p class="info">{project.info}</p>
+        </div>
         <div class="links">
           {#if project.demoLink}
             <TextButton text="demo" url={project.demoLink} />
@@ -114,14 +116,18 @@
     border-radius: var(--radius-md);
   }
 
-  /* Title and dates share the first line; the summary and the links take one each below it.
-     Centred, because the thumbnail beside it sets the height. */
-  .cardText {
+  /* Holds the stuff that isn't the thumbnail*/
+  .cardContent {
     grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--standard-spacing);
+  }
+
+  .cardText {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    align-items: baseline;
-    align-content: center;
     column-gap: calc(var(--standard-spacing) * 2);
     row-gap: var(--standard-spacing);
   }
@@ -139,7 +145,6 @@
 
   /* Pulled back by the buttons' own inline padding so their labels sit on the text's left edge. */
   .links {
-    grid-column: 1 / -1;
     display: flex;
     gap: var(--standard-spacing);
     margin-inline-start: calc(var(--standard-spacing) * -1);
@@ -150,10 +155,12 @@
       inline-size: clamp(9rem, 22cqi, 12rem);
     }
 
-    /* Beside the thumbnail, and wide enough for the dates to sit out at the end of the title's
-       line rather than under it. */
-    .cardText {
+    .cardContent {
       grid-area: 1 / 2;
+    }
+
+    /* Wide enough for the dates to sit out at the end of the title's line rather than under it. */
+    .cardText {
       grid-template-columns: minmax(0, 1fr) auto;
     }
   }

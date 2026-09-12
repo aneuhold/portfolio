@@ -64,7 +64,6 @@
     grid-row: var(--row);
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    align-items: baseline;
     column-gap: calc(var(--standard-spacing) * 2);
     row-gap: var(--standard-spacing);
     /* Stops short of the project rails crossing this row. */
