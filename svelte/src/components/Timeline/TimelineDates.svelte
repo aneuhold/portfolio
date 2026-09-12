@@ -95,9 +95,9 @@
     min-inline-size: calc(2 * var(--month-width) + var(--separator-width));
   }
 
-  /* The large size steps down on a narrow screen. */
-  @media (width < 40rem) {
-    .header-3 {
+  .header-3 {
+    /* The large size steps down on a narrow screen. */
+    @media (width < 40rem) {
       font-size: 1.5rem;
     }
   }

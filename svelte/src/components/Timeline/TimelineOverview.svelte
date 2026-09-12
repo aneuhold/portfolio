@@ -1,0 +1,160 @@
+<!--
+  @component
+
+  The whole career to scale, pinned across the top of the cards on a narrow screen. Month columns
+  run from the earliest on the left to now on the right, with a bar for each era and a mark in a
+  lane for each project, linking to its card.
+-->
+<script lang="ts">
+  import { timelineDatesService, TimelineItemKind, timelineService } from 'shared';
+
+  const timeline = timelineService.build();
+  const lanes = timelineService.assignLanesByOverlap(
+    timeline.map(({ item }) => item).filter((item) => item.kind === TimelineItemKind.Project)
+  );
+  const laneCount = Math.max(...lanes.values()) + 1;
+  const { monthColumnCount } = timelineDatesService;
+  const yearStartGridLines = timelineDatesService.yearStartGridLines();
+
+  // Each year runs to the start of the one after it, and the current year to the last month grid
+  // line.
+  const years = yearStartGridLines.map(({ year, gridLine }, index) => ({
+    year,
+    start: gridLine,
+    end: index === 0 ? monthColumnCount + 1 : yearStartGridLines[index - 1].gridLine
+  }));
+</script>
+
+<nav
+  class="overview"
+  aria-label="Career to scale"
+  style:--month-columns={monthColumnCount}
+  style:--lanes={laneCount}
+>
+  {#each years as { year, start, end } (year)}
+    <div class="year" style:--start={start} style:--end={end}>
+      <span>{year}</span>
+    </div>
+  {/each}
+  {#each timeline as { item, placement } (item.key)}
+    {@const { start, end } = timelineDatesService.monthGridLineRange(item.startDate, item.endDate)}
+    {#if item.kind === TimelineItemKind.Era}
+      <div
+        class="era"
+        style:--era-depth={placement.eraDepth}
+        style:--start={start}
+        style:--end={end}
+      ></div>
+    {:else}
+      {@const range = timelineDatesService.formatRange(item.startDate, item.endDate)}
+      <a
+        class="mark"
+        class:dot={timelineDatesService.isSingleDate(item.startDate, item.endDate)}
+        href="#project-{item.key}"
+        aria-label="{item.name}, {range}"
+        title="{item.name}, {range}"
+        style:--start={start}
+        style:--end={end}
+        style:--lane={(lanes.get(item.key) ?? 0) + 1}
+      ></a>
+    {/if}
+  {/each}
+</nav>
+
+<style>
+  /* One column per month, earliest on the left and now on the right, so every length on the
+     overview is to scale. Rows run from the year labels down through the era bar to the lanes, and
+     a mark finds its lane by line name, so more lanes never renumber anything else. */
+  .overview {
+    /* The era bar and every lane share one thickness. */
+    --overview-lane-width: calc(var(--standard-spacing) * 0.75);
+    --hairline: color-mix(in oklab, var(--color-text-primary) 8%, transparent);
+
+    position: sticky;
+    z-index: 1;
+    inset-block-start: var(--standard-spacing);
+    display: grid;
+    grid-template-columns: repeat(var(--month-columns), minmax(0, 1fr));
+    grid-template-rows:
+      [years] 1rem [eras] var(--overview-lane-width)
+      repeat(var(--lanes), [lane] var(--overview-lane-width));
+    row-gap: 2px;
+    margin-block-end: calc(var(--standard-spacing) * 3);
+    padding: var(--standard-spacing) calc(var(--standard-spacing) * 2);
+    overflow: clip;
+    border-radius: var(--radius-lg);
+    background-color: var(--background);
+    box-shadow: var(--shadow-resting);
+
+    /* The rails beside the cards show the same thing once there is room for them. */
+    @media (width >= 48rem) {
+      display: none;
+    }
+
+    /* Now, in the HDR gradient, down the right edge where the era bar and every lane reach the
+       present. The gradient is conic, so it is sized to a band a little wider than the line and
+       pinned to one edge of it, which sweeps the line through half the hue circle instead of
+       splitting it into two flat colors. */
+    &::after {
+      content: '';
+      position: absolute;
+      grid-row: eras / -1;
+      grid-column: -2 / -1;
+      inset-block: 0;
+      inset-inline: auto calc(-1 * var(--now-thickness) - 2px);
+      inline-size: var(--now-thickness);
+      border-radius: var(--now-thickness);
+      background: var(--hdr-gradient) right / calc(var(--standard-spacing) * 2) 100% no-repeat;
+    }
+  }
+
+  /* Each year spans its own months down the full height of the overview. */
+  .year {
+    grid-row: 1 / -1;
+    grid-column: var(--start) / var(--end);
+    padding-inline-start: 2px;
+    color: var(--color-text-secondary);
+    font-size: 0.625rem;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    line-height: 1rem;
+
+    /* A hairline where each year begins. The last year is the earliest, which starts at the edge
+       of the overview. */
+    &:has(+ .year) {
+      border-inline-start: 1px solid var(--hairline);
+    }
+
+    /* Every other year keeps its label, so the rest have room. */
+    &:nth-child(even) span {
+      visibility: hidden;
+    }
+  }
+
+  /* A pixel of margin keeps two eras that meet in the same month from reading as one. */
+  .era {
+    grid-row: eras;
+    grid-column: var(--start) / var(--end);
+    margin-inline: 1px;
+    border-radius: var(--overview-lane-width);
+    background-color: var(--era-color);
+  }
+
+  /* A project's range along its lane, with a pixel of margin so two ranges that meet in one lane
+     stay apart. */
+  .mark {
+    grid-row: var(--lane) lane;
+    grid-column: var(--start) / var(--end);
+    align-self: center;
+    block-size: var(--project-rail-width);
+    margin-inline: 1px;
+    border-radius: var(--project-rail-width);
+    background-color: var(--color-primary-300);
+
+    /* A project that came and went in a month is a dot centred in that month. */
+    &.dot {
+      justify-self: center;
+      inline-size: var(--project-rail-width);
+    }
+  }
+</style>

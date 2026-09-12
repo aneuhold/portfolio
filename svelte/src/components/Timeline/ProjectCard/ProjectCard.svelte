@@ -40,6 +40,17 @@
 {/if}
 
 <style>
+  /* Clears whatever is pinned above a card when a link jumps to it. */
+  .card,
+  .compactProject {
+    scroll-margin-block-start: calc(var(--standard-spacing) * 2);
+
+    /* The overview pinned above the cards is about this tall. */
+    @media (width < 48rem) {
+      scroll-margin-block-start: calc(var(--standard-spacing) * 13);
+    }
+  }
+
   .card {
     /* The year label sits level with the middle of the project's name. */
     --node-offset: var(--project-node-offset);
@@ -55,7 +66,6 @@
     border-radius: var(--radius-lg);
     background-color: var(--background);
     box-shadow: var(--shadow-resting);
-    scroll-margin-block-start: var(--scroll-offset);
 
     /* Thumbnail stacks above content */
     @media (width < 40rem) {
@@ -83,7 +93,6 @@
     gap: var(--standard-spacing);
     padding: var(--standard-spacing) var(--card-padding);
     background-color: color-mix(in oklab, var(--color-primary) 12%, var(--background));
-    scroll-margin-block-start: var(--scroll-offset);
 
     /* This only needs :global to satisfy the svelte linter, but it works without */
     :global(.compactProject) + & {
