@@ -5,7 +5,7 @@
   "now".
 -->
 <script lang="ts">
-  import { timelineService } from 'shared';
+  import { timelineDatesService } from 'shared';
 
   const {
     startDate,
@@ -18,14 +18,14 @@
     useMaxDateWidth?: boolean;
   } = $props();
 
-  const singleMonth = $derived(timelineService.isSingleMonth(startDate, endDate));
+  const singleMonth = $derived(timelineDatesService.isSingleMonth(startDate, endDate));
 </script>
 
 <span
   class="dates"
   class:maxMonthWidth={useMaxDateWidth && singleMonth}
   class:maxRangeWidth={useMaxDateWidth && !singleMonth}
-  >{timelineService.formatRange(startDate, endDate)}</span
+  >{timelineDatesService.formatRange(startDate, endDate)}</span
 >
 
 <style>
