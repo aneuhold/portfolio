@@ -11,7 +11,8 @@
   a {
     display: flex;
     flex-direction: row;
-    padding: calc(var(--standard-spacing) / 2) var(--standard-spacing);
+    padding: calc(var(--standard-spacing) / 2) calc(var(--standard-spacing) * 1.5);
+    border: 1px solid var(--color-primary-300);
     border-radius: var(--radius-sm);
     text-decoration: none;
     justify-content: center;
@@ -19,10 +20,12 @@
     color: var(--color-primary);
     transition:
       background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
       box-shadow var(--duration-fast) var(--ease-standard);
   }
 
   a:hover {
+    border-color: var(--color-primary);
     background-color: var(--color-primary-100);
     box-shadow: var(--shadow-resting);
   }
