@@ -35,24 +35,41 @@
     --era-lightness: 44%;
     --era-chroma-step: 0.27;
     --era-chroma-floor: 0.15;
+    /* Kinda crazy fill calculation to just make it a little darker as it goes down. */
+    --era-color: oklch(
+      from var(--color-primary) var(--era-lightness)
+        calc(c * max(var(--era-chroma-floor), 1 - var(--era-depth) * var(--era-chroma-step))) h
+    );
 
     display: contents;
   }
 
-  /* Kinda crazy fill calculation to just make it a little darker as it goes down. */
   .rail,
   .card {
-    background-color: oklch(
-      from var(--color-primary) var(--era-lightness)
-        calc(c * max(var(--era-chroma-floor), 1 - var(--era-depth) * var(--era-chroma-step))) h
-    );
+    background-color: var(--era-color);
     color: var(--background);
   }
 
   .rail {
+    position: relative;
     grid-column: 1;
     grid-row: var(--rail-line) / var(--row);
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  /* Rounds the corner into the card */
+  .rail::after {
+    content: '';
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 100%;
+    inline-size: var(--radius-lg);
+    block-size: var(--radius-lg);
+    background: radial-gradient(
+      circle at 100% 0,
+      transparent calc(var(--radius-lg) - 1px),
+      var(--era-color) var(--radius-lg)
+    );
   }
 
   /* Name and dates share the first line, the summary takes the second. */

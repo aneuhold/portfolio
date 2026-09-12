@@ -1,8 +1,7 @@
 <!--
   @component
 
-  A project's name, dates and summary, with its links held to the bottom of whatever height it is
-  given.
+  A project's text and links.
 -->
 <script lang="ts">
   import { type Project } from 'shared';
@@ -22,8 +21,7 @@
 </div>
 
 <style>
-  /* The text holds the top and the links the bottom, so any height given beyond their own opens up
-     between the two. */
+  /* Links pinned to the bottom */
   .cardContent {
     display: flex;
     flex-direction: column;
@@ -31,7 +29,7 @@
     gap: var(--standard-spacing);
   }
 
-  /* Title and dates share the first line; the summary takes the one below it. */
+  /* Title and dates share a line */
   .cardText {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -50,8 +48,7 @@
     text-wrap: pretty;
   }
 
-  /* Steps down at the width the timeline itself does: the dates drop under the title rather than
-     squeezing it. */
+  /* Dates drop under the title */
   @media (width < 40rem) {
     .cardText {
       grid-template-columns: minmax(0, 1fr);

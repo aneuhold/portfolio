@@ -1,8 +1,7 @@
 <!--
   @component
 
-  A project's screenshot, cropped to the one shape every thumbnail shares and as wide as the box it
-  is placed in.
+  A project's thumbnail image.
 -->
 <script lang="ts">
   import { type Project } from 'shared';

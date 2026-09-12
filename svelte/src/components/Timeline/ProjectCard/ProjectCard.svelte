@@ -61,7 +61,6 @@
     box-shadow: var(--shadow-resting);
   }
 
-  /* The thumbnail's column grows with the card between its bounds; the content takes the rest. */
   .card {
     grid-row: var(--row);
     display: grid;
@@ -76,11 +75,27 @@
      bottom edge with no break, and stops short by the same gap at the far end. Half its own width
      of radius rounds the end off completely, whatever width it is given. */
   .rail {
+    position: relative;
     grid-row: var(--rail-start) / var(--rail-line);
     justify-self: end;
     inline-size: var(--project-rail-width);
     margin-block: calc(-1 * var(--card-gap)) var(--card-gap);
     border-radius: 0 0 var(--project-rail-width) var(--project-rail-width);
+  }
+
+  /* Rounds the corner into the card */
+  .rail::after {
+    content: '';
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 100%;
+    inline-size: var(--radius-lg);
+    block-size: var(--radius-lg);
+    background: radial-gradient(
+      circle at 0 100%,
+      transparent calc(var(--radius-lg) - 1px),
+      var(--background) var(--radius-lg)
+    );
   }
 
   .compactProject {
@@ -109,8 +124,7 @@
     border-end-end-radius: var(--radius-lg);
   }
 
-  /* The card steps down at the width the timeline itself does: the thumbnail stacks above the
-     content and takes the card's full width. */
+  /* Thumbnail stacks above content */
   @media (width < 40rem) {
     .card {
       grid-template-columns: minmax(0, 1fr);

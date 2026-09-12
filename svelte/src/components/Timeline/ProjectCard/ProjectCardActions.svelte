@@ -1,7 +1,7 @@
 <!--
   @component
 
-  A project's links: its demo, when it has one, and its source.
+  A project's demo and source links.
 -->
 <script lang="ts">
   import { type Project } from 'shared';
