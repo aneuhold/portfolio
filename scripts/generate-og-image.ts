@@ -10,9 +10,9 @@ import { siteMetadata } from '../packages/shared/config/siteMetadata.js';
 const getConfig = () => ({
   /** HTML source for the share image. */
   htmlSource: resolve(import.meta.dirname, 'og-image/index.html'),
-  /** Output PNG, which both apps import as `shared/images/og-image.png`. */
-  outputPath: resolve(import.meta.dirname, '../packages/shared/images/og-image.png'),
-  /** The image size both apps declare in their `og:image:width` and `og:image:height` tags. */
+  /** Output PNG, served by the SvelteKit site at `siteMetadata.ogImage.url`. */
+  outputPath: resolve(import.meta.dirname, '../svelte/static/og-image.png'),
+  /** The image size declared in `siteMetadata.ogImage`. */
   viewport: { width: siteMetadata.ogImage.width, height: siteMetadata.ogImage.height }
 });
 

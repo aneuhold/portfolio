@@ -1,6 +1,6 @@
 import { eras, type Era } from './config/eras';
 import { projects, type Project, type ProjectKey } from './config/projects';
-import { seoGraphJson } from './config/seoGraphJson';
+import { seoGraphJson, seoGraphScriptTag } from './config/seoGraphJson';
 import { siteMetadata } from './config/siteMetadata';
 import { socialLinks } from './config/socialLinks';
 import { technologies, type TechnologyGroup } from './config/technologies';
@@ -16,6 +16,7 @@ export {
   eras,
   projects,
   seoGraphJson,
+  seoGraphScriptTag,
   siteMetadata,
   socialLinks,
   technologies,

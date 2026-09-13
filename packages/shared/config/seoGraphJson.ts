@@ -3,9 +3,8 @@ import { siteMetadata } from './siteMetadata';
 import { socialLinks } from './socialLinks';
 
 const { siteUrl, siteName, title, description } = siteMetadata;
-const homeUrl = `${siteUrl}/`;
-const websiteId = `${homeUrl}#/schema.org/WebSite`;
-const personId = `${homeUrl}#/schema.org/Person`;
+const websiteId = `${siteUrl}#/schema.org/WebSite`;
+const personId = `${siteUrl}#/schema.org/Person`;
 
 /**
  * The schema.org entities for the site: the site itself, the home page as a profile page, and the
@@ -18,12 +17,12 @@ const seoGraph: Graph = {
       '@type': 'WebSite',
       '@id': websiteId,
       name: siteName,
-      url: homeUrl
+      url: siteUrl
     },
     {
       '@type': 'ProfilePage',
-      '@id': `${homeUrl}#/schema.org/ProfilePage`,
-      url: homeUrl,
+      '@id': `${siteUrl}#/schema.org/ProfilePage`,
+      url: siteUrl,
       name: title,
       description,
       isPartOf: { '@id': websiteId },
@@ -35,7 +34,7 @@ const seoGraph: Graph = {
       name: 'Anton Neuhold',
       jobTitle: 'Senior Software Engineer',
       description,
-      url: homeUrl,
+      url: siteUrl,
       sameAs: socialLinks.map(({ link }) => link)
     }
   ]
@@ -47,3 +46,9 @@ const seoGraph: Graph = {
  * recommends: https://nextjs.org/docs/app/guides/json-ld
  */
 export const seoGraphJson = JSON.stringify(seoGraph).replace(/</g, '\\u003c');
+
+/**
+ * `seoGraphJson` inside a complete `<script type="application/ld+json">` element, for inserting as
+ * raw HTML.
+ */
+export const seoGraphScriptTag = `<script type="application/ld+json">${seoGraphJson}</script>`;
