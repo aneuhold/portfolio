@@ -24,7 +24,13 @@ const eraDefinitions = {
       { layer: TechnologyLayer.Frontend, technologies: [Technology.NextJs, Technology.React] },
       {
         layer: TechnologyLayer.Backend,
-        technologies: [Technology.NestJs, Technology.GraphQl, Technology.Prisma]
+        technologies: [
+          Technology.NestJs,
+          Technology.GraphQl,
+          Technology.Prisma,
+          Technology.PostgreSql,
+          Technology.Aws
+        ]
       },
       { layer: TechnologyLayer.Language, technologies: [Technology.TypeScript] }
     ]
@@ -54,7 +60,14 @@ const eraDefinitions = {
     technologyGroups: [
       {
         layer: TechnologyLayer.Language,
-        technologies: [Technology.Java, Technology.Python, Technology.Swift, Technology.TypeScript]
+        technologies: [
+          Technology.Java,
+          Technology.Python,
+          Technology.C,
+          Technology.CPlusPlus,
+          Technology.Swift,
+          Technology.TypeScript
+        ]
       },
       { layer: TechnologyLayer.Frontend, technologies: [Technology.React, Technology.VueJs] }
     ]

@@ -202,8 +202,7 @@ const projectDefinitions = {
       {
         layer: TechnologyLayer.Frontend,
         technologies: [Technology.NextJs, Technology.React, Technology.TypeScript]
-      },
-      { layer: TechnologyLayer.Platform, technologies: [Technology.Netlify] }
+      }
     ],
     demoLink: 'https://carpetgeeks.netlify.app/',
     codeLink: 'https://github.com/aneuhold/carpet-geeks',
