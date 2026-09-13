@@ -1,4 +1,5 @@
 import Link from '$components/Link';
+import { siteMetadata } from 'shared';
 import styles from './Footer.module.css';
 
 /**
@@ -20,7 +21,7 @@ export default function Footer() {
         Built with React & Next.js •{' '}
         <Link
           linkText="View SvelteKit version"
-          url="https://tonyneuhold.com"
+          url={siteMetadata.siteUrl}
           ariaLabel="SvelteKit version of portfolio"
         />
       </span>

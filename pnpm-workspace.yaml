@@ -4,10 +4,12 @@ packages:
   - react
 
 # `sharp` needs its install script to resolve the image binaries used by the
-# production build. `@parcel/watcher` only backs an optional file watcher, so it
-# is left unbuilt.
+# production build. `esbuild`, which `tsx` uses to run the asset generation
+# scripts, needs its install script to verify its platform binary.
+# `@parcel/watcher` only backs an optional file watcher, so it is left unbuilt.
 allowBuilds:
   '@parcel/watcher': false
+  esbuild: true
   sharp: true
 
 # Hold back any package published within the last 7 days, so a freshly

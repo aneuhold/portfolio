@@ -1,5 +1,7 @@
 import { eras, type Era } from './config/eras';
 import { projects, type Project, type ProjectKey } from './config/projects';
+import { seoGraphJson, seoGraphScriptTag } from './config/seoGraphJson';
+import { siteMetadata } from './config/siteMetadata';
 import { socialLinks } from './config/socialLinks';
 import { technologies, type TechnologyGroup } from './config/technologies';
 import { timelineService, type TimelinePlacement } from './services/Timeline.service';
@@ -13,6 +15,9 @@ import { type TimelineItemBase, TimelineItemKind } from './types/TimelineItemBas
 export {
   eras,
   projects,
+  seoGraphJson,
+  seoGraphScriptTag,
+  siteMetadata,
   socialLinks,
   technologies,
   TextColor,

@@ -1,22 +1,14 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import { mdsvex } from 'mdsvex';
 
 // eslint-disable-next-line jsdoc/check-tag-names
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: [
-    mdsvex({
-      extensions: ['.md']
-    }),
-    // TypeScript that emits code, such as an enum, needs the script preprocessor. See
-    // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/preprocess.md
-    vitePreprocess({
-      script: true
-    })
-  ],
+  // TypeScript that emits code, such as an enum, needs the script preprocessor. See
+  // https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/preprocess.md
+  preprocess: vitePreprocess({
+    script: true
+  }),
   kit: {
     adapter: adapter({
       pages: 'build',
@@ -28,8 +20,7 @@ const config = {
     alias: {
       $components: 'src/components'
     }
-  },
-  extensions: ['.svelte', '.md']
+  }
 };
 
 export default config;
