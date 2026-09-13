@@ -1,6 +1,7 @@
 import { eras, type Era } from './config/eras';
 import { projects, type Project, type ProjectKey } from './config/projects';
 import { socialLinks } from './config/socialLinks';
+import { technologies, type TechnologyGroup } from './config/technologies';
 import { timelineService, type TimelinePlacement } from './services/Timeline.service';
 import { timelineDatesService } from './services/TimelineDates.service';
 import { timelineLiftService } from './services/TimelineLift.service';
@@ -12,6 +13,7 @@ export {
   eras,
   projects,
   socialLinks,
+  technologies,
   TextColor,
   TimelineItemKind,
   timelineDatesService,
@@ -20,4 +22,4 @@ export {
 };
 
 // Export TypeScript types where needed
-export type { Era, Project, ProjectKey, TimelineItemBase, TimelinePlacement };
+export type { Era, Project, ProjectKey, TechnologyGroup, TimelineItemBase, TimelinePlacement };

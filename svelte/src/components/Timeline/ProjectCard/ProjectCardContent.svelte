@@ -1,11 +1,12 @@
 <!--
   @component
 
-  A project's text and links.
+  A project's text, technologies, and links.
 -->
 <script lang="ts">
   import { type Project } from 'shared';
   import TimelineDates from '../TimelineDates.svelte';
+  import TimelineTechnologies from '../TimelineTechnologies.svelte';
   import ProjectCardActions from './ProjectCardActions.svelte';
 
   const { project }: { project: Project } = $props();
@@ -16,6 +17,9 @@
     <h3 class="header-6">{project.name}</h3>
     <TimelineDates startDate={project.startDate} endDate={project.endDate} />
     <p class="info">{project.info}</p>
+    <div class="technologies">
+      <TimelineTechnologies technologyGroups={project.technologyGroups} />
+    </div>
   </div>
   <ProjectCardActions {project} />
 </div>
@@ -46,8 +50,12 @@
     text-wrap: balance;
   }
 
-  .info {
+  .info,
+  .technologies {
     grid-column: 1 / -1;
+  }
+
+  .info {
     color: var(--color-text-secondary);
     /* Um. Seemed like an okay trade-off here? */
     text-wrap: pretty;

@@ -1,3 +1,5 @@
+import { type TechnologyGroup } from '../config/technologies';
+
 /**
  * What every element of the timeline has in common.
  */
@@ -10,6 +12,10 @@ export type TimelineItemBase = {
   info: string;
   startDate: Date;
   endDate?: Date;
+  /**
+   * The technologies behind the item, one group per layer, in the order they are shown.
+   */
+  technologyGroups: TechnologyGroup[];
 };
 
 /**

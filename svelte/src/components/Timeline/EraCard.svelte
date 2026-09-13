@@ -1,13 +1,14 @@
 <!--
   @component
 
-  The card heading its era, saying who it was with, when, for how long, and what it amounted to. On
-  a narrow screen, where there are no project rails, the card also names the projects still running
-  from before the era began.
+  The card heading its era, saying who it was with, when, for how long, what it amounted to, and the
+  technologies behind it. On a narrow screen, where there are no project rails, the card also names
+  the projects still running from before the era began.
 -->
 <script lang="ts">
   import { type Era, TextColor, type TimelinePlacement, timelineService } from 'shared';
   import TimelineDates, { TimelineDatesSize } from './TimelineDates.svelte';
+  import TimelineTechnologies from './TimelineTechnologies.svelte';
 
   const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();
 
@@ -33,6 +34,9 @@
   </p>
   <TimelineDates startDate={era.startDate} endDate={era.endDate} />
   <p class="info">{era.info}</p>
+  <div class="technologies">
+    <TimelineTechnologies technologyGroups={era.technologyGroups} onDarkGround />
+  </div>
   {#if projectsRunningAtStart.length > 0}
     <p class="runningAtStart">
       Still running from before:
@@ -44,8 +48,8 @@
 </section>
 
 <style>
-  /* The name and the tenure share the top, the dates sit under the name, and the summary takes the
-     rest. */
+  /* The name and the tenure share the top, the dates sit under the name, and the summary and
+     technologies take the rest. */
   .card {
     /* The year label sits level with the middle of the era's name. */
     --node-offset: var(--era-node-offset);
@@ -90,9 +94,14 @@
   }
 
   .info,
+  .technologies,
   .runningAtStart {
     grid-column: 1 / -1;
     margin-block-start: var(--standard-spacing);
+  }
+
+  .info,
+  .runningAtStart {
     color: var(--color-text-secondary);
     text-wrap: pretty;
   }
