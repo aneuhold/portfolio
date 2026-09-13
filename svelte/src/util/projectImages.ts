@@ -38,7 +38,6 @@ const projectImages: Record<string, Picture> = {
   mongodbExerciseTracker: exerciseTracker,
   nextjs15Course,
   personalDashboard,
-  personalEslintConfig: eslintConfig,
   personalTypescriptLibraries: tsLibs,
   placesAndroidApp,
   placesIosApp,

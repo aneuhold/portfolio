@@ -3,6 +3,7 @@ import { projects, type Project, type ProjectKey } from './config/projects';
 import { socialLinks } from './config/socialLinks';
 import { timelineService, type TimelinePlacement } from './services/Timeline.service';
 import { timelineDatesService } from './services/TimelineDates.service';
+import { timelineLiftService } from './services/TimelineLift.service';
 import { TextColor } from './types/TextColor';
 import { type TimelineItemBase, TimelineItemKind } from './types/TimelineItemBase';
 
@@ -14,6 +15,7 @@ export {
   TextColor,
   TimelineItemKind,
   timelineDatesService,
+  timelineLiftService,
   timelineService
 };
 
