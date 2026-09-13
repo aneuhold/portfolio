@@ -24,9 +24,9 @@
   onMount(() => timelineLiftService.attach(timelineElement));
 </script>
 
-<section class="timeline" bind:this={timelineElement}>
+<section class="timeline" style:--grid-lanes={laneCount} bind:this={timelineElement}>
   <TimelineOverview />
-  <div class="grid" style:--lanes={laneCount}>
+  <div class="grid">
     <!-- Every rail comes before every card, so rails sit next to rails and cards next to cards in
       the markup, which is what a run of dated rows and their nodes are styled by. -->
     {#each timeline as { item, placement } (item.key)}
@@ -52,7 +52,7 @@
      rest. */
   .timeline {
     --year-width: calc(var(--standard-spacing) * 5);
-    --lane-width: calc(var(--standard-spacing) * 2.5);
+    --grid-lane-width: calc(var(--standard-spacing) * 2.5);
     /* A node is the circle where a card meets its rail. It is as wide across as the era rail. */
     --era-rail-width: calc(var(--standard-spacing) * 1.5);
     --project-rail-width: calc(var(--standard-spacing) / 2);
@@ -70,6 +70,9 @@
     --era-lightness: 44%;
     --era-chroma-step: 0.27;
     --era-chroma-floor: 0.15;
+    /* How far each lane turns the primary's hue from the lane before it. The lanes share the color
+       wheel evenly, however many there are. */
+    --grid-lane-hue-step: calc(360 / var(--grid-lanes));
     /* How far the rest of the timeline fades back while an item is hovered, so the hovered item's
        rails read clearly where they cross the rest. */
     --recede: calc(var(--hovering, 0) * 0.3);
@@ -100,7 +103,9 @@
       --era-space: calc(var(--era-gap) * min(1, var(--row) - 1));
       /* Each lane turns the primary's hue a step further, so rails running side by side stay
          apart. */
-      --rail-color: oklch(from var(--color-primary) 60% 0.13 calc(h + var(--lane, 0) * 50));
+      --rail-color: oklch(
+        from var(--color-primary) 60% 0.13 calc(h + var(--grid-lane, 0) * var(--grid-lane-hue-step))
+      );
     }
 
     /* Every part drawn for an item reads how far forward the item has come, from 0 at rest to 1
@@ -136,12 +141,12 @@
     /* From the middle of the era rail to the leading edge of the cards, which is how far anything
        drawn on the era rail reaches across to a card. */
     --gutter-width: calc(
-      var(--lane-width) / 2 + var(--lanes) * var(--lane-width) + var(--card-gap)
+      var(--grid-lane-width) / 2 + var(--grid-lanes) * var(--grid-lane-width) + var(--card-gap)
     );
 
     display: grid;
     grid-template-columns:
-      var(--year-width) var(--lane-width) repeat(var(--lanes), var(--lane-width))
+      var(--year-width) var(--grid-lane-width) repeat(var(--grid-lanes), var(--grid-lane-width))
       var(--card-gap) minmax(0, 1fr);
 
     /* The overview takes over on a narrow screen, and the cards take the whole width. */
@@ -157,7 +162,7 @@
       position: absolute;
       inset-block-start: var(--node-offset);
       inset-inline-end: calc(
-        100% + var(--gutter-width) + var(--lane-width) / 2 + var(--standard-spacing) / 2
+        100% + var(--gutter-width) + var(--grid-lane-width) / 2 + var(--standard-spacing) / 2
       );
       translate: 0 -50%;
       color: var(--color-text-primary);
@@ -222,9 +227,20 @@
       display: none;
     }
 
-    /* The HDR gradient marks the present. It is conic, so its center sits just below the line,
-       which then sweeps from violet through pink to orange from one end to the other. */
+    /* Marks the present in the color of each rail it crosses: the most recent era's color across
+       the era rail, then each lane's rail color at the middle of its lane, holding the last lane's
+       color on to the cards. Lane colors differ only in hue, a step apart, so turning the hue
+       steadily from the first lane's middle to the last's passes through every lane's color on the
+       way. Between two stops the hue turns the shorter way round, so a stop halfway across the lanes
+       keeps each turn under half a circle. */
     &::after {
+      --halfway-color: oklch(
+        from var(--rail-color) l c calc(h + (var(--grid-lanes) - 1) / 2 * var(--grid-lane-hue-step))
+      );
+      --last-grid-lane-color: oklch(
+        from var(--rail-color) l c calc(h + (var(--grid-lanes) - 1) * var(--grid-lane-hue-step))
+      );
+
       content: '';
       position: absolute;
       inset-block-start: 50%;
@@ -233,7 +249,13 @@
       block-size: var(--now-thickness);
       translate: 0 -50%;
       border-radius: var(--now-thickness);
-      background: var(--hdr-gradient) top / 100% calc(var(--standard-spacing) * 4) no-repeat;
+      background: linear-gradient(
+        to right in oklch shorter hue,
+        var(--era-color) calc((var(--grid-lane-width) + var(--era-rail-width)) / 2),
+        var(--rail-color) calc(var(--grid-lane-width) * 1.5),
+        var(--halfway-color) calc(var(--grid-lane-width) * (var(--grid-lanes) / 2 + 1)),
+        var(--last-grid-lane-color) calc(var(--grid-lane-width) * (var(--grid-lanes) + 0.5))
+      );
     }
   }
 </style>

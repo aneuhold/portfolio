@@ -27,15 +27,15 @@
     data-item={project.key}
     style:--row={placement.row}
     style:--rail-grid-line={placement.railGridLine}
-    style:--lane={placement.lane}
-    style:--lane-span={placement.lane + 2}
+    style:--grid-lane={placement.lane}
+    style:--grid-lane-span={placement.lane + 2}
   ></div>
   <div
     class="corner"
     data-item={project.key}
     style:--row={placement.row}
-    style:--lane={placement.lane}
-    style:--lane-span={placement.lane + 2}
+    style:--grid-lane={placement.lane}
+    style:--grid-lane-span={placement.lane + 2}
   ></div>
 {/if}
 
@@ -43,7 +43,7 @@
   /* The lane is the last column of the span, so the rail and the corner both end in it. */
   .rail,
   .corner {
-    grid-column: 2 / span var(--lane-span);
+    grid-column: 2 / span var(--grid-lane-span);
 
     /* The overview pinned above the cards stands in for the rails on a narrow screen. */
     @media (width < 48rem) {
@@ -57,7 +57,7 @@
     grid-row: var(--rail-grid-line) / var(--row);
     justify-self: end;
     inline-size: var(--project-rail-width);
-    margin-inline-end: calc((var(--lane-width) - var(--project-rail-width)) / 2);
+    margin-inline-end: calc((var(--grid-lane-width) - var(--project-rail-width)) / 2);
     border-radius: var(--project-rail-width) var(--project-rail-width) 0 0;
     background-color: var(--rail-color);
     box-shadow: 0 0 0 var(--swell) var(--rail-color);
@@ -68,7 +68,7 @@
       content: '';
       display: block;
       block-size: 100%;
-      margin-inline: calc((var(--project-rail-width) - var(--lane-width)) / 2);
+      margin-inline: calc((var(--project-rail-width) - var(--grid-lane-width)) / 2);
     }
 
     /* With no rows to run up, the rail is only its rounded top end, because the corner's border
@@ -92,8 +92,8 @@
     grid-row: var(--row);
     align-self: start;
     block-size: calc(var(--project-node-offset) + var(--corner-drop));
-    margin-inline: calc((var(--lane-width) + var(--era-rail-width)) / 2)
-      calc((var(--lane-width) - var(--project-rail-width)) / 2);
+    margin-inline: calc((var(--grid-lane-width) + var(--era-rail-width)) / 2)
+      calc((var(--grid-lane-width) - var(--project-rail-width)) / 2);
     border-inline-end: var(--project-rail-width) solid var(--rail-color);
     border-block-end: var(--project-rail-width) solid var(--rail-color);
     border-end-end-radius: var(--radius-lg);
@@ -114,8 +114,8 @@
       inset-block-start: var(--project-node-offset);
       inset-inline-start: calc(100% + var(--project-rail-width) / 2);
       inline-size: calc(
-        var(--lane-width) / 2 + (var(--lanes) - var(--lane) - 1) * var(--lane-width) +
-          var(--card-gap)
+        var(--grid-lane-width) / 2 + (var(--grid-lanes) - var(--grid-lane) - 1) *
+          var(--grid-lane-width) + var(--card-gap)
       );
       block-size: 2px;
       translate: 0 -50%;

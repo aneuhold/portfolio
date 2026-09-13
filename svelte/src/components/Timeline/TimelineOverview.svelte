@@ -29,7 +29,7 @@
   class="overview"
   aria-label="Career to scale"
   style:--month-columns={monthColumnCount}
-  style:--lanes={laneCount}
+  style:--overview-lanes={laneCount}
 >
   {#each years as { year, start, end } (year)}
     <div class="year" style:--start={start} style:--end={end}>
@@ -58,7 +58,7 @@
         style:--start={start}
         style:--end={end}
         style:--overview-lane={(lanes.get(item.key) ?? 0) + 1}
-        style:--lane={placement.lane}
+        style:--grid-lane={placement.lane}
         style:--era-depth={placement.eraDepth}
       ></a>
     {/if}
@@ -81,7 +81,7 @@
     grid-template-columns: repeat(var(--month-columns), minmax(0, 1fr));
     grid-template-rows:
       [years] 1rem [eras] var(--overview-lane-width)
-      repeat(var(--lanes), [lane] var(--overview-lane-width));
+      repeat(var(--overview-lanes), [lane] var(--overview-lane-width));
     row-gap: 2px;
     margin-block-end: calc(var(--standard-spacing) * 3);
     padding: var(--standard-spacing) calc(var(--standard-spacing) * 2);

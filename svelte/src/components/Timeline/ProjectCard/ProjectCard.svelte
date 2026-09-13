@@ -32,7 +32,7 @@
     id="project-{project.key}"
     data-item={project.key}
     style:--row={placement.row}
-    style:--lane={placement.lane}
+    style:--grid-lane={placement.lane}
     data-year={placement.year}
   >
     <div class="media">
