@@ -13,6 +13,7 @@ A frontend portfolio showcasing a Senior Software Engineer's work, managed with 
 ├── svelte/           # SvelteKit app (primary)
 ├── react/            # Next.js app (secondary)
 ├── packages/shared/  # shared: config, global styles, project images
+├── scripts/          # Generators for the favicons, apple touch icons, and OG image
 └── .github/
     ├── actions/setup-pnpm-workspace/  # Composite action for CI setup
     └── workflows/                     # Parallel Svelte and React build/deploy/lighthouse jobs
@@ -32,16 +33,17 @@ Run these from the root directory.
 - Lint: `pnpm lint` (root config plus both apps)
 - Type check: `pnpm check` (svelte-check in svelte, `tsc` in react)
 - Lighthouse: `pnpm svelte:lighthouse`, `pnpm react:lighthouse`, or `pnpm lighthouse` for both
+- Favicons, apple touch icons, and OG image: `pnpm generate:assets`
 
 ### Important project files
 
 - `pnpm-workspace.yaml`: the workspace member list, build allowlist, and release-age hold
 - `tsconfig.json` at the root covers `packages/shared`; each app has its own `tsconfig.json`
 - `packages/shared/package.json`: the `exports` map, which decides what the apps can import
-- `svelte/svelte.config.js`: static adapter, mdsvex for `.md` routes, `$components` alias
+- `svelte/svelte.config.js`: static adapter, `$components` alias
 - `svelte/vite.config.ts`: enhanced images, Vitest (jsdom) config
 - `react/next.config.ts`: static export and image optimization; `transpilePackages` must list `shared` because Next does not compile packages under `node_modules` by default
-- `packages/shared/config/projects.ts` and `packages/shared/config/socialLinks.ts`: content driving both sites
+- `packages/shared/config/projects.ts`, `packages/shared/config/socialLinks.ts`, and `packages/shared/config/siteMetadata.ts`: content driving both sites
 - `packages/shared/global-styles/global.css`: CSS custom properties used by both apps
 - `lighthouserc.yml`: Lighthouse CI thresholds for both sites
 

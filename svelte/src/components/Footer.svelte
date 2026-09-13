@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { siteMetadata } from 'shared';
   import Link from './Link.svelte';
 </script>
 
@@ -9,7 +10,7 @@
   </span>
   <span class="subtitle-2">
     Built with SvelteKit •
-    <Link url="https://react.tonyneuhold.com" linkText="View React version" />
+    <Link url={siteMetadata.reactSiteUrl} linkText="View React version" />
   </span>
   <span class="subtitle-1">©{new Date().getFullYear()} Anton Neuhold</span>
 </footer>

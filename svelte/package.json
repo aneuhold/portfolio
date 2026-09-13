@@ -16,8 +16,6 @@
     "sub:eslint": "local-npm subscribe @aneuhold/eslint-config"
   },
   "dependencies": {
-    "marked": "^18.0.9",
-    "mdsvex": "^0.12.8",
     "shared": "workspace:*"
   },
   "devDependencies": {

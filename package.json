@@ -16,9 +16,10 @@
     "react:lighthouse": "pnpm react:build && lhci autorun --config=./lighthouserc.yml --collect.staticDistDir=./react/out",
     "build": "pnpm svelte:build && pnpm react:build",
     "lighthouse": "pnpm svelte:lighthouse && pnpm react:lighthouse",
-    "check": "tsc -b packages/shared && pnpm -r --parallel check",
+    "check": "tsc -b packages/shared scripts && pnpm -r --parallel check",
     "lint": "eslint && pnpm --filter svelte lint && pnpm --filter react lint",
     "test": "pnpm --filter svelte test",
+    "generate:assets": "tsx scripts/generate-favicons.ts && tsx scripts/generate-og-image.ts",
     "upgrade:core": "pnpm up -r '@aneuhold/*' --latest",
     "upgrade:all": "pnpm up -r --latest",
     "sub:eslint": "local-npm subscribe @aneuhold/eslint-config",
@@ -32,8 +33,11 @@
     "@aneuhold/local-npm-registry": "^1.0.1",
     "@aneuhold/robot-instructions": "^0.1.6",
     "@lhci/cli": "^0.15.1",
+    "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
+    "playwright": "^1.63.0",
     "prettier": "^3.9.6",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3"
   }
 }

@@ -28,7 +28,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://auroracolonypub.com',
     codeLink: 'https://github.com/aneuhold/aurora-colony-pub',
-    thumbnailDescription: 'Aurora Colony Pub Logo.'
+    thumbnailDescription:
+      'The Aurora Colony Pub shield logo, with two beer mugs, beside the pub name and "Aurora, Oregon".'
   },
   mesoPro: {
     key: 'mesoPro',
@@ -49,7 +50,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://mesopro.tonyneuhold.com',
     codeLink: 'https://github.com/aneuhold/workout',
-    thumbnailDescription: 'MesoPro Logo.'
+    thumbnailDescription:
+      'The MesoPro logo, an M between barbell plates, beside the tagline "Evidence-based hypertrophy training".'
   },
   personalDashboard: {
     key: 'personalDashboard',
@@ -69,7 +71,7 @@ const projectDefinitions = {
     ],
     demoLink: 'https://dashboard.tonyneuhold.com',
     codeLink: 'https://github.com/aneuhold/dashboard',
-    thumbnailDescription: 'Personal Dashboard Logo.'
+    thumbnailDescription: 'A metal gear inside a green ring on a black background.'
   },
   localNpmRegistry: {
     key: 'localNpmRegistry',
@@ -84,7 +86,8 @@ const projectDefinitions = {
       }
     ],
     codeLink: 'https://github.com/aneuhold/ts-libs/tree/main/packages/local-npm-registry',
-    thumbnailDescription: 'Local NPM Registry Thumbnail.'
+    thumbnailDescription:
+      'A red npm cube with arrows out to smaller package cubes, above the title "local-npm-registry".'
   },
   personalTypescriptLibraries: {
     key: 'personalTypescriptLibraries',
@@ -97,7 +100,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Platform, technologies: [Technology.Npm, Technology.Jsr] }
     ],
     codeLink: 'https://github.com/aneuhold/ts-libs',
-    thumbnailDescription: 'Personal TypeScript Libraries Thumbnail.'
+    thumbnailDescription:
+      'A TypeScript logo connected to code, database, and API icons, above the title "ts-libs".'
   },
   tiddlyDrive2: {
     key: 'tiddlyDrive2',
@@ -114,7 +118,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Platform, technologies: [Technology.GoogleDrive] }
     ],
     codeLink: 'https://github.com/aneuhold/tiddlydrive',
-    thumbnailDescription: 'Tiddly Drive 2 Logo.',
+    thumbnailDescription:
+      'The Tiddly Drive 2 logo, a white document on a blue app icon, beside the name "Tiddly Drive 2".',
     demoLink: 'https://workspace.google.com/marketplace/app/tiddly_drive_2/477983451498?flow_type=2'
   },
   // Commented out because it isn't as important as the other ones. Could be added back if the
@@ -138,7 +143,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Tooling, technologies: [Technology.NodeJs, Technology.TypeScript] }
     ],
     codeLink: 'https://github.com/aneuhold/main-scripts',
-    thumbnailDescription: 'Main Scripts Thumbnail.'
+    thumbnailDescription:
+      'The Commands section of the Main Scripts README, listing tb commands such as tb open, tb setup, and tb pkg.'
   },
   nextjs15Course: {
     key: 'nextjs15Course',
@@ -154,7 +160,8 @@ const projectDefinitions = {
     ],
     codeLink: 'https://github.com/aneuhold/nextjs-15-course',
     demoLink: 'https://nextjs-15-course-xi.vercel.app/',
-    thumbnailDescription: 'Next.js 15 Invoices App thumbnail'
+    thumbnailDescription:
+      'The Acme logo above the invoices app dashboard, invoice table, and mobile customer list.'
   },
   halomodSpa: {
     key: 'halomodSpa',
@@ -168,7 +175,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Backend, technologies: [Technology.Python, Technology.Flask] }
     ],
     codeLink: 'https://github.com/halomod/TheHaloMod-SPA',
-    thumbnailDescription: 'HaloMod SPA Thumbnail.'
+    thumbnailDescription:
+      'The Halo Mod web app with a models panel and a log-scale plot of the mass function against radius.'
   },
   pointSpire: {
     key: 'pointSpire',
@@ -189,7 +197,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://point-spire.com',
     codeLink: 'https://github.com/PointSpire/PointSpire',
-    thumbnailDescription: 'PointSpire Thumbnail'
+    thumbnailDescription:
+      'The PointSpire web app listing nested projects and tasks with priorities, dates, and tags.'
   },
   carpetGeeksExampleWebsite: {
     key: 'carpetGeeksExampleWebsite',
@@ -206,7 +215,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://carpetgeeks.netlify.app/',
     codeLink: 'https://github.com/aneuhold/carpet-geeks',
-    thumbnailDescription: 'Carpet Geeks Thumbnail.'
+    thumbnailDescription:
+      'The Carpet Geeks home page with carpet cleaning services, customer reviews, and a "Call now" banner.'
   },
   reactDrumMachine: {
     key: 'reactDrumMachine',
@@ -218,7 +228,7 @@ const projectDefinitions = {
     technologyGroups: [{ layer: TechnologyLayer.Frontend, technologies: [Technology.React] }],
     demoLink: 'https://aneuhold-drum-machine.netlify.com/',
     codeLink: 'https://github.com/aneuhold/React-Projects/tree/master/fcc-drum-machine',
-    thumbnailDescription: 'React Drum Machine Thumbnail.'
+    thumbnailDescription: 'A drum machine with a three by three grid of pads for the keys Q to C.'
   },
   reactCalculator: {
     key: 'reactCalculator',
@@ -230,7 +240,8 @@ const projectDefinitions = {
     technologyGroups: [{ layer: TechnologyLayer.Frontend, technologies: [Technology.React] }],
     demoLink: 'https://aneuhold-calculator.netlify.com/',
     codeLink: 'https://github.com/aneuhold/React-Projects/tree/master/fcc-calculator',
-    thumbnailDescription: 'React Cacluator Thumbnail.'
+    thumbnailDescription:
+      'A calculator with green-bordered buttons, its display reading 58+96x3=346.'
   },
   reactPomodoroClock: {
     key: 'reactPomodoroClock',
@@ -242,7 +253,8 @@ const projectDefinitions = {
     technologyGroups: [{ layer: TechnologyLayer.Frontend, technologies: [Technology.React] }],
     demoLink: 'https://aneuhold-pomodoro-clock.netlify.com/',
     codeLink: 'https://github.com/aneuhold/React-Projects/tree/master/fcc-pomodoro-clock',
-    thumbnailDescription: 'Pomodoro Clock Thumbnail.'
+    thumbnailDescription:
+      'A pomodoro clock on a green background with a pine tree, session and break length arrows, and a 24:00 timer.'
   },
   mongodbExerciseTracker: {
     key: 'mongodbExerciseTracker',
@@ -259,7 +271,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://decisive-cowl.glitch.me/',
     codeLink: 'https://github.com/aneuhold/fcc-exercisetracker',
-    thumbnailDescription: 'MongoDB Exercise Tracker Thumbnail.'
+    thumbnailDescription:
+      'The Exercise Tracker page with forms to create a user and add exercises, and notes on the log API.'
   },
   placesAndroidApp: {
     key: 'placesAndroidApp',
@@ -273,7 +286,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Language, technologies: [Technology.Java] }
     ],
     codeLink: 'https://github.com/aneuhold/places-android-app',
-    thumbnailDescription: 'Places Android App Thumbnail.'
+    thumbnailDescription:
+      'The Places Android app listing saved places such as ASU-Brickyard and London-England.'
   },
   placesIosApp: {
     key: 'placesIosApp',
@@ -287,7 +301,8 @@ const projectDefinitions = {
       { layer: TechnologyLayer.Language, technologies: [Technology.Swift] }
     ],
     codeLink: 'https://github.com/aneuhold/PlacesiOSApp',
-    thumbnailDescription: 'Places iOS App Thumbnail.'
+    thumbnailDescription:
+      'The Places iOS app on an iPhone, listing saved places such as Reavis-Grave and Moscow-Russia.'
   },
   urlShortener: {
     key: 'urlShortener',
@@ -304,7 +319,8 @@ const projectDefinitions = {
     ],
     demoLink: 'https://tangible-risk.glitch.me/',
     codeLink: 'https://github.com/aneuhold/fcc-urlshortener',
-    thumbnailDescription: 'URL Shortener Thumbnail.'
+    thumbnailDescription:
+      'The URL Shortener Microservice page with user stories, API examples, and a form to shorten a URL.'
   },
   battleShip: {
     key: 'battleShip',
@@ -315,7 +331,8 @@ const projectDefinitions = {
     endDate: new Date('2017-09-25'),
     technologyGroups: [{ layer: TechnologyLayer.Language, technologies: [Technology.Java] }],
     codeLink: 'https://github.com/aneuhold/ser215-battleship',
-    thumbnailDescription: 'Battleship Thumbnail.'
+    thumbnailDescription:
+      'A Java Battleship game with two boards of hits and misses above a game readout log.'
   },
   blackJack: {
     key: 'blackJack',
@@ -327,7 +344,7 @@ const projectDefinitions = {
     technologyGroups: [{ layer: TechnologyLayer.Language, technologies: [Technology.Python] }],
     demoLink: 'https://repl.it/@aneuhold/BlackJack',
     codeLink: 'https://github.com/aneuhold/python-projects/tree/master/Black%20Jack',
-    thumbnailDescription: 'Python Command Line BlackJack Thumbnail.'
+    thumbnailDescription: 'A terminal running a Python BlackJack game that ends with "You Win!!".'
   }
 } satisfies ProjectMap;
 

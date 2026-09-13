@@ -6,6 +6,7 @@
   "files": [],
   "references": [
     { "path": "./packages/shared" },
+    { "path": "./scripts" },
     { "path": "./svelte" },
     { "path": "./react" }
   ]
