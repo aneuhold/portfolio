@@ -1,17 +1,10 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
-import {
-  timelineDatesService,
-  TimelineItemKind,
-  timelineLiftService,
-  timelineService
-} from 'shared';
+import { timelineDatesService, TimelineItemKind, timelineService } from 'shared';
 import EraCard from './EraCard';
 import EraRail from './EraRail';
 import ProjectCard from './ProjectCard/ProjectCard';
 import ProjectRail from './ProjectRail';
 import styles from './Timeline.module.css';
+import TimelineAnimationWrapper from './TimelineAnimationWrapper';
 import TimelineOverview from './TimelineOverview';
 
 /**
@@ -35,21 +28,8 @@ export default function Timeline() {
     .slice(0, 4)
     .map(({ key }) => key);
 
-  const timelineElement = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!timelineElement.current) {
-      return;
-    }
-    return timelineLiftService.attach(timelineElement.current);
-  }, []);
-
   return (
-    <section
-      className={styles.timeline}
-      style={{ '--grid-lanes': laneCount }}
-      ref={timelineElement}
-    >
+    <TimelineAnimationWrapper className={styles.timeline} style={{ '--grid-lanes': laneCount }}>
       <TimelineOverview />
       <div className={styles.grid}>
         {/* Every rail comes before every card, so rails sit next to rails and cards next to cards in
@@ -77,6 +57,6 @@ export default function Timeline() {
           now
         </p>
       </div>
-    </section>
+    </TimelineAnimationWrapper>
   );
 }
