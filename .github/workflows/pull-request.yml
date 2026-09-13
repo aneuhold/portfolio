@@ -7,6 +7,31 @@ on:
       - main
 
 jobs:
+  # Workspace: Type check and lint for shared and both apps (runs in parallel with the site jobs)
+  check:
+    name: '🔍 Type Check & Lint'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node, PNPM, and install deps
+        uses: pnpm/setup@v2
+        with:
+          runtime: 'node@lts'
+          cache: true
+          require-lockfile: true
+
+      - name: Type check
+        run: pnpm check
+
+      # Lint goes after check because check generates types.
+      - name: Lint
+        run: pnpm lint
+
   # Svelte: Build, Test, Deploy & Lighthouse (runs in parallel with React)
   svelte:
     name: '🔷 Svelte: Build, Test & Deploy'
