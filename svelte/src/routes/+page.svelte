@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import Hero from '$components/Hero.svelte';
-  import Projects from '$components/Projects/Projects.svelte';
+  import Timeline from '$components/Timeline/Timeline.svelte';
 </script>
 
 <Hero />
-<Projects />
+<Timeline />

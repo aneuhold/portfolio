@@ -1,20 +1,12 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "target": "ESNEXT",
-    "module": "NodeNext",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "importHelpers": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true
-    // "allowImportingTsExtensions": true
-  },
-  "exclude": ["node_modules"]
+  // A solution file: it holds no sources of its own, it only names the projects the
+  // workspace is made of. TypeScript walks these references to answer "find all
+  // references" and "rename" from any project into any other, which is what lets a
+  // symbol in `packages/shared` list its usages in both apps without them being open.
+  "files": [],
+  "references": [
+    { "path": "./packages/shared" },
+    { "path": "./svelte" },
+    { "path": "./react" }
+  ]
 }

@@ -7,6 +7,31 @@ on:
       - main
 
 jobs:
+  # Workspace: Type check and lint for shared and both apps (runs in parallel with the site jobs)
+  check:
+    name: '🔍 Type Check & Lint'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node, PNPM, and install deps
+        uses: pnpm/setup@v2.1.0
+        with:
+          runtime: 'node@lts'
+          cache: true
+          require-lockfile: true
+
+      - name: Type check
+        run: pnpm check
+
+      # Lint goes after check because check generates types.
+      - name: Lint
+        run: pnpm lint
+
   # Svelte: Build, Test, Deploy & Lighthouse (runs in parallel with React)
   svelte:
     name: '🔷 Svelte: Build, Test & Deploy'
@@ -22,17 +47,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup workspace
-        uses: ./.github/actions/setup-pnpm-workspace
+      - name: Setup Node, PNPM, and install deps
+        uses: pnpm/setup@v2.1.0
+        with:
+          runtime: 'node@lts'
+          cache: true
+          require-lockfile: true
 
       # Cache Vite build output for faster subsequent builds
       - name: Cache Vite build
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: svelte/.vite
-          key: ${{ runner.os }}-vite-${{ hashFiles('svelte/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-vite-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-vite-
 
@@ -43,7 +72,7 @@ jobs:
         run: pnpm test
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         id: netlify
         with:
           publish-dir: './svelte/build'
@@ -82,18 +111,22 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup workspace
-        uses: ./.github/actions/setup-pnpm-workspace
+      - name: Setup Node, PNPM, and install deps
+        uses: pnpm/setup@v2.1.0
+        with:
+          runtime: 'node@lts'
+          cache: true
+          require-lockfile: true
 
       # Cache Next.js build output for faster subsequent builds
       - name: Cache Next.js build
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: |
             react/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('react/pnpm-lock.yaml') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
 
@@ -101,7 +134,7 @@ jobs:
         run: pnpm react:build
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         id: netlify
         with:
           publish-dir: './react/out'
@@ -137,7 +170,7 @@ jobs:
 
     steps:
       - name: Post Lighthouse Results to PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         if: github.event_name == 'pull_request'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

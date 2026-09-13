@@ -14,23 +14,14 @@ jobs:
       deployments: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Set up PNPM
-        uses: pnpm/action-setup@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
+      - name: Setup Node, PNPM, and install deps
+        uses: pnpm/setup@v2.1.0
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
-          cache-dependency-path: |
-            pnpm-lock.yaml
-            svelte/pnpm-lock.yaml
-            react/pnpm-lock.yaml
-
-      - name: Install dependencies (root, react, svelte)
-        run: pnpm run i
+          runtime: 'node@lts'
+          cache: true
+          require-lockfile: true
 
       - name: Build the svelte site
         run: pnpm svelte:build
@@ -39,7 +30,7 @@ jobs:
         run: pnpm react:build
 
       - name: Deploy to Netlify (Svelte)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         with:
           publish-dir: './svelte/build'
           production-branch: main
@@ -56,7 +47,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Deploy to Netlify (React)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         with:
           publish-dir: './react/out'
           production-branch: main

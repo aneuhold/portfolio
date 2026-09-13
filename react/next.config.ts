@@ -15,9 +15,14 @@ const nextConfig: NextConfig = {
     imageSizes: [300, 600],
     deviceSizes: []
   },
-  // Only added here because next-image-export-optimizer says to and warns otherwise. Don't see an
-  // issue with builds though when it is removed.
-  transpilePackages: ['next-image-export-optimizer'],
+  transpilePackages: [
+    // Only added here because next-image-export-optimizer says to and warns otherwise. Don't see an
+    // issue with builds though when it is removed.
+    'next-image-export-optimizer',
+    // `shared` ships TypeScript source rather than a build, so Next has to compile
+    // it alongside the app.
+    'shared'
+  ],
   env: {
     nextImageExportOptimizer_exportFolderPath: 'out',
     nextImageExportOptimizer_quality: '90',
@@ -28,7 +33,11 @@ const nextConfig: NextConfig = {
   },
   // Helps on static hosts by ensuring directory-style URLs map to index.html
   trailingSlash: true,
-  outputFileTracingRoot: path.join(__dirname, '../')
+  outputFileTracingRoot: path.join(__dirname, '../'),
+  // Stops `next dev` from writing AGENTS.md and CLAUDE.md into this folder when it runs under an AI
+  // coding agent.
+  // See: https://nextjs.org/docs/app/guides/ai-agents#opting-out
+  agentRules: false
 };
 
 export default nextConfig;

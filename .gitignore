@@ -36,5 +36,5 @@ next-image-export-optimizer-hashes.json
 .svelte-kit
 /package
 
-# Shared files
-*/shared
+# Declarations emitted by `shared` so `tsc` and `svelte-check` can read across projects
+.tsbuild

@@ -1,4 +1,4 @@
-import '$shared/global-styles/global.css';
+import 'shared/global-styles/global.css';
 import { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import Script from 'next/script';

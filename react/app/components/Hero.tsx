@@ -1,5 +1,5 @@
 import Link from '$components/Link';
-import socialLinks from '$shared/config/socialLinks';
+import { socialLinks } from 'shared';
 import styles from './Hero.module.css';
 
 /**

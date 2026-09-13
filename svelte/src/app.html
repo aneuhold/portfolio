@@ -10,14 +10,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="%sveltekit.assets%/favicon.ico" />
 
-    <!-- Font pre-connects (only used because the fonts are critical) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Roboto (used throughout the site) is served from static/fonts, one variable font file per
+      style covering every weight. The normal style is preloaded since most text uses it. The
+      fallback face scales Arial to Roboto's metrics (the values next/font generates for Roboto), so
+      text keeps its size when Roboto swaps in. 
+      
+      As of 9/13/2026 This was faster than loading from Google Fonts.
 
-    <!-- Roboto font (used throughout the site) The font weights are all used. -->
+      The Roboto Fallback is what showed up in the Next.js build as a good fallback. So that is
+      where those numbers come from.
+    -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500;0,400;1,400;0,300;1,300&display=swap"
-      rel="stylesheet"
+      rel="preload"
+      href="%sveltekit.assets%/fonts/roboto-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
+    <style>
+      @font-face {
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('%sveltekit.assets%/fonts/roboto-latin-wght-normal.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Roboto';
+        font-style: italic;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url('%sveltekit.assets%/fonts/roboto-latin-wght-italic.woff2') format('woff2');
+      }
+      @font-face {
+        font-family: 'Roboto Fallback';
+        src: local('Arial');
+        ascent-override: 92.98%;
+        descent-override: 24.47%;
+        line-gap-override: 0%;
+        size-adjust: 99.78%;
+      }
+    </style>
 
     <!-- Google tag (gtag.js) for Google Analytics - Deferred loading for better performance -->
     <script>

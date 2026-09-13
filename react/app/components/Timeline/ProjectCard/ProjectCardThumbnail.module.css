@@ -1,0 +1,19 @@
+/* One shape for every thumbnail, whatever the screenshot behind it, so the column of cards reads
+   as a set. */
+.thumbnail {
+  display: block;
+  /* Needs 100% to keep it inside the box it is given */
+  inline-size: 100%;
+  /* Overrides the normal height of the image so the ratio decides */
+  block-size: auto;
+  /** 3/2 just kinda looks good */
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  /* Because some screenshots have a header */
+  object-position: center top;
+  border-radius: var(--radius-md);
+  /* Drawn over the image's edge, so a screenshot with a white background keeps its shape on the
+     card */
+  outline: 1px solid var(--color-hairline);
+  outline-offset: -1px;
+}

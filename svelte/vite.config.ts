@@ -1,10 +1,9 @@
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'path';
-import { defineConfig } from 'vite';
-import { defineConfig as vitestDefineConfig } from 'vitest/config';
+import { defineConfig } from 'vitest/config';
 
-const viteConfig = defineConfig({
+export default defineConfig({
   plugins: [enhancedImages(), sveltekit()],
   resolve: {
     alias: {
@@ -13,18 +12,11 @@ const viteConfig = defineConfig({
     // Tell Vitest to use the `browser` entry points in `package.json` files, even though it's running in Node
     conditions: process.env.VITEST ? ['browser'] : undefined
   },
-  server: {
-    fs: {
-      allow: ['shared']
-    }
-  }
-});
-
-const vitestConfig = vitestDefineConfig({
   test: {
     exclude: ['node_modules/**/*'],
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['./src/vitest.setup.ts'],
     server: {
       deps: {
         // Inline @testing-library/svelte so its .svelte.js files (which use Svelte 5 runes like
@@ -35,8 +27,3 @@ const vitestConfig = vitestDefineConfig({
     }
   }
 });
-
-export default {
-  ...viteConfig,
-  ...vitestConfig
-};
