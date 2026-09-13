@@ -20,17 +20,44 @@
         src: url('../../svelte/static/fonts/roboto-latin-wght-italic.woff2') format('woff2');
       }
 
-      /* The Hero's type sizes are in rem, so a larger root font size scales the whole block up to
-         fill the image. */
-      html {
-        font-size: 28px;
+      /* Draws the Hero at 1.75 times the site's size: the rem-based type scales with the root font
+         size, and the spacing tokens scale with the site's 8px --standard-spacing. `:root` matches
+         the specificity of global.css, which this block follows in source order. */
+      :root {
+        --scale: 1.75;
+        --standard-spacing: calc(8px * var(--scale));
+        font-size: calc(16px * var(--scale));
       }
 
+      /* Centered items shrink to their content, so the name's card fits the width of the text. */
       body {
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
         height: 100vh;
+      }
+
+      .header-2 {
+        position: relative;
+        padding: calc(var(--standard-spacing) * 2);
+        border-radius: calc(var(--radius-lg) * 2);
+        /* The tint the site's project cards use. */
+        background-color: color-mix(in oklab, var(--color-primary) 12%, var(--background));
+      }
+
+      /* A still frame of the hover glow in svelte/src/components/AnimatedBorderBackground.svelte:
+         the rainbow gradient, blurred, reaching one border width past the card on every side. The
+         card creates no stacking context, so the negative z-index puts the glow behind the card's
+         background. */
+      .header-2::before {
+        content: '';
+        position: absolute;
+        inset: calc(var(--standard-spacing) * -1);
+        z-index: -1;
+        border-radius: calc(var(--radius-lg) * 2);
+        background: var(--hdr-gradient);
+        filter: blur(var(--standard-spacing));
       }
     </style>
   </head>
@@ -40,6 +67,6 @@
       +<br />
       <i>&lt; Web Developer /&gt;</i>
     </p>
-    <h1 class="header-2">Anton (Tony) Neuhold</h1>
+    <h1 class="header-2">Anton Neuhold</h1>
   </body>
 </html>
