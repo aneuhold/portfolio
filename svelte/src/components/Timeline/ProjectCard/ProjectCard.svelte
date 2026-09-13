@@ -18,7 +18,9 @@
   <div
     class="compactProject"
     id="project-{project.key}"
+    data-item={project.key}
     style:--row={placement.row}
+    style:--era-depth={placement.eraDepth}
     data-year={placement.year}
   >
     <TimelineDates startDate={project.startDate} endDate={project.endDate} useMaxDateWidth />
@@ -28,7 +30,9 @@
   <article
     class="card"
     id="project-{project.key}"
+    data-item={project.key}
     style:--row={placement.row}
+    style:--lane={placement.lane}
     data-year={placement.year}
   >
     <div class="media">
@@ -83,6 +87,8 @@
   .compactProject {
     /* The year label sits level with the middle of the dated row. */
     --node-offset: 50%;
+    /* Its node sits on the era rail. */
+    --rail-color: var(--era-color);
 
     position: relative;
     grid-column: -2;

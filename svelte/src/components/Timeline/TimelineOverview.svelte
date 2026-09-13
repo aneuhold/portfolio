@@ -41,6 +41,7 @@
     {#if item.kind === TimelineItemKind.Era}
       <div
         class="era"
+        data-item={item.key}
         style:--era-depth={placement.eraDepth}
         style:--start={start}
         style:--end={end}
@@ -51,11 +52,14 @@
         class="mark"
         class:dot={timelineDatesService.isSingleDate(item.startDate, item.endDate)}
         href="#project-{item.key}"
+        data-item={item.key}
         aria-label="{item.name}, {range}"
         title="{item.name}, {range}"
         style:--start={start}
         style:--end={end}
-        style:--lane={(lanes.get(item.key) ?? 0) + 1}
+        style:--overview-lane={(lanes.get(item.key) ?? 0) + 1}
+        style:--lane={placement.lane}
+        style:--era-depth={placement.eraDepth}
       ></a>
     {/if}
   {/each}
@@ -70,7 +74,8 @@
     --overview-lane-width: calc(var(--standard-spacing) * 0.75);
 
     position: sticky;
-    z-index: 1;
+    /* Above a card coming forward, which rises to 1. */
+    z-index: 2;
     inset-block-start: var(--standard-spacing);
     display: grid;
     grid-template-columns: repeat(var(--month-columns), minmax(0, 1fr));
@@ -130,30 +135,41 @@
     }
   }
 
-  /* A pixel of margin keeps two eras that meet in the same month from reading as one. */
+  /* A pixel of margin keeps two eras that meet in the same month from reading as one. The bar
+     thickens while its era is active. */
   .era {
     grid-row: eras;
     grid-column: var(--start) / var(--end);
     margin-inline: 1px;
     border-radius: var(--overview-lane-width);
     background-color: var(--era-color);
+    scale: 1 calc(1 + var(--grow) * 0.6);
   }
 
   /* A project's range along its lane, with a pixel of margin so two ranges that meet in one lane
-     stay apart. */
+     stay apart. While the project is active it thickens and takes the color its card glows in. */
   .mark {
-    grid-row: var(--lane) lane;
+    grid-row: var(--overview-lane) lane;
     grid-column: var(--start) / var(--end);
     align-self: center;
     block-size: var(--project-rail-width);
     margin-inline: 1px;
     border-radius: var(--project-rail-width);
-    background-color: var(--color-primary-300);
+    background-color: color-mix(
+      in oklab,
+      var(--rail-color) calc(var(--lift) * 100%),
+      var(--color-primary-300)
+    );
+    scale: 1 calc(1 + var(--grow));
 
-    /* A project that came and went in a month is a dot centred in that month. */
+    /* A project that came and went in a month is a dot centred in that month, in its era's color
+       like its dated row. */
     &.dot {
+      --rail-color: var(--era-color);
+
       justify-self: center;
       inline-size: var(--project-rail-width);
+      scale: calc(1 + var(--grow));
     }
   }
 </style>

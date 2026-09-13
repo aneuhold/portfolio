@@ -16,6 +16,7 @@
 
 <section
   class="card"
+  data-item={era.key}
   style:--row={placement.row}
   style:--era-depth={placement.eraDepth}
   data-year={placement.year}
@@ -48,6 +49,7 @@
   .card {
     /* The year label sits level with the middle of the era's name. */
     --node-offset: var(--era-node-offset);
+    --rail-color: var(--era-color);
     /* The ground here is dark, so a step back from the name is a step off white, not off black. */
     --color-text-secondary: color-mix(in oklab, var(--background) 76%, transparent);
 

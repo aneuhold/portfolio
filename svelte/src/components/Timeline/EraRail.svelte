@@ -5,13 +5,14 @@
   node level with the card's name and a faint connector across to it.
 -->
 <script lang="ts">
-  import { type TimelinePlacement } from 'shared';
+  import { type Era, type TimelinePlacement } from 'shared';
 
-  const { placement }: { placement: TimelinePlacement } = $props();
+  const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();
 </script>
 
 <div
   class="rail"
+  data-item={era.key}
   style:--row={placement.row}
   style:--rail-grid-line={placement.railGridLine}
   style:--era-depth={placement.eraDepth}
@@ -29,13 +30,15 @@
     margin-block: var(--era-space) var(--card-gap);
     border-radius: calc(var(--era-rail-width) / 2);
     background-color: var(--era-color);
+    box-shadow: 0 0 0 var(--swell) var(--era-color);
 
     /* The overview pinned above the cards stands in for the era rail on a narrow screen. */
     @media (width < 48rem) {
       display: none;
     }
 
-    /* A faint line from the node, under the project rails, across to the card. */
+    /* A faint line from the node, under the project rails, across to the card. It turns solid
+       while the era is active, and never takes the hover from the rails it crosses. */
     &::before {
       content: '';
       position: absolute;
@@ -44,7 +47,13 @@
       inline-size: var(--gutter-width);
       block-size: 2px;
       translate: 0 -50%;
-      background-color: color-mix(in oklab, var(--era-color) 40%, transparent);
+      scale: 1 calc(1 + var(--grow));
+      background-color: color-mix(
+        in oklab,
+        var(--era-color) calc(40% + var(--lift) * 60%),
+        transparent
+      );
+      pointer-events: none;
     }
 
     &::after {
@@ -55,6 +64,7 @@
       inline-size: var(--era-rail-width);
       block-size: var(--era-rail-width);
       translate: -50% -50%;
+      scale: calc(1 + var(--grow) * 0.4);
       border: calc(var(--era-rail-width) / 3) solid var(--era-color);
       border-radius: 50%;
       background-color: var(--background);

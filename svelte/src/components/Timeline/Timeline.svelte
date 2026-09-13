@@ -8,7 +8,8 @@
   full width.
 -->
 <script lang="ts">
-  import { TimelineItemKind, timelineService } from 'shared';
+  import { TimelineItemKind, timelineLiftService, timelineService } from 'shared';
+  import { onMount } from 'svelte';
   import EraCard from './EraCard.svelte';
   import EraRail from './EraRail.svelte';
   import ProjectCard from './ProjectCard/ProjectCard.svelte';
@@ -17,16 +18,20 @@
 
   const timeline = timelineService.build();
   const laneCount = Math.max(...timeline.map(({ placement }) => placement.lane)) + 1;
+
+  let timelineElement: HTMLElement;
+
+  onMount(() => timelineLiftService.attach(timelineElement));
 </script>
 
-<section class="timeline">
+<section class="timeline" bind:this={timelineElement}>
   <TimelineOverview />
   <div class="grid" style:--lanes={laneCount}>
     <!-- Every rail comes before every card, so rails sit next to rails and cards next to cards in
       the markup, which is what a run of dated rows and their nodes are styled by. -->
     {#each timeline as { item, placement } (item.key)}
       {#if item.kind === TimelineItemKind.Era}
-        <EraRail {placement} />
+        <EraRail era={item} {placement} />
       {:else}
         <ProjectRail project={item} {placement} />
       {/if}
@@ -65,6 +70,9 @@
     --era-lightness: 44%;
     --era-chroma-step: 0.27;
     --era-chroma-floor: 0.15;
+    /* How far the rest of the timeline fades back while an item is hovered, so the hovered item's
+       rails read clearly where they cross the rest. */
+    --recede: calc(var(--hovering, 0) * 0.3);
 
     margin-inline: auto;
     max-inline-size: 68rem;
@@ -90,6 +98,34 @@
       /* The first era meets the top of the grid. Each one after it leaves a gap above, and the
          project rails running between the two eras cross it. */
       --era-space: calc(var(--era-gap) * min(1, var(--row) - 1));
+      /* Each lane turns the primary's hue a step further, so rails running side by side stay
+         apart. */
+      --rail-color: oklch(from var(--color-primary) 60% 0.13 calc(h + var(--lane, 0) * 50));
+    }
+
+    /* Every part drawn for an item reads how far forward the item has come, from 0 at rest to 1
+       while it is active. The hovered item comes forward, or with nothing hovered, the item at the
+       focus line: it has arrived once it reaches the line, and departed once the next one arrives. */
+    :global([data-item]) {
+      --lift: max(
+        var(--hover, 0),
+        (var(--arrive, 0) - var(--depart, 0)) * (1 - var(--hovering, 0))
+      );
+      /* How far its parts grow as it comes forward, which is not at all where motion is reduced.
+         Colors, shadows, and opacity follow the lift either way. */
+      --grow: var(--lift);
+      /* How much wider a rail's stroke grows on each side. */
+      --swell: calc(var(--grow) * var(--project-rail-width) / 2);
+
+      @media (prefers-reduced-motion: reduce) {
+        --grow: 0;
+      }
+    }
+
+    /* Parts fade back while another item is hovered. Cards and dated rows stay opaque and fade
+       their contents instead, toward their own ground rather than the page's. */
+    :global(:is([data-item]:not(.card, .compactProject), .card > *, .compactProject > *)) {
+      opacity: calc(1 - var(--recede) * (1 - var(--lift)));
     }
   }
 
@@ -134,6 +170,34 @@
       /* Gives way to the overview's year labels on a narrow screen. */
       @media (width < 48rem) {
         content: none;
+      }
+    }
+
+    /* Every card and dated row grows away from the rails as it comes forward, about the point its
+       node lines up with, and moves above its neighbors. */
+    > :global(:is(.card, .compactProject)) {
+      z-index: round(up, var(--lift));
+      transform-origin: 0 var(--node-offset);
+      scale: calc(1 + var(--grow) * 0.02);
+
+      /* With no rails beside it, it grows out into the side padding instead. */
+      @media (width < 48rem) {
+        transform-origin: 50% var(--node-offset);
+        scale: calc(1 + var(--grow) * 0.04);
+      }
+
+      /* The raised shadow, and under it a glow in the color of the rail the item hangs off, which
+         ties the card to its branch. Only the shadows show, outside the card. */
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        box-shadow:
+          var(--shadow-raised),
+          0 10px 32px -4px var(--rail-color);
+        opacity: var(--lift);
       }
     }
   }
