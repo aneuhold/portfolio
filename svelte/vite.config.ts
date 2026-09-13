@@ -16,6 +16,7 @@ export default defineConfig({
     exclude: ['node_modules/**/*'],
     globals: true,
     environment: 'jsdom',
+    setupFiles: ['./src/vitest.setup.ts'],
     server: {
       deps: {
         // Inline @testing-library/svelte so its .svelte.js files (which use Svelte 5 runes like
