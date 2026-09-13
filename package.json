@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "1.1.0",
   "description": "A personal portfolio to showcase Anton G Neuhold's work on his website.",
-  "packageManager": "pnpm@11.23.0",
+  "packageManager": "pnpm@12.4.1",
   "type": "module",
   "private": true,
   "scripts": {
