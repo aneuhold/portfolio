@@ -34,7 +34,7 @@
     border-radius: var(--radius-md);
     /* Drawn over the image's edge, so a screenshot with a white background keeps its shape on the
        card */
-    outline: 1px solid var(--hairline);
+    outline: 1px solid var(--color-hairline);
     outline-offset: -1px;
   }
 </style>

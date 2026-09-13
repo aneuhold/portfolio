@@ -6,8 +6,14 @@
   the projects still running from before the era began.
 -->
 <script lang="ts">
-  import { type Era, TextColor, type TimelinePlacement, timelineService } from 'shared';
-  import TimelineDates, { TimelineDatesSize } from './TimelineDates.svelte';
+  import {
+    type Era,
+    TextColor,
+    TimelineDatesSize,
+    type TimelinePlacement,
+    timelineService
+  } from 'shared';
+  import TimelineDates from './TimelineDates.svelte';
   import TimelineTechnologies from './TimelineTechnologies.svelte';
 
   const { era, placement }: { era: Era; placement: TimelinePlacement } = $props();

@@ -33,7 +33,11 @@ const nextConfig: NextConfig = {
   },
   // Helps on static hosts by ensuring directory-style URLs map to index.html
   trailingSlash: true,
-  outputFileTracingRoot: path.join(__dirname, '../')
+  outputFileTracingRoot: path.join(__dirname, '../'),
+  // Stops `next dev` from writing AGENTS.md and CLAUDE.md into this folder when it runs under an AI
+  // coding agent.
+  // See: https://nextjs.org/docs/app/guides/ai-agents#opting-out
+  agentRules: false
 };
 
 export default nextConfig;

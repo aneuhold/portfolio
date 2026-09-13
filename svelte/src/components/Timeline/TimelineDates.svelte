@@ -5,18 +5,8 @@
   over, or how long that was. An item still running reads as "now" in a range and "so far" in a
   duration.
 -->
-<script lang="ts" module>
-  /**
-   * The type sizes a `TimelineDates` renders at.
-   */
-  export enum TimelineDatesSize {
-    Small = 'Small',
-    Large = 'Large'
-  }
-</script>
-
 <script lang="ts">
-  import { TextColor, timelineDatesService } from 'shared';
+  import { TextColor, timelineDatesService, TimelineDatesSize } from 'shared';
 
   const {
     startDate,

@@ -6,6 +6,7 @@ import { timelineService, type TimelinePlacement } from './services/Timeline.ser
 import { timelineDatesService } from './services/TimelineDates.service';
 import { timelineLiftService } from './services/TimelineLift.service';
 import { TextColor } from './types/TextColor';
+import { TimelineDatesSize } from './types/TimelineDatesSize';
 import { type TimelineItemBase, TimelineItemKind } from './types/TimelineItemBase';
 
 // Export classes and objects
@@ -15,6 +16,7 @@ export {
   socialLinks,
   technologies,
   TextColor,
+  TimelineDatesSize,
   TimelineItemKind,
   timelineDatesService,
   timelineLiftService,

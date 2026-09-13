@@ -126,7 +126,7 @@
     /* A hairline where each year begins. The last year is the earliest, which starts at the edge
        of the overview. */
     &:has(+ .year) {
-      border-inline-start: 1px solid var(--hairline);
+      border-inline-start: 1px solid var(--color-hairline);
     }
 
     /* Every other year keeps its label, so the rest have room. */
