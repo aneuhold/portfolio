@@ -14,10 +14,10 @@ jobs:
       deployments: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Setup Node, PNPM, and install deps
-        uses: pnpm/setup@v2
+        uses: pnpm/setup@v2.1.0
         with:
           runtime: 'node@lts'
           cache: true
@@ -30,7 +30,7 @@ jobs:
         run: pnpm react:build
 
       - name: Deploy to Netlify (Svelte)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         with:
           publish-dir: './svelte/build'
           production-branch: main
@@ -47,7 +47,7 @@ jobs:
         timeout-minutes: 1
 
       - name: Deploy to Netlify (React)
-        uses: nwtgck/actions-netlify@v3.0
+        uses: nwtgck/actions-netlify@v4
         with:
           publish-dir: './react/out'
           production-branch: main
