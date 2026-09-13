@@ -10,6 +10,16 @@ export type Project = TimelineItemBase & {
 type ProjectMap = { [projectKey: string]: Project };
 
 const projectDefinitions = {
+  auroraColonyPub: {
+    key: 'auroraColonyPub',
+    kind: TimelineItemKind.Project,
+    name: 'Aurora Colony Pub',
+    info: 'The website for the Aurora Colony Pub in Aurora, Oregon, focused on fast pages and strong SEO. Built with Astro and Svelte islands on Cloudflare Pages, with Cloudflare Workers handling the contact form and Facebook feed, and Sveltia CMS for editing content.',
+    startDate: new Date('2026-05-01'),
+    demoLink: 'https://auroracolonypub.com',
+    codeLink: 'https://github.com/aneuhold/aurora-colony-pub',
+    thumbnailDescription: 'Aurora Colony Pub Logo.'
+  },
   mesoPro: {
     key: 'mesoPro',
     kind: TimelineItemKind.Project,

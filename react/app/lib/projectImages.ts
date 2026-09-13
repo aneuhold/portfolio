@@ -2,12 +2,12 @@ import type { ProjectKey } from 'shared';
 import type { StaticImageData } from 'next/image';
 
 // Static image imports from the shared images directory
+import auroraColonyPub from 'shared/images/aurora-colony-pub.png';
 import battleship from 'shared/images/battleship.png';
 import blackjack from 'shared/images/blackjack.png';
 import calculator from 'shared/images/calculator.png';
 import carpetgeeks from 'shared/images/carpetgeeks.png';
 import drummachine from 'shared/images/drummachine.png';
-import eslintConfig from 'shared/images/eslint-config.png';
 import exercisetracker from 'shared/images/exercisetracker.png';
 import halomodSpa from 'shared/images/halomod-spa.png';
 import localNpmRegistry from 'shared/images/local-npm-registry.png';
@@ -24,11 +24,11 @@ import tsLibs from 'shared/images/ts-libs.png';
 import urlShortener from 'shared/images/urlShortener.png';
 
 const projectImages: Record<string, StaticImageData> = {
+  auroraColonyPub,
   mesoPro,
   personalDashboard,
   localNpmRegistry,
   tiddlyDrive2,
-  personalEslintConfig: eslintConfig,
   personalTypescriptLibraries: tsLibs,
   nextjs15Course,
   pointSpire,

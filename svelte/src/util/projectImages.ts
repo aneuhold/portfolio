@@ -1,6 +1,7 @@
 import type { ProjectKey } from 'shared';
 // Explicitly request 600px and 300px variants for all project thumbnails. Query params must end
 // with &enhanced to trigger the enhanced image processing (just due to lazy typing is all.)
+import auroraColonyPub from 'shared/images/aurora-colony-pub.png?w=600;300&enhanced';
 import battleship from 'shared/images/battleship.png?w=600;300&enhanced';
 import blackjack from 'shared/images/blackjack.png?w=600;300&enhanced';
 import calculator from 'shared/images/calculator.png?w=600;300&enhanced';
@@ -28,6 +29,7 @@ export type Picture = typeof eslintConfig;
  * The thumbnail for each project, keyed the same way the project data is.
  */
 const projectImages: Record<string, Picture> = {
+  auroraColonyPub,
   battleShip: battleship,
   blackJack: blackjack,
   carpetGeeksExampleWebsite: carpetGeeks,
