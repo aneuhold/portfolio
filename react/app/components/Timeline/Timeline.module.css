@@ -1,0 +1,207 @@
+/* Every measurement the grid and the overview share is declared here, and they derive the
+   rest. */
+.timeline {
+  --year-width: calc(var(--standard-spacing) * 5);
+  --grid-lane-width: calc(var(--standard-spacing) * 2.5);
+  /* A node is the circle where a card meets its rail. It is as wide across as the era rail. */
+  --era-rail-width: calc(var(--standard-spacing) * 1.5);
+  --project-rail-width: calc(var(--standard-spacing) / 2);
+  --now-thickness: 3px;
+  --card-padding: calc(var(--standard-spacing) * 2);
+  /* How far down its card a node sits, which is level with the middle of the card's name. */
+  --era-node-offset: calc(var(--card-padding) * 1.5 + 1rem);
+  --project-node-offset: calc(var(--card-padding) + 1rem);
+  --card-gap: calc(var(--standard-spacing) * 2);
+  --era-gap: calc(var(--standard-spacing) * 6);
+  /* How much of the primary's chroma each era further back gives up, and the floor it stops at.
+     Lightness is held, which keeps the contrast of the white text the same at every step. */
+  --era-lightness: 44%;
+  --era-chroma-step: 0.27;
+  --era-chroma-floor: 0.15;
+  /* How far each lane turns the primary's hue from the lane before it. The lanes share the color
+     wheel evenly, however many there are. */
+  --grid-lane-hue-step: calc(360 / var(--grid-lanes));
+  /* How far the rest of the timeline fades back while an item is hovered, so the hovered item's
+     rails read clearly where they cross the rest. */
+  --recede: calc(var(--hovering, 0) * 0.3);
+
+  margin-inline: auto;
+  max-inline-size: 68rem;
+  padding: calc(var(--standard-spacing) * 3);
+  /* The site centres its text; a timeline is read down a left edge. */
+  text-align: start;
+
+  @media (width < 48rem) {
+    --era-gap: calc(var(--standard-spacing) * 4);
+  }
+
+  @media (width < 40rem) {
+    padding-inline: calc(var(--standard-spacing) * 2);
+  }
+
+  /* Every part drawn for an item reads how far forward the item has come, from 0 at rest to 1
+     while it is active. The hovered item comes forward, or with nothing hovered, the item at the
+     focus line: it has arrived once it reaches the line, and departed once the next one arrives. */
+  [data-item] {
+    --lift: max(var(--hover, 0), (var(--arrive, 0) - var(--depart, 0)) * (1 - var(--hovering, 0)));
+    /* How far its parts grow as it comes forward, which is not at all where motion is reduced.
+       Colors, shadows, and opacity follow the lift either way. */
+    --grow: var(--lift);
+    /* How much wider a rail's stroke grows on each side. */
+    --swell: calc(var(--grow) * var(--project-rail-width) / 2);
+
+    @media (prefers-reduced-motion: reduce) {
+      --grow: 0;
+    }
+  }
+
+  /* Parts fade back while another item is hovered. Cards and dated rows stay opaque and fade
+     their contents instead, toward their own ground rather than the page's. */
+  :is([data-item]:not(.card, .compactProject), .card > *, .compactProject > *) {
+    opacity: calc(1 - var(--recede) * (1 - var(--lift)));
+  }
+}
+
+/* Declared on every element rather than once, so each one resolves them from the --era-depth and
+   --row it carries instead of from where the declaration sits. :where() holds the rule at zero
+   specificity, so a class that sets one of them, as a card sets --rail-color, overrides it
+   whichever order the stylesheets load in. */
+:where(.timeline) * {
+  --era-color: oklch(
+    from var(--color-primary) var(--era-lightness)
+      calc(c * max(var(--era-chroma-floor), 1 - var(--era-depth, 0) * var(--era-chroma-step))) h
+  );
+  /* The first era meets the top of the grid. Each one after it leaves a gap above, and the
+     project rails running between the two eras cross it. */
+  --era-space: calc(var(--era-gap) * min(1, var(--row) - 1));
+  /* Each lane turns the primary's hue a step further, so rails running side by side stay
+     apart. */
+  --rail-color: oklch(
+    from var(--color-primary) 60% 0.13 calc(h + var(--grid-lane, 0) * var(--grid-lane-hue-step))
+  );
+}
+
+/* One grid for the whole timeline: a year column, the era rail, a column per lane, a gap, then
+   the cards. A project rail runs up past the rows above its card without leaving the grid, and
+   there is no row gap, because it has to run unbroken from one row into the next. */
+.grid {
+  /* From the middle of the era rail to the leading edge of the cards, which is how far anything
+     drawn on the era rail reaches across to a card. */
+  --gutter-width: calc(
+    var(--grid-lane-width) / 2 + var(--grid-lanes) * var(--grid-lane-width) + var(--card-gap)
+  );
+
+  display: grid;
+  grid-template-columns:
+    var(--year-width) var(--grid-lane-width) repeat(var(--grid-lanes), var(--grid-lane-width))
+    var(--card-gap) minmax(0, 1fr);
+
+  /* The overview takes over on a narrow screen, and the cards take the whole width. */
+  @media (width < 48rem) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* The year beside the first row of each year, level with the row's node. It is measured back
+     across the gutter from the row's leading edge to the era rail's column, and ends a standard
+     spacing short of it, like the now label. */
+  [data-year]::after {
+    content: attr(data-year);
+    position: absolute;
+    inset-block-start: var(--node-offset);
+    inset-inline-end: calc(
+      100% + var(--gutter-width) + var(--grid-lane-width) / 2 + var(--standard-spacing) / 2
+    );
+    translate: 0 -50%;
+    color: var(--color-text-primary);
+    opacity: 0.65;
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+
+    /* Gives way to the overview's year labels on a narrow screen. */
+    @media (width < 48rem) {
+      content: none;
+    }
+  }
+
+  /* Every card and dated row grows away from the rails as it comes forward, about the point its
+     node lines up with, and moves above its neighbors. */
+  > :is(.card, .compactProject) {
+    z-index: round(up, var(--lift));
+    transform-origin: 0 var(--node-offset);
+    scale: calc(1 + var(--grow) * 0.02);
+
+    /* With no rails beside it, it grows out into the side padding instead. */
+    @media (width < 48rem) {
+      transform-origin: 50% var(--node-offset);
+      scale: calc(1 + var(--grow) * 0.04);
+    }
+
+    /* The raised shadow, and under it a glow in the color of the rail the item hangs off, which
+       ties the card to its branch. Only the shadows show, outside the card. */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: inherit;
+      box-shadow:
+        var(--shadow-raised),
+        0 10px 32px -4px var(--rail-color);
+      opacity: var(--lift);
+    }
+  }
+}
+
+/* Sits on the top edge of the grid, where every project rail still running begins. The label
+   takes the year column, and its line runs on from the end of that column to the cards. */
+.now {
+  position: relative;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  padding-inline-end: calc(var(--standard-spacing) / 2);
+  translate: 0 -50%;
+  color: color-mix(in oklab, var(--color-text-primary) 65%, transparent);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-align: end;
+
+  /* Gives way to the overview's now line on a narrow screen. */
+  @media (width < 48rem) {
+    display: none;
+  }
+
+  /* Marks the present in the color of each rail it crosses: the most recent era's color across
+     the era rail, then each lane's rail color at the middle of its lane, holding the last lane's
+     color on to the cards. Lane colors differ only in hue, a step apart, so turning the hue
+     steadily from the first lane's middle to the last's passes through every lane's color on the
+     way. Between two stops the hue turns the shorter way round, so a stop halfway across the lanes
+     keeps each turn under half a circle. */
+  &::after {
+    --halfway-color: oklch(
+      from var(--rail-color) l c calc(h + (var(--grid-lanes) - 1) / 2 * var(--grid-lane-hue-step))
+    );
+    --last-grid-lane-color: oklch(
+      from var(--rail-color) l c calc(h + (var(--grid-lanes) - 1) * var(--grid-lane-hue-step))
+    );
+
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    inline-size: var(--gutter-width);
+    block-size: var(--now-thickness);
+    translate: 0 -50%;
+    border-radius: var(--now-thickness);
+    background: linear-gradient(
+      to right in oklch shorter hue,
+      var(--era-color) calc((var(--grid-lane-width) + var(--era-rail-width)) / 2),
+      var(--rail-color) calc(var(--grid-lane-width) * 1.5),
+      var(--halfway-color) calc(var(--grid-lane-width) * (var(--grid-lanes) / 2 + 1)),
+      var(--last-grid-lane-color) calc(var(--grid-lane-width) * (var(--grid-lanes) + 0.5))
+    );
+  }
+}

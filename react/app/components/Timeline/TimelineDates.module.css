@@ -1,0 +1,40 @@
+.timelineDates {
+  /* Three characters of month, a space and four of year, and the half covers the letters, which
+     run wider than the digit a ch measures. */
+  --month-width: 8.5ch;
+  --separator-width: 2.5ch;
+  white-space: nowrap;
+}
+
+/* A card can redefine the theme's text colors, which is how one on a dark ground gets dates that
+   read against it. */
+.primary {
+  color: var(--color-text-primary);
+}
+
+.secondary {
+  color: var(--color-text-secondary);
+}
+
+.duration:global(.caption-tabular) {
+  line-height: normal;
+}
+
+/* Holding the width of the widest date rather than each row's own gives a column of dates one
+   edge for whatever follows them to start from. A range holds two of those and the separator
+   between them, which is also wide enough for one running to now. */
+.maxMonthWidth,
+.maxRangeWidth {
+  display: inline-block;
+  min-inline-size: var(--month-width);
+}
+.maxRangeWidth {
+  min-inline-size: calc(2 * var(--month-width) + var(--separator-width));
+}
+
+.timelineDates:global(.header-3) {
+  /* The large size steps down on a narrow screen. */
+  @media (width < 40rem) {
+    font-size: 1.5rem;
+  }
+}

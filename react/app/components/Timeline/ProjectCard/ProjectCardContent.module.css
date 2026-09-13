@@ -1,0 +1,35 @@
+/* Links pinned to the bottom */
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--standard-spacing);
+}
+
+/* Title and dates share a line */
+.cardText {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: calc(var(--standard-spacing) * 2);
+  row-gap: var(--standard-spacing);
+
+  /* Dates drop under the title */
+  @media (width < 40rem) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+.info,
+.technologies {
+  grid-column: 1 / -1;
+}
+
+.info {
+  color: var(--color-text-secondary);
+  /* Um. Seemed like an okay trade-off here? */
+  text-wrap: pretty;
+}
