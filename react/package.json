@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next-image-export-optimizer",
+    "build": "tsc -b ../packages/shared && next build && next-image-export-optimizer",
     "preview": "pnpm run build && pnpm dlx serve out -l 3000",
     "start": "next start",
     "check": "tsc --noEmit",

@@ -15,8 +15,10 @@
     "skipLibCheck": true,
     // `composite` is what allows the apps to reference this project, and referencing it
     // is what makes cross-project navigation work. It requires declaration output, so
-    // the declarations go to a gitignored folder that only `tsc` and `svelte-check`
-    // read. Editors and both bundlers keep using the TypeScript source directly.
+    // the declarations go to a gitignored folder. Every app type check (`tsc`,
+    // `svelte-check`, and the one inside `next build`) reads that folder, so it has to be
+    // built with `tsc -b` first. Editors and both bundlers keep using the TypeScript
+    // source directly.
     "composite": true,
     "rootDir": ".",
     "outDir": "./.tsbuild",
