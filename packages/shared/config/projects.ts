@@ -174,7 +174,7 @@ const projectDefinitions = {
     key: 'pointSpire',
     kind: TimelineItemKind.Project,
     name: 'PointSpire',
-    info: 'A personal project manager built with Scrum on a team with MongoDB, OAuth authentication, React, and TypeScript. Try it now by logging in with Github!',
+    info: 'A personal project manager built with Scrum on a team with MongoDB, OAuth authentication, React, and TypeScript.',
     startDate: new Date('2020-05-01'),
     endDate: new Date('2020-08-01'),
     technologyGroups: [
