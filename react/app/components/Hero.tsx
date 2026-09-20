@@ -17,7 +17,7 @@ export default function Hero() {
       </p>
       <h1 className="header-2">Anton (Tony) Neuhold</h1>
       <p className={`header-6 ${styles.subtitle}`}>
-        Hi! I'm a Senior Software Engineer with 4+ years of experience and a bachelors degree in
+        Hi! I'm a Senior Software Engineer with 5+ years of experience and a bachelors degree in
         Software Engineering from{' '}
         <Link
           url="https://www.asu.edu/"

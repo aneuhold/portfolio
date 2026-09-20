@@ -12,7 +12,7 @@
   </p>
   <h1 class="header-2">Anton (Tony) Neuhold</h1>
   <p class="header-6 subtitle">
-    Hi! I'm a Senior Software Engineer with 4+ years of experience and a bachelors degree in
+    Hi! I'm a Senior Software Engineer with 5+ years of experience and a bachelors degree in
     Software Engineering from <Link
       url="https://www.asu.edu/"
       linkText="Arizona State University"
